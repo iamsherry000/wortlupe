@@ -1,0 +1,44 @@
+{
+ "version": "deen-6f6acd7",
+ "source": "https://huggingface.co/midudev/firefox-translations @ 6f6acd72c26975a06a8e61b72d1fbacbd184c23f",
+ "license": "MPL-2.0",
+ "files": {
+  "model": {
+   "parts": [
+    "model.deen.intgemm.alphas.bin.part0",
+    "model.deen.intgemm.alphas.bin.part1"
+   ],
+   "bytes": 31561787,
+   "sha256": "3e6f7c2c2425d10824797270b382bee718ff34af2cab9308841c82ca46dc6f20"
+  },
+  "lex": {
+   "parts": [
+    "lex.50.50.deen.s2t.bin"
+   ],
+   "bytes": 4945796,
+   "sha256": "113b98460468360cca68c042e1cddf49c4e1931cbb975ed04349c9a3bd607010"
+  },
+  "vocab": {
+   "parts": [
+    "vocab.deen.spm"
+   ],
+   "bytes": 810073,
+   "sha256": "69f730becafa48e3bb2c244eab66456877c08959a02f2bd5519b5a3088b62f9c"
+  },
+  "wasm": {
+   "parts": [
+    "bergamot-translator-worker.wasm"
+   ],
+   "bytes": 5241884,
+   "sha256": "735d4d95ede043c48f146b9a89336077f18885ad30b7e9a6a86c51a73ca02e7b"
+  },
+  "glue": {
+   "parts": [
+    "bergamot-translator-worker.js"
+   ],
+   "bytes": 80474,
+   "sha256": "bc2fc98d859845162817f9526c39eb1ca4805f7149dfebc0fbcda4d2af68e13c"
+  }
+ },
+ "totalBytes": 42640014
+}

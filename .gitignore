@@ -1,0 +1,30 @@
+# 原始 dump（kaikki 1 GB、詞頻表）不進版控，SPEC §3
+build/raw/
+node_modules/
+# Playwright 測試產物
+test-results/
+playwright-report/
+
+# forms.json 正本 120 MB，可由 build/build-data.mjs 從 build/raw 重建；不進版控避免 repo 膨脹（2026-09-27 Sherry 同意）
+data/forms.json
+
+# P2.7 翻譯模型與引擎（約 41 MB，MPL-2.0）：由 build/fetch-mt.mjs 依鎖定版本＋sha256 下載，manifest.json 與授權檔仍進版控
+mt/*
+!mt/manifest.json
+!mt/LICENSE-MPL-2.0.txt
+
+# Wrangler 本機快取與機密（Cloudflare）
+.wrangler/
+.dev.vars
+.env
+.env.*
+
+# 開發紀錄與驗收報告只留在私人資料夾，不公開
+PHASE_LOG.md
+docs/tester/
+qa/
+
+# 雜項
+*.log
+.DS_Store
+Thumbs.db

@@ -1,0 +1,14 @@
+{
+  "name": "Wortlupe",
+  "short_name": "Wortlupe",
+  "description": "Tap any German word to see its dictionary form and grammar. Works offline.",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#f7f5f0",
+  "theme_color": "#f7f5f0",
+  "icons": [
+    { "src": "icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}

@@ -1,0 +1,29 @@
+# 部署範圍（SPEC §8）：wrangler 以專案資料夾當資產目錄，這裡列出「不上傳」的東西。
+# 上線產物只有 index.html、sw.js、manifest、icons/、src/、data/runtime/ 與 data/ 下的手寫 json＋lexicon。
+# tests/deploy.test.js 會模擬上傳清單，檢查白名單、25 MiB 上限與 sw.js 快取清單。
+
+# 正本與開發用資料（forms.json 51 MB，超過 Cloudflare 單檔 25 MiB 上限，執行期也用不到）
+data/forms.json
+build/
+tests/
+docs/
+qa/
+node_modules/
+test-results/
+playwright-report/
+.git/
+
+# 文件與設定檔
+*.md
+package.json
+package-lock.json
+playwright.config.js
+vitest.config.js
+wrangler.json
+.assetsignore
+.gitignore
+
+# GitHub 公開 repo 用的檔（授權、贊助按鈕）與 wrangler 本機快取
+LICENSE
+.github/
+.wrangler/

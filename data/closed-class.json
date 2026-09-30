@@ -1,0 +1,2200 @@
+{
+ "_說明": "P2.2 封閉詞類首要讀法表（由 build/make-closed-class.mjs 從標準文法表展開，不讀 Wiktionary）。字卡一律以這份為準；第一個讀法是預設首要讀法，ctx 符合時該讀法排第一。",
+ "forms": {
+  "ich": [
+   {
+    "lemma": "ich",
+    "pos": "pron",
+    "form": "1st person · nominative · singular",
+    "gloss": "I"
+   }
+  ],
+  "mich": [
+   {
+    "lemma": "ich",
+    "pos": "pron",
+    "form": "1st person · accusative · singular (also reflexive)",
+    "gloss": "me; myself"
+   }
+  ],
+  "mir": [
+   {
+    "lemma": "ich",
+    "pos": "pron",
+    "form": "1st person · dative · singular (also reflexive)",
+    "gloss": "me, to me, for me; myself"
+   }
+  ],
+  "du": [
+   {
+    "lemma": "du",
+    "pos": "pron",
+    "form": "2nd person · nominative · singular (informal)",
+    "gloss": "you (one person, informal)"
+   }
+  ],
+  "dich": [
+   {
+    "lemma": "du",
+    "pos": "pron",
+    "form": "2nd person · accusative · singular (also reflexive)",
+    "gloss": "you; yourself"
+   }
+  ],
+  "dir": [
+   {
+    "lemma": "du",
+    "pos": "pron",
+    "form": "2nd person · dative · singular (also reflexive)",
+    "gloss": "you, to you, for you; yourself"
+   }
+  ],
+  "er": [
+   {
+    "lemma": "er",
+    "pos": "pron",
+    "form": "3rd person · masculine · nominative · singular",
+    "gloss": "he; it (for a masculine noun)"
+   }
+  ],
+  "ihn": [
+   {
+    "lemma": "er",
+    "pos": "pron",
+    "form": "3rd person · masculine · accusative · singular",
+    "gloss": "him; it (for a masculine noun)"
+   }
+  ],
+  "ihm": [
+   {
+    "lemma": "er",
+    "pos": "pron",
+    "form": "3rd person · masculine/neuter · dative · singular",
+    "gloss": "him, to him; it, to it"
+   }
+  ],
+  "sie": [
+   {
+    "lemma": "sie",
+    "pos": "pron",
+    "form": "3rd person · feminine · nominative/accusative · singular",
+    "gloss": "she; her; it (for a feminine noun)",
+    "ctx": "subj3sg"
+   },
+   {
+    "lemma": "sie",
+    "pos": "pron",
+    "form": "3rd person · nominative/accusative · plural",
+    "gloss": "they; them",
+    "ctx": "subjPl"
+   }
+  ],
+  "Sie": [
+   {
+    "lemma": "Sie",
+    "pos": "pron",
+    "form": "polite form of address · nominative/accusative (one or more people)",
+    "gloss": "you (polite)",
+    "ctx": "subjPl"
+   }
+  ],
+  "es": [
+   {
+    "lemma": "es",
+    "pos": "pron",
+    "form": "3rd person · neuter · nominative/accusative · singular",
+    "gloss": "it"
+   }
+  ],
+  "wir": [
+   {
+    "lemma": "wir",
+    "pos": "pron",
+    "form": "1st person · nominative · plural",
+    "gloss": "we"
+   }
+  ],
+  "uns": [
+   {
+    "lemma": "wir",
+    "pos": "pron",
+    "form": "1st person · accusative/dative · plural (also reflexive)",
+    "gloss": "us, to us; ourselves; each other"
+   }
+  ],
+  "ihr": [
+   {
+    "lemma": "ihr",
+    "pos": "pron",
+    "form": "2nd person · nominative · plural (informal)",
+    "gloss": "you (more than one person, informal)"
+   },
+   {
+    "lemma": "sie",
+    "pos": "pron",
+    "form": "3rd person · feminine · dative · singular",
+    "gloss": "her, to her, for her",
+    "ctx": "otherSubject"
+   },
+   {
+    "lemma": "ihr",
+    "pos": "det",
+    "form": "possessive · masculine nominative singular, or neuter nominative/accusative singular",
+    "gloss": "her; their (Ihr: your, polite)",
+    "ctx": "noun"
+   }
+  ],
+  "euch": [
+   {
+    "lemma": "ihr",
+    "pos": "pron",
+    "form": "2nd person · accusative/dative · plural (also reflexive)",
+    "gloss": "you, to you (more than one person); yourselves"
+   }
+  ],
+  "ihnen": [
+   {
+    "lemma": "sie",
+    "pos": "pron",
+    "form": "3rd person · dative · plural",
+    "gloss": "them, to them"
+   }
+  ],
+  "Ihnen": [
+   {
+    "lemma": "Sie",
+    "pos": "pron",
+    "form": "polite form of address · dative",
+    "gloss": "you, to you (polite)"
+   }
+  ],
+  "man": [
+   {
+    "lemma": "man",
+    "pos": "pron",
+    "form": "indefinite pronoun · nominative",
+    "gloss": "one, you, people (in general)"
+   }
+  ],
+  "sich": [
+   {
+    "lemma": "sich",
+    "pos": "pron",
+    "form": "reflexive pronoun · 3rd person or polite Sie · accusative/dative",
+    "gloss": "himself, herself, itself, themselves, yourself (polite); each other"
+   }
+  ],
+  "mein": [
+   {
+    "lemma": "mein",
+    "pos": "det",
+    "form": "possessive (my) · masculine · nominative · singular; neuter · nominative · singular; neuter · accusative · singular",
+    "gloss": "my",
+    "ctx": "noun"
+   }
+  ],
+  "meine": [
+   {
+    "lemma": "mein",
+    "pos": "det",
+    "form": "possessive (my) · feminine · nominative · singular; feminine · accusative · singular; plural · nominative; plural · accusative",
+    "gloss": "my",
+    "ctx": "noun"
+   },
+   {
+    "lemma": "meinen",
+    "pos": "verb",
+    "useDict": true,
+    "ctx": "verbUse"
+   }
+  ],
+  "meinen": [
+   {
+    "lemma": "mein",
+    "pos": "det",
+    "form": "possessive (my) · masculine · accusative · singular; plural · dative",
+    "gloss": "my",
+    "ctx": "noun"
+   },
+   {
+    "lemma": "meinen",
+    "pos": "verb",
+    "useDict": true,
+    "ctx": "verbUse"
+   }
+  ],
+  "meinem": [
+   {
+    "lemma": "mein",
+    "pos": "det",
+    "form": "possessive (my) · masculine · dative · singular; neuter · dative · singular",
+    "gloss": "my",
+    "ctx": "noun"
+   }
+  ],
+  "meiner": [
+   {
+    "lemma": "mein",
+    "pos": "det",
+    "form": "possessive (my) · feminine · dative · singular; feminine · genitive · singular; plural · genitive",
+    "gloss": "my",
+    "ctx": "noun"
+   }
+  ],
+  "meines": [
+   {
+    "lemma": "mein",
+    "pos": "det",
+    "form": "possessive (my) · masculine · genitive · singular; neuter · genitive · singular",
+    "gloss": "my",
+    "ctx": "noun"
+   }
+  ],
+  "dein": [
+   {
+    "lemma": "dein",
+    "pos": "det",
+    "form": "possessive (your (one person, informal)) · masculine · nominative · singular; neuter · nominative · singular; neuter · accusative · singular",
+    "gloss": "your (one person, informal)",
+    "ctx": "noun"
+   }
+  ],
+  "deine": [
+   {
+    "lemma": "dein",
+    "pos": "det",
+    "form": "possessive (your (one person, informal)) · feminine · nominative · singular; feminine · accusative · singular; plural · nominative; plural · accusative",
+    "gloss": "your (one person, informal)",
+    "ctx": "noun"
+   }
+  ],
+  "deinen": [
+   {
+    "lemma": "dein",
+    "pos": "det",
+    "form": "possessive (your (one person, informal)) · masculine · accusative · singular; plural · dative",
+    "gloss": "your (one person, informal)",
+    "ctx": "noun"
+   }
+  ],
+  "deinem": [
+   {
+    "lemma": "dein",
+    "pos": "det",
+    "form": "possessive (your (one person, informal)) · masculine · dative · singular; neuter · dative · singular",
+    "gloss": "your (one person, informal)",
+    "ctx": "noun"
+   }
+  ],
+  "deiner": [
+   {
+    "lemma": "dein",
+    "pos": "det",
+    "form": "possessive (your (one person, informal)) · feminine · dative · singular; feminine · genitive · singular; plural · genitive",
+    "gloss": "your (one person, informal)",
+    "ctx": "noun"
+   }
+  ],
+  "deines": [
+   {
+    "lemma": "dein",
+    "pos": "det",
+    "form": "possessive (your (one person, informal)) · masculine · genitive · singular; neuter · genitive · singular",
+    "gloss": "your (one person, informal)",
+    "ctx": "noun"
+   }
+  ],
+  "sein": [
+   {
+    "lemma": "sein",
+    "pos": "verb",
+    "useDict": true
+   },
+   {
+    "lemma": "sein",
+    "pos": "det",
+    "form": "possessive (his) · masculine · nominative · singular; neuter · nominative · singular; neuter · accusative · singular",
+    "gloss": "his; its",
+    "ctx": "noun"
+   }
+  ],
+  "seine": [
+   {
+    "lemma": "sein",
+    "pos": "det",
+    "form": "possessive (his) · feminine · nominative · singular; feminine · accusative · singular; plural · nominative; plural · accusative",
+    "gloss": "his; its",
+    "ctx": "noun"
+   }
+  ],
+  "seinen": [
+   {
+    "lemma": "sein",
+    "pos": "det",
+    "form": "possessive (his) · masculine · accusative · singular; plural · dative",
+    "gloss": "his; its",
+    "ctx": "noun"
+   }
+  ],
+  "seinem": [
+   {
+    "lemma": "sein",
+    "pos": "det",
+    "form": "possessive (his) · masculine · dative · singular; neuter · dative · singular",
+    "gloss": "his; its",
+    "ctx": "noun"
+   }
+  ],
+  "seiner": [
+   {
+    "lemma": "sein",
+    "pos": "det",
+    "form": "possessive (his) · feminine · dative · singular; feminine · genitive · singular; plural · genitive",
+    "gloss": "his; its",
+    "ctx": "noun"
+   }
+  ],
+  "seines": [
+   {
+    "lemma": "sein",
+    "pos": "det",
+    "form": "possessive (his) · masculine · genitive · singular; neuter · genitive · singular",
+    "gloss": "his; its",
+    "ctx": "noun"
+   }
+  ],
+  "ihre": [
+   {
+    "lemma": "ihr",
+    "pos": "det",
+    "form": "possessive (her) · feminine · nominative · singular; feminine · accusative · singular; plural · nominative; plural · accusative",
+    "gloss": "her; their (Ihr: your, polite)",
+    "ctx": "noun"
+   }
+  ],
+  "Ihre": [
+   {
+    "lemma": "ihr",
+    "pos": "det",
+    "form": "possessive (your, polite) · feminine · nominative · singular; feminine · accusative · singular; plural · nominative; plural · accusative",
+    "gloss": "your (polite)",
+    "ctx": "noun"
+   }
+  ],
+  "ihren": [
+   {
+    "lemma": "ihr",
+    "pos": "det",
+    "form": "possessive (her) · masculine · accusative · singular; plural · dative",
+    "gloss": "her; their (Ihr: your, polite)",
+    "ctx": "noun"
+   }
+  ],
+  "Ihren": [
+   {
+    "lemma": "ihr",
+    "pos": "det",
+    "form": "possessive (your, polite) · masculine · accusative · singular; plural · dative",
+    "gloss": "your (polite)",
+    "ctx": "noun"
+   }
+  ],
+  "ihrem": [
+   {
+    "lemma": "ihr",
+    "pos": "det",
+    "form": "possessive (her) · masculine · dative · singular; neuter · dative · singular",
+    "gloss": "her; their (Ihr: your, polite)",
+    "ctx": "noun"
+   }
+  ],
+  "Ihrem": [
+   {
+    "lemma": "ihr",
+    "pos": "det",
+    "form": "possessive (your, polite) · masculine · dative · singular; neuter · dative · singular",
+    "gloss": "your (polite)",
+    "ctx": "noun"
+   }
+  ],
+  "ihrer": [
+   {
+    "lemma": "ihr",
+    "pos": "det",
+    "form": "possessive (her) · feminine · dative · singular; feminine · genitive · singular; plural · genitive",
+    "gloss": "her; their (Ihr: your, polite)",
+    "ctx": "noun"
+   }
+  ],
+  "Ihrer": [
+   {
+    "lemma": "ihr",
+    "pos": "det",
+    "form": "possessive (your, polite) · feminine · dative · singular; feminine · genitive · singular; plural · genitive",
+    "gloss": "your (polite)",
+    "ctx": "noun"
+   }
+  ],
+  "ihres": [
+   {
+    "lemma": "ihr",
+    "pos": "det",
+    "form": "possessive (her) · masculine · genitive · singular; neuter · genitive · singular",
+    "gloss": "her; their (Ihr: your, polite)",
+    "ctx": "noun"
+   }
+  ],
+  "Ihres": [
+   {
+    "lemma": "ihr",
+    "pos": "det",
+    "form": "possessive (your, polite) · masculine · genitive · singular; neuter · genitive · singular",
+    "gloss": "your (polite)",
+    "ctx": "noun"
+   }
+  ],
+  "unser": [
+   {
+    "lemma": "unser",
+    "pos": "det",
+    "form": "possessive (our) · masculine · nominative · singular; neuter · nominative · singular; neuter · accusative · singular",
+    "gloss": "our",
+    "ctx": "noun"
+   }
+  ],
+  "unsere": [
+   {
+    "lemma": "unser",
+    "pos": "det",
+    "form": "possessive (our) · feminine · nominative · singular; feminine · accusative · singular; plural · nominative; plural · accusative",
+    "gloss": "our",
+    "ctx": "noun"
+   }
+  ],
+  "unseren": [
+   {
+    "lemma": "unser",
+    "pos": "det",
+    "form": "possessive (our) · masculine · accusative · singular; plural · dative",
+    "gloss": "our",
+    "ctx": "noun"
+   }
+  ],
+  "unserem": [
+   {
+    "lemma": "unser",
+    "pos": "det",
+    "form": "possessive (our) · masculine · dative · singular; neuter · dative · singular",
+    "gloss": "our",
+    "ctx": "noun"
+   }
+  ],
+  "unserer": [
+   {
+    "lemma": "unser",
+    "pos": "det",
+    "form": "possessive (our) · feminine · dative · singular; feminine · genitive · singular; plural · genitive",
+    "gloss": "our",
+    "ctx": "noun"
+   }
+  ],
+  "unseres": [
+   {
+    "lemma": "unser",
+    "pos": "det",
+    "form": "possessive (our) · masculine · genitive · singular; neuter · genitive · singular",
+    "gloss": "our",
+    "ctx": "noun"
+   }
+  ],
+  "euer": [
+   {
+    "lemma": "euer",
+    "pos": "det",
+    "form": "possessive (your (more than one person, informal)) · masculine · nominative · singular; neuter · nominative · singular; neuter · accusative · singular",
+    "gloss": "your (more than one person, informal)",
+    "ctx": "noun"
+   }
+  ],
+  "eure": [
+   {
+    "lemma": "euer",
+    "pos": "det",
+    "form": "possessive (your (more than one person, informal)) · feminine · nominative · singular; feminine · accusative · singular; plural · nominative; plural · accusative",
+    "gloss": "your (more than one person, informal)",
+    "ctx": "noun"
+   }
+  ],
+  "euren": [
+   {
+    "lemma": "euer",
+    "pos": "det",
+    "form": "possessive (your (more than one person, informal)) · masculine · accusative · singular; plural · dative",
+    "gloss": "your (more than one person, informal)",
+    "ctx": "noun"
+   }
+  ],
+  "eurem": [
+   {
+    "lemma": "euer",
+    "pos": "det",
+    "form": "possessive (your (more than one person, informal)) · masculine · dative · singular; neuter · dative · singular",
+    "gloss": "your (more than one person, informal)",
+    "ctx": "noun"
+   }
+  ],
+  "eurer": [
+   {
+    "lemma": "euer",
+    "pos": "det",
+    "form": "possessive (your (more than one person, informal)) · feminine · dative · singular; feminine · genitive · singular; plural · genitive",
+    "gloss": "your (more than one person, informal)",
+    "ctx": "noun"
+   }
+  ],
+  "eures": [
+   {
+    "lemma": "euer",
+    "pos": "det",
+    "form": "possessive (your (more than one person, informal)) · masculine · genitive · singular; neuter · genitive · singular",
+    "gloss": "your (more than one person, informal)",
+    "ctx": "noun"
+   }
+  ],
+  "Ihr": [
+   {
+    "lemma": "ihr",
+    "pos": "det",
+    "form": "possessive (your, polite) · masculine · nominative · singular; neuter · nominative · singular; neuter · accusative · singular",
+    "gloss": "your (polite)",
+    "ctx": "noun"
+   }
+  ],
+  "der": [
+   {
+    "lemma": "der",
+    "pos": "article",
+    "form": "masculine · nominative · singular; feminine · dative · singular; feminine · genitive · singular; plural · genitive",
+    "gloss": "the"
+   },
+   {
+    "lemma": "der",
+    "pos": "pron",
+    "form": "relative or demonstrative pronoun · masculine · nominative; feminine · dative",
+    "gloss": "who, which, that; that one",
+    "ctx": "rel"
+   }
+  ],
+  "die": [
+   {
+    "lemma": "der",
+    "pos": "article",
+    "form": "feminine · nominative · singular; feminine · accusative · singular; plural · nominative; plural · accusative",
+    "gloss": "the"
+   },
+   {
+    "lemma": "der",
+    "pos": "pron",
+    "form": "relative or demonstrative pronoun · feminine or plural · nominative/accusative",
+    "gloss": "who, which, that; that one, they",
+    "ctx": "rel"
+   }
+  ],
+  "das": [
+   {
+    "lemma": "der",
+    "pos": "article",
+    "form": "neuter · nominative · singular; neuter · accusative · singular",
+    "gloss": "the",
+    "ctx": "noun"
+   },
+   {
+    "lemma": "das",
+    "pos": "pron",
+    "form": "demonstrative pronoun · neuter · nominative/accusative",
+    "gloss": "that, this",
+    "ctx": "demonstrative"
+   },
+   {
+    "lemma": "der",
+    "pos": "pron",
+    "form": "relative pronoun · neuter · nominative/accusative",
+    "gloss": "which, that",
+    "ctx": "rel"
+   }
+  ],
+  "den": [
+   {
+    "lemma": "der",
+    "pos": "article",
+    "form": "masculine · accusative · singular; plural · dative",
+    "gloss": "the"
+   },
+   {
+    "lemma": "der",
+    "pos": "pron",
+    "form": "relative or demonstrative pronoun · masculine · accusative",
+    "gloss": "whom, which, that; him, that one",
+    "ctx": "rel"
+   }
+  ],
+  "dem": [
+   {
+    "lemma": "der",
+    "pos": "article",
+    "form": "masculine · dative · singular; neuter · dative · singular",
+    "gloss": "the"
+   },
+   {
+    "lemma": "der",
+    "pos": "pron",
+    "form": "relative or demonstrative pronoun · masculine/neuter · dative",
+    "gloss": "(to) whom, (to) which; him, that one",
+    "ctx": "rel"
+   }
+  ],
+  "des": [
+   {
+    "lemma": "der",
+    "pos": "article",
+    "form": "masculine · genitive · singular; neuter · genitive · singular",
+    "gloss": "the, of the"
+   }
+  ],
+  "dessen": [
+   {
+    "lemma": "der",
+    "pos": "pron",
+    "form": "relative or demonstrative pronoun · masculine/neuter genitive",
+    "gloss": "whose, of which"
+   }
+  ],
+  "deren": [
+   {
+    "lemma": "der",
+    "pos": "pron",
+    "form": "relative or demonstrative pronoun · feminine or plural genitive",
+    "gloss": "whose, of which"
+   }
+  ],
+  "denen": [
+   {
+    "lemma": "der",
+    "pos": "pron",
+    "form": "relative or demonstrative pronoun · plural dative",
+    "gloss": "(to) whom, (to) which; them"
+   }
+  ],
+  "ein": [
+   {
+    "lemma": "ein",
+    "pos": "article",
+    "form": "masculine · nominative · singular; neuter · nominative · singular; neuter · accusative · singular",
+    "gloss": "a, an"
+   },
+   {
+    "lemma": "ein",
+    "pos": "num",
+    "form": "number",
+    "gloss": "one"
+   }
+  ],
+  "eine": [
+   {
+    "lemma": "ein",
+    "pos": "article",
+    "form": "feminine · nominative · singular; feminine · accusative · singular",
+    "gloss": "a, an"
+   },
+   {
+    "lemma": "ein",
+    "pos": "num",
+    "form": "number · feminine",
+    "gloss": "one"
+   }
+  ],
+  "einen": [
+   {
+    "lemma": "ein",
+    "pos": "article",
+    "form": "masculine · accusative · singular",
+    "gloss": "a, an"
+   },
+   {
+    "lemma": "ein",
+    "pos": "num",
+    "form": "number · masculine · accusative",
+    "gloss": "one"
+   }
+  ],
+  "einem": [
+   {
+    "lemma": "ein",
+    "pos": "article",
+    "form": "masculine · dative · singular; neuter · dative · singular",
+    "gloss": "a, an"
+   },
+   {
+    "lemma": "ein",
+    "pos": "num",
+    "form": "number · dative",
+    "gloss": "one"
+   }
+  ],
+  "einer": [
+   {
+    "lemma": "ein",
+    "pos": "article",
+    "form": "feminine · dative · singular; feminine · genitive · singular",
+    "gloss": "a, an; of a"
+   },
+   {
+    "lemma": "einer",
+    "pos": "pron",
+    "form": "indefinite pronoun · masculine · nominative",
+    "gloss": "one (of them), someone",
+    "ctx": "notNoun"
+   }
+  ],
+  "eines": [
+   {
+    "lemma": "ein",
+    "pos": "article",
+    "form": "masculine · genitive · singular; neuter · genitive · singular",
+    "gloss": "of a, of an"
+   },
+   {
+    "lemma": "einer",
+    "pos": "pron",
+    "form": "indefinite pronoun · neuter",
+    "gloss": "one (of them)",
+    "ctx": "notNoun"
+   }
+  ],
+  "eins": [
+   {
+    "lemma": "eins",
+    "pos": "num",
+    "form": "number (counting)",
+    "gloss": "one"
+   }
+  ],
+  "kein": [
+   {
+    "lemma": "kein",
+    "pos": "det",
+    "form": "negative article · masculine · nominative · singular; neuter · nominative · singular; neuter · accusative · singular",
+    "gloss": "no, not a, not any",
+    "ctx": "noun"
+   }
+  ],
+  "keine": [
+   {
+    "lemma": "kein",
+    "pos": "det",
+    "form": "negative article · feminine · nominative · singular; feminine · accusative · singular; plural · nominative; plural · accusative",
+    "gloss": "no, not a, not any",
+    "ctx": "noun"
+   },
+   {
+    "lemma": "keiner",
+    "pos": "pron",
+    "form": "indefinite pronoun (stands alone)",
+    "gloss": "none",
+    "ctx": "notNoun"
+   }
+  ],
+  "keinen": [
+   {
+    "lemma": "kein",
+    "pos": "det",
+    "form": "negative article · masculine · accusative · singular; plural · dative",
+    "gloss": "no, not a, not any",
+    "ctx": "noun"
+   }
+  ],
+  "keinem": [
+   {
+    "lemma": "kein",
+    "pos": "det",
+    "form": "negative article · masculine · dative · singular; neuter · dative · singular",
+    "gloss": "no, not a, not any",
+    "ctx": "noun"
+   }
+  ],
+  "keiner": [
+   {
+    "lemma": "kein",
+    "pos": "det",
+    "form": "negative article · feminine · dative · singular; feminine · genitive · singular; plural · genitive",
+    "gloss": "no, not a, not any",
+    "ctx": "noun"
+   },
+   {
+    "lemma": "keiner",
+    "pos": "pron",
+    "form": "indefinite pronoun (stands alone)",
+    "gloss": "nobody, no one; none",
+    "ctx": "notNoun"
+   }
+  ],
+  "keines": [
+   {
+    "lemma": "kein",
+    "pos": "det",
+    "form": "negative article · masculine · genitive · singular; neuter · genitive · singular",
+    "gloss": "no, not a, not any",
+    "ctx": "noun"
+   },
+   {
+    "lemma": "keiner",
+    "pos": "pron",
+    "form": "indefinite pronoun (stands alone)",
+    "gloss": "none",
+    "ctx": "notNoun"
+   }
+  ],
+  "dieser": [
+   {
+    "lemma": "dieser",
+    "pos": "det",
+    "form": "demonstrative · masculine · nominative · singular; feminine · dative · singular; feminine · genitive · singular; plural · genitive",
+    "gloss": "this, these; that"
+   }
+  ],
+  "welcher": [
+   {
+    "lemma": "welcher",
+    "pos": "det",
+    "form": "question word · masculine · nominative · singular; feminine · dative · singular; feminine · genitive · singular; plural · genitive",
+    "gloss": "which"
+   }
+  ],
+  "diese": [
+   {
+    "lemma": "dieser",
+    "pos": "det",
+    "form": "demonstrative · feminine · nominative · singular; feminine · accusative · singular; plural · nominative; plural · accusative",
+    "gloss": "this, these; that"
+   }
+  ],
+  "welche": [
+   {
+    "lemma": "welcher",
+    "pos": "det",
+    "form": "question word · feminine · nominative · singular; feminine · accusative · singular; plural · nominative; plural · accusative",
+    "gloss": "which"
+   }
+  ],
+  "dieses": [
+   {
+    "lemma": "dieser",
+    "pos": "det",
+    "form": "demonstrative · neuter · nominative · singular; neuter · accusative · singular; masculine · genitive · singular; neuter · genitive · singular",
+    "gloss": "this, these; that"
+   }
+  ],
+  "welches": [
+   {
+    "lemma": "welcher",
+    "pos": "det",
+    "form": "question word · neuter · nominative · singular; neuter · accusative · singular; masculine · genitive · singular; neuter · genitive · singular",
+    "gloss": "which"
+   }
+  ],
+  "diesen": [
+   {
+    "lemma": "dieser",
+    "pos": "det",
+    "form": "demonstrative · masculine · accusative · singular; plural · dative",
+    "gloss": "this, these; that"
+   }
+  ],
+  "welchen": [
+   {
+    "lemma": "welcher",
+    "pos": "det",
+    "form": "question word · masculine · accusative · singular; plural · dative",
+    "gloss": "which"
+   }
+  ],
+  "diesem": [
+   {
+    "lemma": "dieser",
+    "pos": "det",
+    "form": "demonstrative · masculine · dative · singular; neuter · dative · singular",
+    "gloss": "this, these; that"
+   }
+  ],
+  "welchem": [
+   {
+    "lemma": "welcher",
+    "pos": "det",
+    "form": "question word · masculine · dative · singular; neuter · dative · singular",
+    "gloss": "which"
+   }
+  ],
+  "wo": [
+   {
+    "lemma": "wo",
+    "pos": "adv",
+    "form": "question word (place)",
+    "gloss": "where"
+   },
+   {
+    "lemma": "wo",
+    "pos": "conj",
+    "form": "relative or subordinating (… wo …)",
+    "gloss": "where, in which"
+   }
+  ],
+  "wer": [
+   {
+    "lemma": "wer",
+    "pos": "pron",
+    "form": "question word · nominative",
+    "gloss": "who"
+   }
+  ],
+  "wen": [
+   {
+    "lemma": "wer",
+    "pos": "pron",
+    "form": "question word · accusative",
+    "gloss": "whom, who"
+   }
+  ],
+  "wem": [
+   {
+    "lemma": "wer",
+    "pos": "pron",
+    "form": "question word · dative",
+    "gloss": "to whom, who"
+   }
+  ],
+  "was": [
+   {
+    "lemma": "was",
+    "pos": "pron",
+    "form": "question word or relative pronoun",
+    "gloss": "what; which"
+   },
+   {
+    "lemma": "was",
+    "pos": "pron",
+    "form": "colloquial short form of etwas",
+    "gloss": "something"
+   }
+  ],
+  "wann": [
+   {
+    "lemma": "wann",
+    "pos": "adv",
+    "form": "question word (time)",
+    "gloss": "when, at what time"
+   }
+  ],
+  "wie": [
+   {
+    "lemma": "wie",
+    "pos": "adv",
+    "form": "question word",
+    "gloss": "how"
+   },
+   {
+    "lemma": "wie",
+    "pos": "conj",
+    "form": "comparison (so … wie)",
+    "gloss": "like, as"
+   }
+  ],
+  "warum": [
+   {
+    "lemma": "warum",
+    "pos": "adv",
+    "form": "question word",
+    "gloss": "why"
+   }
+  ],
+  "wieso": [
+   {
+    "lemma": "wieso",
+    "pos": "adv",
+    "form": "question word",
+    "gloss": "why"
+   }
+  ],
+  "woher": [
+   {
+    "lemma": "woher",
+    "pos": "adv",
+    "form": "question word (place)",
+    "gloss": "where from"
+   }
+  ],
+  "wohin": [
+   {
+    "lemma": "wohin",
+    "pos": "adv",
+    "form": "question word (direction)",
+    "gloss": "where to"
+   }
+  ],
+  "und": [
+   {
+    "lemma": "und",
+    "pos": "conj",
+    "form": "coordinating conjunction",
+    "gloss": "and"
+   }
+  ],
+  "aber": [
+   {
+    "lemma": "aber",
+    "pos": "conj",
+    "form": "coordinating conjunction",
+    "gloss": "but"
+   },
+   {
+    "lemma": "aber",
+    "pos": "particle",
+    "form": "particle (emphasis)",
+    "gloss": "really, and how"
+   }
+  ],
+  "oder": [
+   {
+    "lemma": "oder",
+    "pos": "conj",
+    "form": "coordinating conjunction",
+    "gloss": "or"
+   },
+   {
+    "lemma": "oder",
+    "pos": "particle",
+    "form": "tag question (…, oder?)",
+    "gloss": "right?, isn’t it?"
+   }
+  ],
+  "denn": [
+   {
+    "lemma": "denn",
+    "pos": "conj",
+    "form": "coordinating conjunction (word order does not change)",
+    "gloss": "because, for"
+   },
+   {
+    "lemma": "denn",
+    "pos": "particle",
+    "form": "particle in questions",
+    "gloss": "then (softens a question)"
+   }
+  ],
+  "weil": [
+   {
+    "lemma": "weil",
+    "pos": "conj",
+    "form": "subordinating conjunction (verb goes to the end)",
+    "gloss": "because"
+   }
+  ],
+  "dass": [
+   {
+    "lemma": "dass",
+    "pos": "conj",
+    "form": "subordinating conjunction (verb goes to the end)",
+    "gloss": "that"
+   }
+  ],
+  "wenn": [
+   {
+    "lemma": "wenn",
+    "pos": "conj",
+    "form": "subordinating conjunction (verb goes to the end)",
+    "gloss": "if; when, whenever"
+   }
+  ],
+  "ob": [
+   {
+    "lemma": "ob",
+    "pos": "conj",
+    "form": "subordinating conjunction (verb goes to the end)",
+    "gloss": "whether, if"
+   }
+  ],
+  "als": [
+   {
+    "lemma": "als",
+    "pos": "conj",
+    "form": "subordinating conjunction (one time in the past)",
+    "gloss": "when"
+   },
+   {
+    "lemma": "als",
+    "pos": "conj",
+    "form": "comparison",
+    "gloss": "than"
+   },
+   {
+    "lemma": "als",
+    "pos": "conj",
+    "form": "role",
+    "gloss": "as"
+   }
+  ],
+  "damit": [
+   {
+    "lemma": "damit",
+    "pos": "conj",
+    "form": "subordinating conjunction (verb goes to the end)",
+    "gloss": "so that",
+    "ctx": "afterComma"
+   },
+   {
+    "lemma": "damit",
+    "pos": "adv",
+    "form": "adverb (da + mit)",
+    "gloss": "with it, with that; by that",
+    "ctx": "verb"
+   }
+  ],
+  "bevor": [
+   {
+    "lemma": "bevor",
+    "pos": "conj",
+    "form": "subordinating conjunction (verb goes to the end)",
+    "gloss": "before"
+   }
+  ],
+  "nachdem": [
+   {
+    "lemma": "nachdem",
+    "pos": "conj",
+    "form": "subordinating conjunction (verb goes to the end)",
+    "gloss": "after"
+   }
+  ],
+  "obwohl": [
+   {
+    "lemma": "obwohl",
+    "pos": "conj",
+    "form": "subordinating conjunction (verb goes to the end)",
+    "gloss": "although"
+   }
+  ],
+  "also": [
+   {
+    "lemma": "also",
+    "pos": "adv",
+    "form": "adverb",
+    "gloss": "so, therefore; well"
+   }
+  ],
+  "in": [
+   {
+    "lemma": "in",
+    "pos": "prep",
+    "form": "two-way preposition · dative (where?) or accusative (where to?)",
+    "gloss": "in, inside; into (with accusative)"
+   }
+  ],
+  "an": [
+   {
+    "lemma": "an",
+    "pos": "prep",
+    "form": "two-way preposition · dative (where?) or accusative (where to?)",
+    "gloss": "at, on (touching a side); to (with accusative)"
+   },
+   {
+    "lemma": "an",
+    "pos": "adv",
+    "form": "adverb / separable prefix",
+    "gloss": "on (switched on); part of verbs like anrufen, anfangen"
+   }
+  ],
+  "auf": [
+   {
+    "lemma": "auf",
+    "pos": "prep",
+    "form": "two-way preposition · dative (where?) or accusative (where to?)",
+    "gloss": "on, onto; at (auf der Arbeit); in (auf Deutsch)"
+   },
+   {
+    "lemma": "auf",
+    "pos": "adv",
+    "form": "adverb / separable prefix",
+    "gloss": "open; up; part of verbs like aufstehen, aufmachen"
+   }
+  ],
+  "mit": [
+   {
+    "lemma": "mit",
+    "pos": "prep",
+    "form": "preposition · takes the dative",
+    "gloss": "with; by (mit dem Bus)"
+   },
+   {
+    "lemma": "mit",
+    "pos": "adv",
+    "form": "adverb / separable prefix",
+    "gloss": "along, too; part of verbs like mitkommen, mitbringen"
+   }
+  ],
+  "für": [
+   {
+    "lemma": "für",
+    "pos": "prep",
+    "form": "preposition · takes the accusative",
+    "gloss": "for"
+   }
+  ],
+  "von": [
+   {
+    "lemma": "von",
+    "pos": "prep",
+    "form": "preposition · takes the dative",
+    "gloss": "from; of; by"
+   }
+  ],
+  "aus": [
+   {
+    "lemma": "aus",
+    "pos": "prep",
+    "form": "preposition · takes the dative",
+    "gloss": "out of, from"
+   },
+   {
+    "lemma": "aus",
+    "pos": "adv",
+    "form": "adverb / separable prefix",
+    "gloss": "off, over; out; part of verbs like aussehen, ausgehen"
+   }
+  ],
+  "nach": [
+   {
+    "lemma": "nach",
+    "pos": "prep",
+    "form": "preposition · takes the dative",
+    "gloss": "to (cities, countries); after; according to"
+   }
+  ],
+  "bei": [
+   {
+    "lemma": "bei",
+    "pos": "prep",
+    "form": "preposition · takes the dative",
+    "gloss": "at (someone’s place); near; during (beim Essen)"
+   }
+  ],
+  "vor": [
+   {
+    "lemma": "vor",
+    "pos": "prep",
+    "form": "two-way preposition · dative (where?) or accusative (where to?)",
+    "gloss": "in front of; before; ago (vor + time)"
+   }
+  ],
+  "über": [
+   {
+    "lemma": "über",
+    "pos": "prep",
+    "form": "two-way preposition · dative (where?) or accusative (where to?)",
+    "gloss": "over, above; about (a topic)"
+   }
+  ],
+  "unter": [
+   {
+    "lemma": "unter",
+    "pos": "prep",
+    "form": "two-way preposition · dative (where?) or accusative (where to?)",
+    "gloss": "under, below; among"
+   }
+  ],
+  "um": [
+   {
+    "lemma": "um",
+    "pos": "prep",
+    "form": "preposition · takes the accusative",
+    "gloss": "around; at (um 8 Uhr)"
+   },
+   {
+    "lemma": "um",
+    "pos": "conj",
+    "form": "um … zu + infinitive",
+    "gloss": "in order to"
+   }
+  ],
+  "durch": [
+   {
+    "lemma": "durch",
+    "pos": "prep",
+    "form": "preposition · takes the accusative",
+    "gloss": "through"
+   }
+  ],
+  "gegen": [
+   {
+    "lemma": "gegen",
+    "pos": "prep",
+    "form": "preposition · takes the accusative",
+    "gloss": "against; around (gegen 8 Uhr)"
+   }
+  ],
+  "ohne": [
+   {
+    "lemma": "ohne",
+    "pos": "prep",
+    "form": "preposition · takes the accusative",
+    "gloss": "without"
+   },
+   {
+    "lemma": "ohne",
+    "pos": "conj",
+    "form": "ohne … zu + infinitive",
+    "gloss": "without …-ing"
+   }
+  ],
+  "bis": [
+   {
+    "lemma": "bis",
+    "pos": "prep",
+    "form": "preposition · takes the accusative",
+    "gloss": "until, by; up to"
+   },
+   {
+    "lemma": "bis",
+    "pos": "conj",
+    "form": "subordinating conjunction",
+    "gloss": "until"
+   }
+  ],
+  "seit": [
+   {
+    "lemma": "seit",
+    "pos": "prep",
+    "form": "preposition · takes the dative",
+    "gloss": "since; for (time up to now)"
+   },
+   {
+    "lemma": "seit",
+    "pos": "conj",
+    "form": "subordinating conjunction",
+    "gloss": "since"
+   }
+  ],
+  "wegen": [
+   {
+    "lemma": "wegen",
+    "pos": "prep",
+    "form": "preposition · takes the genitive",
+    "gloss": "because of"
+   }
+  ],
+  "hinter": [
+   {
+    "lemma": "hinter",
+    "pos": "prep",
+    "form": "two-way preposition · dative (where?) or accusative (where to?)",
+    "gloss": "behind"
+   }
+  ],
+  "neben": [
+   {
+    "lemma": "neben",
+    "pos": "prep",
+    "form": "two-way preposition · dative (where?) or accusative (where to?)",
+    "gloss": "next to, beside"
+   }
+  ],
+  "zwischen": [
+   {
+    "lemma": "zwischen",
+    "pos": "prep",
+    "form": "two-way preposition · dative (where?) or accusative (where to?)",
+    "gloss": "between"
+   }
+  ],
+  "trotz": [
+   {
+    "lemma": "trotz",
+    "pos": "prep",
+    "form": "preposition · takes the genitive",
+    "gloss": "despite"
+   }
+  ],
+  "während": [
+   {
+    "lemma": "während",
+    "pos": "prep",
+    "form": "preposition · takes the genitive",
+    "gloss": "during"
+   },
+   {
+    "lemma": "während",
+    "pos": "conj",
+    "form": "subordinating conjunction",
+    "gloss": "while"
+   }
+  ],
+  "statt": [
+   {
+    "lemma": "statt",
+    "pos": "prep",
+    "form": "preposition · takes the genitive",
+    "gloss": "instead of"
+   }
+  ],
+  "gegenüber": [
+   {
+    "lemma": "gegenüber",
+    "pos": "prep",
+    "form": "preposition · takes the dative",
+    "gloss": "opposite, across from"
+   }
+  ],
+  "ab": [
+   {
+    "lemma": "ab",
+    "pos": "prep",
+    "form": "preposition · takes the dative",
+    "gloss": "from (a time on)"
+   },
+   {
+    "lemma": "ab",
+    "pos": "adv",
+    "form": "adverb / separable prefix",
+    "gloss": "off, away; part of verbs like abfahren, abholen"
+   }
+  ],
+  "zu": [
+   {
+    "lemma": "zu",
+    "pos": "prep",
+    "form": "preposition · takes the dative",
+    "gloss": "to (a person or place); at (zu Hause)"
+   },
+   {
+    "lemma": "zu",
+    "pos": "adv",
+    "form": "before an adjective or adverb",
+    "gloss": "too (zu laut = too loud)",
+    "ctx": "adjNext"
+   },
+   {
+    "lemma": "zu",
+    "pos": "particle",
+    "form": "before an infinitive",
+    "gloss": "to (zu + infinitive)",
+    "ctx": "infNext"
+   }
+  ],
+  "am": [
+   {
+    "lemma": "am",
+    "pos": "contraction",
+    "form": "an + dem",
+    "gloss": "short for an dem",
+    "parts": [
+     "an",
+     "dem"
+    ]
+   }
+  ],
+  "im": [
+   {
+    "lemma": "im",
+    "pos": "contraction",
+    "form": "in + dem",
+    "gloss": "short for in dem",
+    "parts": [
+     "in",
+     "dem"
+    ]
+   }
+  ],
+  "ans": [
+   {
+    "lemma": "ans",
+    "pos": "contraction",
+    "form": "an + das",
+    "gloss": "short for an das",
+    "parts": [
+     "an",
+     "das"
+    ]
+   }
+  ],
+  "ins": [
+   {
+    "lemma": "ins",
+    "pos": "contraction",
+    "form": "in + das",
+    "gloss": "short for in das",
+    "parts": [
+     "in",
+     "das"
+    ]
+   }
+  ],
+  "zum": [
+   {
+    "lemma": "zum",
+    "pos": "contraction",
+    "form": "zu + dem",
+    "gloss": "short for zu dem",
+    "parts": [
+     "zu",
+     "dem"
+    ]
+   }
+  ],
+  "zur": [
+   {
+    "lemma": "zur",
+    "pos": "contraction",
+    "form": "zu + der",
+    "gloss": "short for zu der",
+    "parts": [
+     "zu",
+     "der"
+    ]
+   }
+  ],
+  "beim": [
+   {
+    "lemma": "beim",
+    "pos": "contraction",
+    "form": "bei + dem",
+    "gloss": "short for bei dem",
+    "parts": [
+     "bei",
+     "dem"
+    ]
+   }
+  ],
+  "vom": [
+   {
+    "lemma": "vom",
+    "pos": "contraction",
+    "form": "von + dem",
+    "gloss": "short for von dem",
+    "parts": [
+     "von",
+     "dem"
+    ]
+   }
+  ],
+  "aufs": [
+   {
+    "lemma": "aufs",
+    "pos": "contraction",
+    "form": "auf + das",
+    "gloss": "short for auf das",
+    "parts": [
+     "auf",
+     "das"
+    ]
+   }
+  ],
+  "fürs": [
+   {
+    "lemma": "fürs",
+    "pos": "contraction",
+    "form": "für + das",
+    "gloss": "short for für das",
+    "parts": [
+     "für",
+     "das"
+    ]
+   }
+  ],
+  "ums": [
+   {
+    "lemma": "ums",
+    "pos": "contraction",
+    "form": "um + das",
+    "gloss": "short for um das",
+    "parts": [
+     "um",
+     "das"
+    ]
+   }
+  ],
+  "durchs": [
+   {
+    "lemma": "durchs",
+    "pos": "contraction",
+    "form": "durch + das",
+    "gloss": "short for durch das",
+    "parts": [
+     "durch",
+     "das"
+    ]
+   }
+  ],
+  "noch": [
+   {
+    "lemma": "noch",
+    "pos": "adv",
+    "form": "adverb",
+    "gloss": "still; yet (noch nicht = not yet); another (noch ein)"
+   }
+  ],
+  "nur": [
+   {
+    "lemma": "nur",
+    "pos": "adv",
+    "form": "adverb",
+    "gloss": "only, just"
+   }
+  ],
+  "schon": [
+   {
+    "lemma": "schon",
+    "pos": "adv",
+    "form": "adverb",
+    "gloss": "already; (particle) surely, really"
+   }
+  ],
+  "leider": [
+   {
+    "lemma": "leider",
+    "pos": "adv",
+    "form": "adverb",
+    "gloss": "unfortunately"
+   }
+  ],
+  "eben": [
+   {
+    "lemma": "eben",
+    "pos": "adv",
+    "form": "adverb",
+    "gloss": "just, exactly; just now"
+   }
+  ],
+  "auch": [
+   {
+    "lemma": "auch",
+    "pos": "adv",
+    "form": "adverb",
+    "gloss": "also, too"
+   }
+  ],
+  "sehr": [
+   {
+    "lemma": "sehr",
+    "pos": "adv",
+    "form": "adverb",
+    "gloss": "very; very much"
+   }
+  ],
+  "gern": [
+   {
+    "lemma": "gern",
+    "pos": "adv",
+    "form": "adverb",
+    "gloss": "gladly; with a verb: like to (Ich koche gern = I like cooking)"
+   }
+  ],
+  "gerne": [
+   {
+    "lemma": "gerne",
+    "pos": "adv",
+    "form": "adverb",
+    "gloss": "gladly; with a verb: like to (Ich koche gerne = I like cooking)"
+   }
+  ],
+  "immer": [
+   {
+    "lemma": "immer",
+    "pos": "adv",
+    "form": "adverb",
+    "gloss": "always"
+   }
+  ],
+  "oft": [
+   {
+    "lemma": "oft",
+    "pos": "adv",
+    "form": "adverb",
+    "gloss": "often"
+   }
+  ],
+  "heute": [
+   {
+    "lemma": "heute",
+    "pos": "adv",
+    "form": "adverb",
+    "gloss": "today"
+   }
+  ],
+  "morgen": [
+   {
+    "lemma": "morgen",
+    "pos": "adv",
+    "form": "adverb",
+    "gloss": "tomorrow"
+   }
+  ],
+  "jetzt": [
+   {
+    "lemma": "jetzt",
+    "pos": "adv",
+    "form": "adverb",
+    "gloss": "now"
+   }
+  ],
+  "dann": [
+   {
+    "lemma": "dann",
+    "pos": "adv",
+    "form": "adverb",
+    "gloss": "then"
+   }
+  ],
+  "hier": [
+   {
+    "lemma": "hier",
+    "pos": "adv",
+    "form": "adverb",
+    "gloss": "here"
+   }
+  ],
+  "dort": [
+   {
+    "lemma": "dort",
+    "pos": "adv",
+    "form": "adverb",
+    "gloss": "there"
+   }
+  ],
+  "nun": [
+   {
+    "lemma": "nun",
+    "pos": "adv",
+    "form": "adverb",
+    "gloss": "now; well"
+   }
+  ],
+  "nicht": [
+   {
+    "lemma": "nicht",
+    "pos": "adv",
+    "form": "adverb",
+    "gloss": "not"
+   }
+  ],
+  "so": [
+   {
+    "lemma": "so",
+    "pos": "adv",
+    "form": "adverb",
+    "gloss": "so, like this, this way; (so … wie) as … as"
+   }
+  ],
+  "gestern": [
+   {
+    "lemma": "gestern",
+    "pos": "adv",
+    "form": "adverb",
+    "gloss": "yesterday"
+   }
+  ],
+  "da": [
+   {
+    "lemma": "da",
+    "pos": "adv",
+    "form": "adverb",
+    "gloss": "there; here (Ich bin gleich da = I’ll be right there); then"
+   },
+   {
+    "lemma": "da",
+    "pos": "conj",
+    "form": "subordinating conjunction (verb goes to the end)",
+    "gloss": "since, as"
+   }
+  ],
+  "bitte": [
+   {
+    "lemma": "bitte",
+    "pos": "particle",
+    "form": "particle",
+    "gloss": "please; you’re welcome; pardon?"
+   },
+   {
+    "lemma": "bitten",
+    "pos": "verb",
+    "useDict": true,
+    "ctx": "verbUse"
+   }
+  ],
+  "doch": [
+   {
+    "lemma": "doch",
+    "pos": "particle",
+    "form": "particle",
+    "gloss": "yes (answering a negative question); after all; (makes a request stronger)"
+   }
+  ],
+  "mal": [
+   {
+    "lemma": "mal",
+    "pos": "particle",
+    "form": "particle",
+    "gloss": "just (softens a request); once; times (drei mal)"
+   }
+  ],
+  "ja": [
+   {
+    "lemma": "ja",
+    "pos": "particle",
+    "form": "answer / particle",
+    "gloss": "yes; (particle) you know, after all"
+   }
+  ],
+  "halt": [
+   {
+    "lemma": "halt",
+    "pos": "particle",
+    "form": "particle",
+    "gloss": "just (that’s how it is)"
+   },
+   {
+    "lemma": "halt",
+    "pos": "intj",
+    "form": "interjection",
+    "gloss": "stop!"
+   }
+  ],
+  "selbst": [
+   {
+    "lemma": "selbst",
+    "pos": "particle",
+    "form": "particle",
+    "gloss": "myself, yourself, himself … (for emphasis); even"
+   }
+  ],
+  "hey": [
+   {
+    "lemma": "hey",
+    "pos": "intj",
+    "form": "interjection (greeting / getting attention)",
+    "gloss": "hey"
+   }
+  ],
+  "hi": [
+   {
+    "lemma": "hi",
+    "pos": "intj",
+    "form": "interjection (greeting)",
+    "gloss": "hi"
+   }
+  ],
+  "ok": [
+   {
+    "lemma": "okay",
+    "pos": "intj",
+    "form": "interjection (short for okay)",
+    "gloss": "OK, all right"
+   }
+  ],
+  "okay": [
+   {
+    "lemma": "okay",
+    "pos": "intj",
+    "form": "interjection",
+    "gloss": "OK, all right"
+   }
+  ],
+  "zuhause": [
+   {
+    "lemma": "zuhause",
+    "pos": "adv",
+    "form": "adverb (= zu Hause)",
+    "gloss": "at home"
+   }
+  ],
+  "nichts": [
+   {
+    "lemma": "nichts",
+    "pos": "pron",
+    "form": "indefinite pronoun",
+    "gloss": "nothing"
+   }
+  ],
+  "etwas": [
+   {
+    "lemma": "etwas",
+    "pos": "pron",
+    "form": "indefinite pronoun",
+    "gloss": "something"
+   },
+   {
+    "lemma": "etwas",
+    "pos": "adv",
+    "form": "adverb",
+    "gloss": "a little, somewhat"
+   }
+  ],
+  "alles": [
+   {
+    "lemma": "alles",
+    "pos": "pron",
+    "form": "indefinite pronoun",
+    "gloss": "everything, all"
+   }
+  ],
+  "alle": [
+   {
+    "lemma": "alle",
+    "pos": "det",
+    "form": "determiner · plural",
+    "gloss": "all (of)"
+   },
+   {
+    "lemma": "alle",
+    "pos": "pron",
+    "form": "pronoun · plural",
+    "gloss": "everyone, all of them",
+    "ctx": "notNoun"
+   }
+  ],
+  "viel": [
+   {
+    "lemma": "viel",
+    "pos": "det",
+    "form": "determiner",
+    "gloss": "much, a lot (of)"
+   },
+   {
+    "lemma": "viel",
+    "pos": "adv",
+    "form": "adverb",
+    "gloss": "much, a lot"
+   }
+  ],
+  "mehr": [
+   {
+    "lemma": "mehr",
+    "pos": "det",
+    "form": "comparative of viel",
+    "gloss": "more"
+   }
+  ],
+  "viele": [
+   {
+    "lemma": "viel",
+    "pos": "det",
+    "form": "determiner · plural",
+    "gloss": "many, a lot of"
+   },
+   {
+    "lemma": "viel",
+    "pos": "pron",
+    "form": "pronoun · plural",
+    "gloss": "many (people)",
+    "ctx": "notNoun"
+   }
+  ],
+  "vielen": [
+   {
+    "lemma": "viel",
+    "pos": "det",
+    "form": "determiner · plural dative (vielen Dank = many thanks)",
+    "gloss": "many"
+   }
+  ],
+  "vieles": [
+   {
+    "lemma": "viel",
+    "pos": "pron",
+    "form": "pronoun · neuter",
+    "gloss": "much, many things"
+   }
+  ],
+  "wenige": [
+   {
+    "lemma": "wenig",
+    "pos": "det",
+    "form": "determiner · plural",
+    "gloss": "few"
+   }
+  ],
+  "wenigen": [
+   {
+    "lemma": "wenig",
+    "pos": "det",
+    "form": "determiner · plural dative",
+    "gloss": "few"
+   }
+  ],
+  "genug": [
+   {
+    "lemma": "genug",
+    "pos": "adv",
+    "form": "adverb",
+    "gloss": "enough"
+   }
+  ],
+  "paar": [
+   {
+    "lemma": "paar",
+    "pos": "det",
+    "form": "ein paar (always with ein)",
+    "gloss": "a few, a couple of"
+   }
+  ],
+  "jemand": [
+   {
+    "lemma": "jemand",
+    "pos": "pron",
+    "form": "indefinite pronoun",
+    "gloss": "somebody, someone"
+   }
+  ],
+  "niemand": [
+   {
+    "lemma": "niemand",
+    "pos": "pron",
+    "form": "indefinite pronoun",
+    "gloss": "nobody, no one"
+   }
+  ],
+  "andere": [
+   {
+    "lemma": "anderer",
+    "pos": "det",
+    "form": "determiner · feminine nominative/accusative, or plural",
+    "gloss": "other, different; (die anderen) the others"
+   }
+  ],
+  "anderen": [
+   {
+    "lemma": "anderer",
+    "pos": "det",
+    "form": "determiner · masculine accusative, dative, genitive, or plural",
+    "gloss": "other, different; (die anderen) the others"
+   }
+  ],
+  "anderer": [
+   {
+    "lemma": "anderer",
+    "pos": "det",
+    "form": "determiner · masculine nominative (no article)",
+    "gloss": "other, different; (die anderen) the others"
+   }
+  ],
+  "anderes": [
+   {
+    "lemma": "anderer",
+    "pos": "det",
+    "form": "determiner · neuter nominative/accusative (no article)",
+    "gloss": "other, different; (die anderen) the others"
+   }
+  ],
+  "zwei": [
+   {
+    "lemma": "zwei",
+    "pos": "num",
+    "form": "number",
+    "gloss": "two"
+   }
+  ],
+  "drei": [
+   {
+    "lemma": "drei",
+    "pos": "num",
+    "form": "number",
+    "gloss": "three"
+   }
+  ],
+  "vier": [
+   {
+    "lemma": "vier",
+    "pos": "num",
+    "form": "number",
+    "gloss": "four"
+   }
+  ],
+  "fünf": [
+   {
+    "lemma": "fünf",
+    "pos": "num",
+    "form": "number",
+    "gloss": "five"
+   }
+  ],
+  "sechs": [
+   {
+    "lemma": "sechs",
+    "pos": "num",
+    "form": "number",
+    "gloss": "six"
+   }
+  ],
+  "sieben": [
+   {
+    "lemma": "sieben",
+    "pos": "num",
+    "form": "number",
+    "gloss": "seven"
+   }
+  ],
+  "acht": [
+   {
+    "lemma": "acht",
+    "pos": "num",
+    "form": "number",
+    "gloss": "eight"
+   }
+  ],
+  "neun": [
+   {
+    "lemma": "neun",
+    "pos": "num",
+    "form": "number",
+    "gloss": "nine"
+   }
+  ],
+  "zehn": [
+   {
+    "lemma": "zehn",
+    "pos": "num",
+    "form": "number",
+    "gloss": "ten"
+   }
+  ],
+  "elf": [
+   {
+    "lemma": "elf",
+    "pos": "num",
+    "form": "number",
+    "gloss": "eleven"
+   }
+  ],
+  "zwölf": [
+   {
+    "lemma": "zwölf",
+    "pos": "num",
+    "form": "number",
+    "gloss": "twelve"
+   }
+  ],
+  "zwanzig": [
+   {
+    "lemma": "zwanzig",
+    "pos": "num",
+    "form": "number",
+    "gloss": "twenty"
+   }
+  ],
+  "hundert": [
+   {
+    "lemma": "hundert",
+    "pos": "num",
+    "form": "number",
+    "gloss": "(a) hundred"
+   }
+  ]
+ }
+}

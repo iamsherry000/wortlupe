@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <meta name="theme-color" content="#f7f5f0" media="(prefers-color-scheme: light)">
+  <meta name="theme-color" content="#16181c" media="(prefers-color-scheme: dark)">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="Wortlupe">
+  <title>Wortlupe</title>
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link rel="stylesheet" href="src/style.css">
+</head>
+<body>
+  <header class="bar">
+    <h1>Wortlupe <span class="beta">beta</span></h1>
+    <div class="bar-actions">
+      <button id="edit" type="button" hidden>New text</button>
+      <button id="paste" type="button" class="primary">Paste</button>
+    </div>
+    <nav class="tabs" role="tablist" aria-label="Sections">
+      <button id="tab-read" type="button" role="tab" aria-selected="true">Read</button>
+      <button id="tab-words" type="button" role="tab" aria-selected="false">Words</button>
+    </nav>
+  </header>
+
+  <main>
+    <p id="message" role="status" hidden></p>
+
+    <section id="compose">
+      <p id="hint" role="alert" hidden></p>
+      <label for="input" class="sr-only">German text</label>
+      <textarea id="input" rows="8" placeholder="Paste a German message here…" autocapitalize="off" autocomplete="off" spellcheck="false"></textarea>
+      <button id="read" type="button" class="primary wide">Read</button>
+      <p class="muted small">Tap Paste to read the clipboard, or paste into the box yourself. Everything stays on this phone.</p>
+    </section>
+
+    <section id="reader" hidden>
+      <div id="text" lang="de"></div>
+    </section>
+
+    <!-- P6（SPEC §5.1）單字本：批次貼上＋按熟悉度複習。內容由 src/wordbook/ui.js 畫 -->
+    <section id="words" hidden>
+      <p id="wb-message" role="status" hidden></p>
+
+      <section id="wb-home">
+        <div class="wb-hero">
+          <p class="wb-kicker">Today</p>
+          <p id="wb-due"><span class="num">0</span> due today</p>
+          <p class="muted small" id="wb-due-note"></p>
+          <button id="wb-start" type="button" class="primary wide">Start review</button>
+        </div>
+        <div class="wb-actions">
+          <button id="wb-add" type="button">Add words</button>
+          <button id="wb-all" type="button">All words</button>
+          <button id="wb-export" type="button">Export</button>
+        </div>
+        <div id="wb-export-box" hidden>
+          <label for="wb-export-text" class="muted small">Markdown — copy it anywhere</label>
+          <textarea id="wb-export-text" rows="6" readonly></textarea>
+          <button id="wb-copy" type="button">Copy</button>
+        </div>
+        <h2 class="wb-h">By familiarity</h2>
+        <ul id="wb-groups"></ul>
+      </section>
+
+      <section id="wb-import" hidden>
+        <div class="wb-subbar"><button id="wb-home-link" type="button">← Words</button><h2>Add words</h2></div>
+        <label for="wb-input" class="sr-only">Words to add</label>
+        <textarea id="wb-input" rows="7" autocapitalize="off" autocomplete="off" spellcheck="false"
+          placeholder="One word per line. Your meaning can follow on the same line, or on the next line starting with =&#10;&#10;die Rechnung bill 帳單&#10;feiern&#10;= Party machen"></textarea>
+        <button id="wb-preview-btn" type="button" class="primary wide">Preview</button>
+        <p id="wb-skipped" class="muted small" hidden></p>
+        <ul id="wb-preview" data-state="empty"></ul>
+        <div class="wb-commit-bar"><button id="wb-commit" type="button" class="primary wide" hidden>Add words</button></div>
+      </section>
+
+      <section id="wb-review" hidden>
+        <div class="wb-subbar"><button id="wb-quit" type="button">End</button><span id="wb-progress" class="muted small"></span></div>
+        <div id="wb-card" role="button" tabindex="0" data-side="front" aria-label="Flashcard. Tap to flip.">
+          <div class="front"></div>
+          <div class="back" hidden></div>
+        </div>
+        <div class="wb-grade" hidden>
+          <button id="wb-forgot" type="button">Forgot</button>
+          <button id="wb-unsure" type="button">Not sure</button>
+          <button id="wb-know" type="button">Know it</button>
+        </div>
+      </section>
+
+      <section id="wb-summary" hidden>
+        <h2>Session done</h2>
+        <p class="wb-sum-main"></p>
+        <ul class="wb-sum-groups"></ul>
+        <button id="wb-done" type="button" class="primary wide">Back to words</button>
+      </section>
+
+      <section id="wb-list" hidden>
+        <div class="wb-subbar"><button id="wb-back" type="button">← Words</button><h2 id="wb-list-title">All words</h2></div>
+        <ul id="wb-items"></ul>
+      </section>
+    </section>
+
+    <footer id="about">
+      <h2>About</h2>
+      <p>Wortlupe works offline. The texts you paste and your word list stay on this phone.</p>
+      <p>iPhone setup guide (Share Sheet + Back Tap): <a href="setting-en.html">English</a> · <a href="setting.html" lang="zh-Hant">中文</a></p>
+      <p><strong>Beta:</strong> grammar notes are reliable for full sentences (letters, textbook German). For chat-style messages that drop the subject (<em>hab keine zeit</em>, <em>freu mich</em>), some notes can still be wrong.</p>
+      <p>Dictionary: <a href="https://en.wiktionary.org/">Wiktionary</a> (English edition), extracted by
+        <a href="https://kaikki.org/">kaikki.org</a>, licensed under
+        <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a> and
+        <a href="https://www.gnu.org/licenses/fdl-1.3.html">GFDL</a>.</p>
+      <p>Word frequencies: <a href="https://github.com/hermitdave/FrequencyWords">FrequencyWords</a> by Hermit Dave,
+        licensed under <a href="https://creativecommons.org/licenses/by-sa/4.0/">CC BY-SA 4.0</a>.</p>
+      <p>Wortlupe's dictionary files are adapted from these sources (selected and reformatted) and are shared under the same license. Some usage patterns (<em>Angst vor</em>, <em>sich kümmern um</em> …) and their examples are hand-written where Wiktionary has none.</p>
+      <p>Sentence translation: <a href="https://github.com/mozilla/translations">Firefox Translations</a> German→English model and the <a href="https://github.com/browsermt/bergamot-translator">Bergamot</a> engine by Mozilla and the Bergamot project, licensed under the <a href="mt/LICENSE-MPL-2.0.txt">Mozilla Public License 2.0</a>. It runs on this phone; your text is never sent anywhere.</p>
+      <p class="version">Installed version: <span id="version">checking…</span></p>
+    </footer>
+  </main>
+
+  <aside id="card" role="dialog" aria-label="Word card" hidden>
+    <div class="card-bar">
+      <button id="prev" type="button" aria-label="Previous word">◀</button>
+      <span class="card-token" id="card-token"></span>
+      <button id="next" type="button" aria-label="Next word">▶</button>
+      <button id="close" type="button" aria-label="Close">✕</button>
+    </div>
+    <div id="card-body"></div>
+    <div class="card-foot" id="card-foot">
+      <button id="save" type="button" disabled>Save word</button>
+      <span class="muted small">Word list comes in a later version.</span>
+    </div>
+  </aside>
+
+  <script type="module" src="src/app.js"></script>
+</body>
+</html>

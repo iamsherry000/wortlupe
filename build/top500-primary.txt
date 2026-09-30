@@ -1,0 +1,503 @@
+# Wortlupe 字卡首要讀法稽核：詞頻前 500 名（P2.2，RD 產生）
+# 格式：名次  字 → 原形（詞性）｜這個形｜首要義項；[closed] = 來自封閉詞類表；[noun] = 小寫查不到，改查首字大寫
+
+  1  ich → ich（pron） [closed]｜1st person · nominative · singular｜I
+  2  sie → sie（pron） [closed]｜3rd person · feminine · nominative/accusative · singular｜she; her; it (for a feminine noun)
+  3  das → der（article） [closed]｜neuter · nominative · singular; neuter · accusative · singular｜the
+  4  ist → sein（verb）｜present tense · 3rd person · singular｜to be
+  5  du → du（pron） [closed]｜2nd person · nominative · singular (informal)｜you (one person, informal)
+  6  nicht → nicht（adv） [closed]｜adverb｜not
+  7  die → der（article） [closed]｜feminine · nominative · singular; feminine · accusative · singular; plural · nominative; plural · accusative｜the
+  8  es → es（pron） [closed]｜3rd person · neuter · nominative/accusative · singular｜it
+  9  und → und（conj） [closed]｜coordinating conjunction｜and
+ 10  der → der（article） [closed]｜masculine · nominative · singular; feminine · dative · singular; feminine · genitive · singular; plural · genitive｜the
+ 11  wir → wir（pron） [closed]｜1st person · nominative · plural｜we
+ 12  was → was（pron） [closed]｜question word or relative pronoun｜what; which
+ 13  zu → zu（prep） [closed]｜preposition · takes the dative｜to (a person or place); at (zu Hause)
+ 14  er → er（pron） [closed]｜3rd person · masculine · nominative · singular｜he; it (for a masculine noun)
+ 15  ein → ein（article） [closed]｜masculine · nominative · singular; neuter · nominative · singular; neuter · accusative · singular｜a, an
+ 16  in → in（prep） [closed]｜two-way preposition · dative (where?) or accusative (where to?)｜in, inside; into (with accusative)
+ 17  ja → ja（particle） [closed]｜answer / particle｜yes; (particle) you know, after all
+ 18  mir → ich（pron） [closed]｜1st person · dative · singular (also reflexive)｜me, to me, for me; myself
+ 19  mit → mit（prep） [closed]｜preposition · takes the dative｜with; by (mit dem Bus)
+ 20  wie → wie（adv） [closed]｜question word｜how
+ 21  den → der（article） [closed]｜masculine · accusative · singular; plural · dative｜the
+ 22  mich → ich（pron） [closed]｜1st person · accusative · singular (also reflexive)｜me; myself
+ 23  auf → auf（prep） [closed]｜two-way preposition · dative (where?) or accusative (where to?)｜on, onto; at (auf der Arbeit); in (auf Deutsch)
+ 24  dass → dass（conj） [closed]｜subordinating conjunction (verb goes to the end)｜that
+ 25  aber → aber（conj） [closed]｜coordinating conjunction｜but
+ 26  eine → ein（article） [closed]｜feminine · nominative · singular; feminine · accusative · singular｜a, an
+ 27  so → so（adv） [closed]｜adverb｜so, like this, this way; (so … wie) as … as
+ 28  hat → haben（verb）｜present tense · 3rd person · singular｜to have, to own
+ 29  hier → hier（adv） [closed]｜adverb｜here
+ 30  haben → haben（verb）｜infinitive; present tense · 1st person · plural｜to have, to own　｜大寫 Haben → Haben（noun）｜nominative · singular; dative · singular｜credit
+ 31  für → für（prep） [closed]｜preposition · takes the accusative｜for
+ 32  sind → sein（verb）｜present tense · 1st person · plural; present tense · 3rd person · plural｜to be
+ 33  war → sein（verb）｜past tense · 1st person · singular; past tense · 3rd person · singular｜to be
+ 34  von → von（prep） [closed]｜preposition · takes the dative｜from; of; by
+ 35  wenn → wenn（conj） [closed]｜subordinating conjunction (verb goes to the end)｜if; when, whenever
+ 36  dich → du（pron） [closed]｜2nd person · accusative · singular (also reflexive)｜you; yourself
+ 37  ihr → ihr（pron） [closed]｜2nd person · nominative · plural (informal)｜you (more than one person, informal)
+ 38  nein → nein（intj）｜—｜no　｜大寫 Nein → Nein（noun）｜nominative · singular; nominative · plural｜a no
+ 39  habe → haben（verb）｜present tense · 1st person · singular; subjunctive I · 1st person · singular｜to have, to own　｜大寫 Habe → Habe（noun）｜nominative · singular; genitive · singular｜belongings, possession
+ 40  an → an（prep） [closed]｜two-way preposition · dative (where?) or accusative (where to?)｜at, on (touching a side); to (with accusative)
+ 41  bin → sein（verb）｜present tense · 1st person · singular｜to be
+ 42  noch → noch（adv） [closed]｜adverb｜still; yet (noch nicht = not yet); another (noch ein)
+ 43  nur → nur（adv） [closed]｜adverb｜only, just
+ 44  da → da（adv） [closed]｜adverb｜there; here (Ich bin gleich da = I’ll be right there); then
+ 45  dir → du（pron） [closed]｜2nd person · dative · singular (also reflexive)｜you, to you, for you; yourself
+ 46  sich → sich（pron） [closed]｜reflexive pronoun · 3rd person or polite Sie · accusative/dative｜himself, herself, itself, themselves, yourself (polite); each other
+ 47  einen → ein（article） [closed]｜masculine · accusative · singular｜a, an
+ 48  uns → wir（pron） [closed]｜1st person · accusative/dative · plural (also reflexive)｜us, to us; ourselves; each other
+ 49  hast → haben（verb）｜present tense · 2nd person · singular｜to have, to own　｜大寫 Hast → Hast（noun）｜nominative · singular; genitive · singular｜haste
+ 50  dem → der（article） [closed]｜masculine · dative · singular; neuter · dative · singular｜the
+ 51  kann → können（verb）｜present tense · 1st person · singular; present tense · 3rd person · singular｜to be able (to do or be something), to have the possibility of, can.
+ 52  gut → gut（adj）｜masculine · singular · predicative; feminine · singular · predicative｜good　｜大寫 Gut → Gut（noun）｜nominative · singular; dative · singular｜commodity, property, possession, good
+ 53  auch → auch（adv） [closed]｜adverb｜also, too
+ 54  schon → schon（adv） [closed]｜adverb｜already; (particle) surely, really
+ 55  als → als（conj） [closed]｜subordinating conjunction (one time in the past)｜when
+ 56  sein → sein（verb）｜infinitive｜to be　｜大寫 Sein → Sein（noun）｜nominative · singular; dative · singular｜existence, being, essence (the state and the conditions of being, existing, occurring)
+ 57  mal → mal（particle） [closed]｜particle｜just (softens a request); once; times (drei mal)
+ 58  jetzt → jetzt（adv） [closed]｜adverb｜now
+ 59  ihn → er（pron） [closed]｜3rd person · masculine · accusative · singular｜him; it (for a masculine noun)
+ 60  dann → dann（adv） [closed]｜adverb｜then
+ 61  aus → aus（prep） [closed]｜preposition · takes the dative｜out of, from
+ 62  meine → mein（det） [closed]｜possessive (my) · feminine · nominative · singular; feminine · accusative · singular; plural · nominative; plural · accusative｜my
+ 63  um → um（prep） [closed]｜preposition · takes the accusative｜around; at (um 8 Uhr)
+ 64  im → in + dem（contraction）
+ 65  wird → werden（verb）｜present tense · 3rd person · singular｜to become, to get
+ 66  mein → mein（det） [closed]｜possessive (my) · masculine · nominative · singular; neuter · nominative · singular; neuter · accusative · singular｜my
+ 67  bist → sein（verb）｜present tense · 2nd person · singular｜to be
+ 68  doch → doch（particle） [closed]｜particle｜yes (answering a negative question); after all; (makes a request stronger)
+ 69  alles → alles（pron） [closed]｜indefinite pronoun｜everything, all
+ 70  weiß → wissen（verb）｜present tense · 1st person · singular; present tense · 3rd person · singular｜to know; to be aware of (a fact)　｜大寫 Weiß → Weiß（noun）｜nominative · singular; genitive · singular｜white, whiteness
+ 71  keine → kein（det） [closed]｜negative article · feminine · nominative · singular; feminine · accusative · singular; plural · nominative; plural · accusative｜no, not a, not any
+ 72  oder → oder（conj） [closed]｜coordinating conjunction｜or
+ 73  nach → nach（prep） [closed]｜preposition · takes the dative｜to (cities, countries); after; according to
+ 74  s → S（noun）｜nominative · singular; nominative · plural｜S
+ 75  nichts → nichts（pron） [closed]｜indefinite pronoun｜nothing
+ 76  man → man（pron） [closed]｜indefinite pronoun · nominative｜one, you, people (in general)
+ 77  muss → müssen（verb）｜present tense · 1st person · singular; present tense · 3rd person · singular｜to have to (do something); must; to be obliged (to do something); to need (to do something).　｜大寫 Muss → Muss（noun）｜nominative · singular; genitive · singular｜necessity, a must
+ 78  werden → werden（verb）｜infinitive; present tense · 1st person · plural｜to become, to get
+ 79  will → wollen（verb）｜present tense · 1st person · singular; present tense · 3rd person · singular｜to want; to wish; to desire; to demand
+ 80  ihnen → sie（pron） [closed]｜3rd person · dative · plural｜them, to them
+ 81  geht → gehen（verb）｜present tense · 2nd person · plural; present tense · 3rd person · singular｜to go, to walk
+ 82  wo → wo（adv） [closed]｜question word (place)｜where
+ 83  etwas → etwas（pron） [closed]｜indefinite pronoun｜something
+ 84  oh → oh（intj）｜—｜oh
+ 85  mehr → mehr（det） [closed]｜comparative of viel｜more
+ 86  bei → bei（prep） [closed]｜preposition · takes the dative｜at (someone’s place); near; during (beim Essen)
+ 87  also → also（adv） [closed]｜adverb｜so, therefore; well
+ 88  bitte → bitte（particle） [closed]｜particle｜please; you’re welcome; pardon?
+ 89  immer → immer（adv） [closed]｜adverb｜always
+ 90  hab → haben（verb）｜present tense · 1st person · singular; subjunctive I · 1st person · singular｜to have, to own　｜大寫 Hab → Habe（noun）｜nominative · singular; genitive · singular｜belongings, possession
+ 91  warum → warum（adv） [closed]｜question word｜why
+ 92  vor → vor（prep） [closed]｜two-way preposition · dative (where?) or accusative (where to?)｜in front of; before; ago (vor + time)
+ 93  los → los（adv）｜—｜going on (Was ist los? = What's going on?)　｜大寫 Los → Los（noun）｜nominative · singular; dative · singular｜lottery ticket
+ 94  können → können（verb）｜past participle; infinitive｜to be able (to do or be something), to have the possibility of, can.
+ 95  wieder → wieder（adv）｜—｜again; indicates that the action taking place has happened before
+ 96  sagen → sagen（verb）｜infinitive; present tense · 1st person · plural｜to say (to pronounce; communicate verbally)　｜大寫 Sagen → Sage（noun）｜nominative · plural; genitive · plural｜saga, legend, myth, story, tale
+ 97  machen → machen（verb）｜infinitive; present tense · 1st person · plural｜to make, to produce, to create (an object, arrangement, situation, etc.)
+ 98  danke → danke（intj）｜—｜thanks, thank you　｜大寫 Danke → Dank（noun）｜dative · singular｜thanks, gratitude, appreciation
+ 99  sehr → sehr（adv） [closed]｜adverb｜very; very much
+100  alle → alle（det） [closed]｜determiner · plural｜all (of)
+101  denn → denn（conj） [closed]｜coordinating conjunction (word order does not change)｜because, for
+102  mann → Mann（noun）｜nominative · singular; dative · singular｜man, male human being
+103  tun → tun（verb）｜infinitive; present tense · 1st person · plural｜to do (to perform or execute an action)
+104  ihm → er（pron） [closed]｜3rd person · masculine/neuter · dative · singular｜him, to him; it, to it
+105  zum → zu + dem（contraction）
+106  gehen → gehen（verb）｜infinitive; present tense · 1st person · plural｜to go, to walk
+107  sehen → sehen（verb）｜infinitive; present tense · 1st person · plural｜to see; to have sight
+108  vielleicht → vielleicht（adv）｜—｜perhaps, maybe
+109  einem → ein（article） [closed]｜masculine · dative · singular; neuter · dative · singular｜a, an
+110  wer → wer（pron） [closed]｜question word · nominative｜who
+111  ihre → ihr（det） [closed]｜possessive (her) · feminine · nominative · singular; feminine · accusative · singular; plural · nominative; plural · accusative｜her; their (Ihr: your, polite)
+112  diese → dieser（det） [closed]｜demonstrative · feminine · nominative · singular; feminine · accusative · singular; plural · nominative; plural · accusative｜this, these; that
+113  euch → ihr（pron） [closed]｜2nd person · accusative/dative · plural (also reflexive)｜you, to you (more than one person); yourselves
+114  einer → ein（article） [closed]｜feminine · dative · singular; feminine · genitive · singular｜a, an; of a
+115  komm → kommen（verb）｜imperative · 2nd person · singular｜to come; to arrive
+116  über → über（prep） [closed]｜two-way preposition · dative (where?) or accusative (where to?)｜over, above; about (a topic)
+117  gibt → geben（verb）｜present tense · 3rd person · singular｜to give (changing ownership)
+118  okay → okay（intj） [closed]｜interjection｜OK, all right
+119  wissen → wissen（verb）｜infinitive; present tense · 1st person · plural｜to know; to be aware of (a fact)　｜大寫 Wissen → Wissen（noun）｜nominative · singular; dative · singular｜knowledge
+120  deine → dein（det） [closed]｜possessive (your (one person, informal)) · feminine · nominative · singular; feminine · accusative · singular; plural · nominative; plural · accusative｜your (one person, informal)
+121  müssen → müssen（verb）｜infinitive; present tense · 1st person · plural｜to have to (do something); must; to be obliged (to do something); to need (to do something).
+122  soll → sollen（verb）｜present tense · 1st person · singular; present tense · 3rd person · singular｜should; to be obligated (to do something); ought; shall　｜大寫 Soll → Soll（noun）｜nominative · singular; nominative · plural｜debit
+123  werde → werden（verb）｜present tense · 1st person · singular; subjunctive I · 1st person · singular｜to become, to get
+124  nie → nie（adv）｜—｜never, never at all (referring to an indefinite period of time)
+125  wirklich → wirklich（adv）｜—｜really, actually
+126  hey → hey（intj） [closed]｜interjection (greeting / getting attention)｜hey
+127  kein → kein（det） [closed]｜negative article · masculine · nominative · singular; neuter · nominative · singular; neuter · accusative · singular｜no, not a, not any
+128  viel → viel（det） [closed]｜determiner｜much, a lot (of)
+129  weg → weg（adv）｜—｜away　｜大寫 Weg → Weg（noun）｜nominative · singular; dative · singular｜path, trail, track (usually for foot traffic)
+130  würde → werden（verb）｜subjunctive II · 1st person · singular; subjunctive II · 3rd person · singular｜to become, to get　｜大寫 Würde → Würde（noun）｜nominative · singular; genitive · singular｜dignity
+131  tut → tun（verb）｜present tense · 2nd person · plural; present tense · 3rd person · singular｜to do (to perform or execute an action)
+132  am → an + dem（contraction）
+133  des → der（article） [closed]｜masculine · genitive · singular; neuter · genitive · singular｜the, of the
+134  einfach → einfach（adj）｜masculine · singular · predicative; feminine · singular · predicative｜easy
+135  leben → leben（verb）｜infinitive; present tense · 1st person · plural｜to live, to be alive　｜大寫 Leben → Leben（noun）｜nominative · singular; nominative · plural｜life; being alive
+136  hatte → haben（verb）｜past tense · 1st person · singular; past tense · 3rd person · singular｜to have, to own
+137  zeit → Zeit（noun）｜nominative · singular; genitive · singular｜time (as a concept)
+138  weil → weil（conj） [closed]｜subordinating conjunction (verb goes to the end)｜because
+139  willst → wollen（verb）｜present tense · 2nd person · singular｜to want; to wish; to desire; to demand
+140  kommen → kommen（verb）｜infinitive; present tense · 1st person · plural｜to come; to arrive
+141  dein → dein（det） [closed]｜possessive (your (one person, informal)) · masculine · nominative · singular; neuter · nominative · singular; neuter · accusative · singular｜your (one person, informal)
+142  heute → heute（adv） [closed]｜adverb｜today
+143  kommt → kommen（verb）｜present tense · 2nd person · plural; present tense · 3rd person · singular｜to come; to arrive
+144  wollen → wollen（verb）｜infinitive; present tense · 1st person · plural｜to want; to wish; to desire; to demand　｜大寫 Wollen → Wolle（noun）｜nominative · plural; genitive · plural｜wool
+145  damit → damit（conj） [closed]｜subordinating conjunction (verb goes to the end)｜so that
+146  ganz → ganz（adv）｜—｜quite, completely
+147  wäre → sein（verb）｜subjunctive II · 1st person · singular; subjunctive II · 3rd person · singular｜to be
+148  wollte → wollen（verb）｜past tense · 1st person · singular; subjunctive II · 1st person · singular｜to want; to wish; to desire; to demand
+149  weißt → wissen（verb）｜present tense · 2nd person · singular｜to know; to be aware of (a fact)
+150  ok → okay（intj） [closed]｜interjection (short for okay)｜OK, all right
+151  sicher → sicher（adj）｜masculine · singular · predicative; feminine · singular · predicative｜sure, certainly
+152  gesagt → sagen（verb）｜past participle｜to say (to pronounce; communicate verbally)
+153  frau → Frau（noun）｜nominative · singular; genitive · singular｜woman (adult female human)
+154  nun → nun（adv） [closed]｜adverb｜now; well
+155  bis → bis（prep） [closed]｜preposition · takes the accusative｜until, by; up to
+156  wurde → werden（verb）｜past tense · 1st person · singular; past tense · 3rd person · singular｜to become, to get
+157  leid → leid（adj）｜masculine · singular · predicative; feminine · singular · predicative｜sorry (es tut mir leid = I'm sorry)　｜大寫 Leid → Leid（noun）｜nominative · singular; dative · singular｜woe, grief, distress, sorrow, suffering, affliction
+158  na → na（intj）｜—｜well!, so!; used to introduce a statement
+159  kannst → können（verb）｜present tense · 2nd person · singular｜to be able (to do or be something), to have the possibility of, can.
+160  macht → machen（verb）｜present tense · 2nd person · plural; present tense · 3rd person · singular｜to make, to produce, to create (an object, arrangement, situation, etc.)　｜大寫 Macht → Macht（noun）｜nominative · singular; genitive · singular｜power, authority
+161  dieser → dieser（det） [closed]｜demonstrative · masculine · nominative · singular; feminine · dative · singular; feminine · genitive · singular; plural · genitive｜this, these; that
+162  zurück → zurück（adv）｜—｜back, backward, backwards, to the rear.　｜大寫 Zurück → Zurück（noun）｜nominative · singular; dative · singular｜going back (in existential clauses, negated)
+163  lassen → lassen（verb）｜past participle; infinitive｜to allow; to permit; to let
+164  hallo → hallo（intj）｜—｜hello　｜大寫 Hallo → Hallo（noun）｜—｜hullabaloo, cheering (often welcoming or celebratory)
+165  meinen → mein（det） [closed]｜possessive (my) · masculine · accusative · singular; plural · dative｜my
+166  gott → Gott（noun）｜nominative · singular; dative · singular｜god
+167  seine → sein（det） [closed]｜possessive (his) · feminine · nominative · singular; feminine · accusative · singular; plural · nominative; plural · accusative｜his; its
+168  hätte → haben（verb）｜subjunctive II · 1st person · singular; subjunctive II · 3rd person · singular｜to have, to own
+169  zwei → zwei（num） [closed]｜number｜two
+170  könnte → können（verb）｜subjunctive II · 1st person · singular; subjunctive II · 3rd person · singular｜to be able (to do or be something), to have the possibility of, can.
+171  genau → genau（adv）｜—｜exactly
+172  waren → sein（verb）｜past tense · 1st person · plural; past tense · 3rd person · plural｜to be　｜大寫 Waren → Ware（noun）｜nominative · plural; genitive · plural｜goods, merchandise, ware, commodity
+173  zur → zu + der（contraction）
+174  lass → lass（adj）｜masculine · singular · predicative; feminine · singular · predicative｜powerless, tired, lazy, idle, sluggish, weak, weary, slack, limp; insufficiently diligent
+175  klar → klar（adj）｜masculine · singular · predicative; feminine · singular · predicative｜clear; transparent; bright
+176  morgen → morgen（adv） [closed]｜adverb｜tomorrow
+177  leute → Leute（noun）｜nominative · plural; genitive · plural｜people (several individual persons, a group of people in general, esp. of one kind or another), folk (folks), peeps (slang), guys (boys and/or girls)
+178  vater → Vater（noun）｜nominative · singular; dative · singular｜father
+179  schön → schön（adj）｜masculine · singular · predicative; feminine · singular · predicative｜beautiful, lovely, pretty, handsome
+180  glaube → glauben（verb）｜present tense · 1st person · singular; subjunctive I · 1st person · singular｜to believe something (to consider true)　｜大寫 Glaube → Glaube（noun）｜nominative · singular｜belief, faith
+181  mr. →（不是德文字，斷詞時不可點）
+182  ab → ab（prep） [closed]｜preposition · takes the dative｜from (a time on)
+183  gerade → gerade（adv）｜—｜now (at the moment)　｜大寫 Gerade → Gerade（noun）｜feminine; nominative · singular · strong declension｜line (infinite one-dimensional figure)
+184  tag → Tag（noun）｜nominative · singular; dative · singular｜day (a 24-hour period)
+185  gesehen → sehen（verb）｜past participle｜to see; to have sight
+186  reden → reden（verb）｜infinitive; present tense · 1st person · plural｜to talk, to speak, to orate　｜大寫 Reden → Rede（noun）｜nominative · plural; genitive · plural｜speech, address
+187  wohl → wohl（adv）｜—｜possibly, probably; as I was told (modal particle expressing an assumption, often like English must + infinitive, or (US) guess + clause)　｜大寫 Wohl → Wohl（noun）｜nominative · singular; dative · singular｜good
+188  liebe → lieben（verb）｜present tense · 1st person · singular; subjunctive I · 1st person · singular｜to love, to have a strong affection for (someone or something)　｜大寫 Liebe → Liebe（noun）｜nominative · singular; genitive · singular｜love (tender feeling of affection)
+189  sollte → sollen（verb）｜past tense · 1st person · singular; subjunctive II · 1st person · singular｜should; to be obligated (to do something); ought; shall
+190  sagte → sagen（verb）｜past tense · 1st person · singular; past tense · 3rd person · singular｜to say (to pronounce; communicate verbally)
+191  unsere → unser（det） [closed]｜possessive (our) · feminine · nominative · singular; feminine · accusative · singular; plural · nominative; plural · accusative｜our
+192  jemand → jemand（pron） [closed]｜indefinite pronoun｜somebody, someone
+193  geld → Geld（noun）｜nominative · singular; dative · singular｜money
+194  durch → durch（prep） [closed]｜preposition · takes the accusative｜through
+195  ob → ob（conj） [closed]｜subordinating conjunction (verb goes to the end)｜whether, if
+196  keinen → kein（det） [closed]｜negative article · masculine · accusative · singular; plural · dative｜no, not a, not any
+197  mutter → Mutter（noun）｜nominative · singular; genitive · singular｜mother
+198  raus → raus（adv）｜—｜out, out of there, outta there
+199  gemacht → machen（verb）｜past participle｜to make, to produce, to create (an object, arrangement, situation, etc.)
+200  paar → paar（det） [closed]｜ein paar (always with ein)｜a few, a couple of
+201  mach → machen（verb）｜imperative · 2nd person · singular｜to make, to produce, to create (an object, arrangement, situation, etc.)
+202  passiert → passieren（verb）｜present tense · 2nd person · plural; present tense · 3rd person · singular｜to happen
+203  dachte → denken（verb）｜past tense · 1st person · singular; past tense · 3rd person · singular｜to think, to believe
+204  besser → gut（adj）｜comparative · masculine · singular · predicative; comparative · feminine · singular · predicative｜good
+205  musst → müssen（verb）｜present tense · 2nd person · singular｜to have to (do something); must; to be obliged (to do something); to need (to do something).
+206  wieso → wieso（adv） [closed]｜question word｜why
+207  sir → Not in dictionary
+208  dieses → dieser（det） [closed]｜demonstrative · neuter · nominative · singular; neuter · accusative · singular; masculine · genitive · singular; neuter · genitive · singular｜this, these; that
+209  selbst → selbst（particle） [closed]｜particle｜myself, yourself, himself … (for emphasis); even
+210  gehört → gehören（verb）｜past participle; present tense · 2nd person · plural｜to belong to, be the property of
+211  möchte → mögen（verb）｜subjunctive II · 1st person · singular; subjunctive II · 3rd person · singular｜to like (something or someone)
+212  ohne → ohne（prep） [closed]｜preposition · takes the accusative｜without
+213  hör → hören（verb）｜imperative · 2nd person · singular｜to hear (to perceive sounds (or a sound) through the ear)
+214  her → her（adv）｜—｜hither, to this place, to here, to me/us
+215  sag → sagen（verb）｜imperative · 2nd person · singular｜to say (to pronounce; communicate verbally)
+216  meiner → mein（det） [closed]｜possessive (my) · feminine · dative · singular; feminine · genitive · singular; plural · genitive｜my
+217  anderen → anderer（det） [closed]｜determiner · masculine accusative, dative, genitive, or plural｜other, different; (die anderen) the others
+218  helfen → helfen（verb）｜infinitive; present tense · 1st person · plural｜to help (someone); to assist; to aid
+219  nacht → Nacht（noun）｜nominative · singular; genitive · singular｜night
+220  finden → finden（verb）｜infinitive; present tense · 1st person · plural｜to find; to discover
+221  diesen → dieser（det） [closed]｜demonstrative · masculine · accusative · singular; plural · dative｜this, these; that
+222  gute → gut（adj）｜feminine · nominative · singular · strong declension; nominative · plural · strong declension｜good　｜大寫 Gute → Gut（noun）｜dative · singular｜commodity, property, possession, good
+223  wirst → werden（verb）｜present tense · 2nd person · singular｜to become, to get
+224  lange → lange（adv）｜—｜long, for a long time
+225  natürlich → natürlich（adv）｜—｜naturally
+226  ach → ach（intj）｜—｜oh, alas (expressing surprise, sorrow, or understanding)　｜大寫 Ach → Ach（noun）｜nominative · singular; dative · singular｜oh
+227  meinem → mein（det） [closed]｜possessive (my) · masculine · dative · singular; neuter · dative · singular｜my
+228  gar → gar（adv）｜—｜at all; even
+229  ins → in + das（contraction）
+230  sei → sein（verb）｜subjunctive I · 1st person · singular; subjunctive I · 3rd person · singular｜to be
+231  dort → dort（adv） [closed]｜adverb｜there
+232  weiter → weiter（adv）｜—｜further, farther, more
+233  geben → geben（verb）｜infinitive; present tense · 1st person · plural｜to give (changing ownership)
+234  seit → seit（prep） [closed]｜preposition · takes the dative｜since; for (time up to now)
+235  gleich → gleich（adv）｜—｜right away, in a moment
+236  sagt → sagen（verb）｜present tense · 2nd person · plural; present tense · 3rd person · singular｜to say (to pronounce; communicate verbally)
+237  recht → recht（adj）｜masculine · singular · predicative; feminine · singular · predicative｜right, correct (recht haben = to be right)　｜大寫 Recht → Recht（noun）｜nominative · singular; dative · singular｜right, privilege
+238  ihren → ihr（det） [closed]｜possessive (her) · masculine · accusative · singular; plural · dative｜her; their (Ihr: your, polite)
+239  richtig → richtig（adj）｜masculine · singular · predicative; feminine · singular · predicative｜correct, accurate, right
+240  ordnung → Ordnung（noun）｜nominative · singular; genitive · singular｜order (in Ordnung = alright, OK)
+241  vom → von + dem（contraction）
+242  hören → hören（verb）｜infinitive; present tense · 1st person · plural｜to hear (to perceive sounds (or a sound) through the ear)　｜大寫 Hören → Hören（noun）｜nominative · singular; dative · singular｜hearing
+243  sieht → sehen（verb）｜present tense · 3rd person · singular｜to see; to have sight
+244  davon → davon（adv）｜—｜from it, from that, therefrom, off it, off that
+245  dafür → dafür（adv）｜—｜for that, for it
+246  geh → gehen（verb）｜imperative · 2nd person · singular｜to go, to walk
+247  diesem → dieser（det） [closed]｜demonstrative · masculine · dative · singular; neuter · dative · singular｜this, these; that
+248  wegen → wegen（prep） [closed]｜preposition · takes the genitive｜because of
+249  hause → Haus（noun）｜dative · singular｜house, building
+250  sollten → sollen（verb）｜past tense · 1st person · plural; subjunctive II · 1st person · plural｜should; to be obligated (to do something); ought; shall
+251  mädchen → Mädchen（noun）｜nominative · singular; nominative · plural｜girl
+252  hin → hin（adv）｜—｜there, thither; denotes direction towards a place that is not the speaker’s current location.　｜大寫 Hin → Hin（noun）｜nominative · singular; nominative · plural｜hin
+253  sollen → sollen（verb）｜infinitive; present tense · 1st person · plural｜should; to be obligated (to do something); ought; shall
+254  abend → Abend（noun）｜nominative · singular; dative · singular｜evening; the time from dusk until midnight
+255  haus → Haus（noun）｜nominative · singular; dative · singular｜house, building
+256  denke → denken（verb）｜present tense · 1st person · singular; subjunctive I · 1st person · singular｜to think, to believe　｜大寫 Denke → Denke（noun）｜nominative · singular; genitive · singular｜way of thinking, mindset, mentality, attitude
+257  viele → viel（det） [closed]｜determiner · plural｜many, a lot of
+258  drei → drei（num） [closed]｜number｜three
+259  deinen → dein（det） [closed]｜possessive (your (one person, informal)) · masculine · accusative · singular; plural · dative｜your (one person, informal)
+260  freund → Freund（noun）｜nominative · singular; dative · singular｜friend
+261  guten → gut（adj）｜masculine · genitive · singular · strong declension; neuter · genitive · singular · strong declension｜good　｜大寫 Guten → Gute（noun）｜dative · plural · strong declension; nominative · plural · weak declension｜nominalization of gut
+262  unser → unser（det） [closed]｜possessive (our) · masculine · nominative · singular; neuter · nominative · singular; neuter · accusative · singular｜our
+263  warte → warten（verb）｜present tense · 1st person · singular; subjunctive I · 1st person · singular｜to wait (for)　｜大寫 Warte → Warte（noun）｜nominative · singular; genitive · singular｜lookout, guarding post
+264  machst → machen（verb）｜present tense · 2nd person · singular｜to make, to produce, to create (an object, arrangement, situation, etc.)
+265  menschen → Mensch（noun）｜nominative · plural; genitive · singular｜human, human being, person, man
+266  essen → essen（verb）｜infinitive; present tense · 1st person · plural｜to eat　｜大寫 Essen → Essen（noun）｜nominative · singular; nominative · plural｜meal
+267  angst → Angst（noun）｜nominative · singular; genitive · singular｜fear; fright; anxiety
+268  bleiben → bleiben（verb）｜infinitive; present tense · 1st person · plural｜to remain (to continue to be)　｜大寫 Bleiben → Bleibe（noun）｜plural · uncommon; nominative · plural｜abode, accommodation, residence
+269  zusammen → zusammen（adv）｜—｜together, jointly
+270  welt → Welt（noun）｜nominative · singular; genitive · singular｜world
+271  unter → unter（prep） [closed]｜two-way preposition · dative (where?) or accusative (where to?)｜under, below; among
+272  habt → haben（verb）｜present tense · 2nd person · plural; imperative · 2nd person · plural｜to have, to own
+273  schnell → schnell（adj）｜masculine · singular · predicative; feminine · singular · predicative｜quick, fast
+274  andere → anderer（det） [closed]｜determiner · feminine nominative/accusative, or plural｜other, different; (die anderen) the others
+275  tot → tot（adj）｜masculine · singular · predicative; feminine · singular · predicative｜dead, deceased
+276  getan → tun（verb）｜past participle｜to do (to perform or execute an action)
+277  darf → dürfen（verb）｜present tense · 1st person · singular; present tense · 3rd person · singular｜to be allowed (to do something); to be permitted (to do something); may
+278  erst → erst（adv）｜—｜only, not until
+279  rein → rein（adj）｜masculine · singular · predicative; feminine · singular · predicative｜pure, clear, plain
+280  stimmt → stimmt（intj）｜—｜correct
+281  nehmen → nehmen（verb）｜infinitive; present tense · 1st person · plural｜to take (something into one's possession or on one's body)
+282  kinder → Kind（noun）｜nominative · plural; genitive · plural｜kid; child (young person)
+283  eines → ein（article） [closed]｜masculine · genitive · singular; neuter · genitive · singular｜of a, of an
+284  glauben → glauben（verb）｜infinitive; present tense · 1st person · plural｜to believe something (to consider true)　｜大寫 Glauben → Glaube（noun）｜dative · singular; accusative · singular｜belief, faith
+285  bringen → bringen（verb）｜infinitive; present tense · 1st person · plural｜to bring, to fetch, to take, to convey, to bear
+286  ganze → ganz（adj）｜feminine · nominative · singular · strong declension; nominative · plural · strong declension｜entire, whole, complete　｜大寫 Ganze → Ganzes（noun）｜nominative · plural · strong declension; accusative · plural · strong declension｜whole
+287  genug → genug（adv） [closed]｜adverb｜enough
+288  scheiße → scheiße（adj）｜—｜shit, bad, ill, poor　｜大寫 Scheiße → Scheiße（noun）｜nominative · singular; genitive · singular｜feces, shit
+289  brauchen → brauchen（verb）｜infinitive; present tense · 1st person · plural｜to need, to be in need of, to require
+290  gegen → gegen（prep） [closed]｜preposition · takes the accusative｜against; around (gegen 8 Uhr)
+291  moment → Moment（noun）｜nominative · singular; dative · singular｜moment
+292  junge → jung（adj）｜feminine · nominative · singular · strong declension; nominative · plural · strong declension｜young　｜大寫 Junge → Junge（noun）｜nominative · singular｜boy
+293  steht → stehen（verb）｜present tense · 2nd person · plural; present tense · 3rd person · singular｜to stand (to be upright, support oneself in an erect position)
+294  sonst → sonst（adv）｜—｜otherwise (under different circumstances)
+295  musik → Musik（noun）｜nominative · singular; genitive · singular｜music
+296  arbeit → Arbeit（noun）｜nominative · singular; genitive · singular｜toil, regularly performed work, regularly pursued economic activity, labor, job, employment, occupation
+297  seid → sein（verb）｜present tense · 2nd person · plural; imperative · 2nd person · plural｜to be
+298  ihrer → ihr（det） [closed]｜possessive (her) · feminine · dative · singular; feminine · genitive · singular; plural · genitive｜her; their (Ihr: your, polite)
+299  fragen → fragen（verb）｜infinitive; present tense · 1st person · plural｜to ask　｜大寫 Fragen → Frage（noun）｜nominative · plural; genitive · plural｜question (interrogative sentence or phrase)
+300  herr → Herr（noun）｜nominative · singular｜Mr.
+301  dabei → dabei（adv）｜—｜with it
+302  heißt → heißen（verb）｜present tense · 2nd person · singular; present tense · 2nd person · plural｜to be called, to be named
+303  familie → Familie（noun）｜nominative · singular; genitive · singular｜family
+304  warten → warten（verb）｜infinitive; present tense · 1st person · plural｜to wait (for)　｜大寫 Warten → Warte（noun）｜nominative · plural; genitive · plural｜lookout, guarding post
+305  niemand → niemand（pron） [closed]｜indefinite pronoun｜nobody, no one
+306  sofort → sofort（adv）｜—｜immediately, at once
+307  bevor → bevor（conj） [closed]｜subordinating conjunction (verb goes to the end)｜before
+308  jahre → Jahr（noun）｜nominative · plural; genitive · plural｜year (solar year, the time it takes the Earth to complete one orbit of the Sun)
+309  einmal → einmal（adv）｜—｜once, one time (one and only one time)
+310  problem → Problem（noun）｜nominative · singular; dative · singular｜problem
+311  sohn → Sohn（noun）｜nominative · singular; dative · singular｜son
+312  wann → wann（adv） [closed]｜question word (time)｜when, at what time
+313  brauche → brauchen（verb）｜present tense · 1st person · singular; subjunctive I · 1st person · singular｜to need, to be in need of, to require　｜大寫 Brauche → Brauch（noun）｜dative · singular｜custom
+314  fertig → fertig（adj）｜masculine · singular · predicative; feminine · singular · predicative｜ready for use; done; fully prepared
+315  halt → halt（particle） [closed]｜particle｜just (that’s how it is)
+316  allein → allein（adj）｜—｜alone
+317  beim → bei + dem（contraction）
+318  sprechen → sprechen（verb）｜infinitive; present tense · 1st person · plural｜to speak (some language, the truth, etc.)
+319  beide → beide（det）｜—｜both
+320  gefunden → finden（verb）｜past participle · masculine · singular · predicative; past participle · feminine · singular · predicative｜to find; to discover
+321  hatten → haben（verb）｜past tense · 1st person · plural; past tense · 3rd person · plural｜to have, to own
+322  sache → Sache（noun）｜nominative · singular; genitive · singular｜matter, affair, case, question, issue
+323  hilfe → Hilfe（noun）｜nominative · singular; genitive · singular｜help, aid
+324  verdammt → verdammt（adj）｜masculine · singular · predicative; feminine · singular · predicative｜damned
+325  ne → ein（article）｜feminine · nominative · accusative · singular｜a, an
+326  jeder → jeder（pron）｜—｜each
+327  warst → sein（verb）｜past tense · 2nd person · singular｜to be
+328  gern → gern（adv） [closed]｜adverb｜gladly; with a verb: like to (Ich koche gern = I like cooking)
+329  konnte → können（verb）｜past tense · 1st person · singular; past tense · 3rd person · singular｜to be able (to do or be something), to have the possibility of, can.
+330  darüber → darüber（adv）｜—｜above, above it/this/that
+331  halten → halten（verb）｜infinitive; present tense · 1st person · plural｜to hold (an object in one's hands)　｜大寫 Halten → Halt（noun）｜dative · plural｜hold; adhesion
+332  siehst → sehen（verb）｜present tense · 2nd person · singular｜to see; to have sight
+333  verstehe → verstehen（verb）｜present tense · 1st person · singular; subjunctive I · 1st person · singular｜to understand
+334  jahren → Jahr（noun）｜dative · plural｜year (solar year, the time it takes the Earth to complete one orbit of the Sun)
+335  kam → kommen（verb）｜past tense · 1st person · singular; past tense · 3rd person · singular｜to come; to arrive
+336  kind → Kind（noun）｜nominative · singular; dative · singular｜kid; child (young person)
+337  wusste → wissen（verb）｜past tense · 1st person · singular; past tense · 3rd person · singular｜to know; to be aware of (a fact)
+338  wahr → wahr（adj）｜masculine · singular · predicative; feminine · singular · predicative｜true, real
+339  seinen → sein（det） [closed]｜possessive (his) · masculine · accusative · singular; plural · dative｜his; its
+340  dazu → dazu（adv）｜—｜in addition to it, in addition, besides
+341  bruder → Bruder（noun）｜nominative · singular; dative · singular｜brother
+342  daran → daran（adv）｜—｜on it, on that
+343  ihrem → ihr（det） [closed]｜possessive (her) · masculine · dative · singular; neuter · dative · singular｜her; their (Ihr: your, polite)
+344  denken → denken（verb）｜infinitive; present tense · 1st person · plural｜to think, to believe　｜大寫 Denken → Denke（noun）｜plural · uncommon｜way of thinking, mindset, mentality, attitude
+345  könnten → können（verb）｜subjunctive II · 1st person · plural; subjunctive II · 3rd person · plural｜to be able (to do or be something), to have the possibility of, can.
+346  dank → dank（prep）｜—｜thanks to, because of, courtesy of　｜大寫 Dank → Dank（noun）｜nominative · singular; dative · singular｜thanks, gratitude, appreciation
+347  würden → werden（verb）｜subjunctive II · 1st person · plural; subjunctive II · 3rd person · plural｜to become, to get　｜大寫 Würden → Würde（noun）｜nominative · plural; genitive · plural｜dignity
+348  lieber → gern（adv）｜comparative｜willingly; gladly; with pleasure; usually expressed verbally in English, with like, enjoy etc.　｜大寫 Lieber → Lieber（noun）｜nominative · singular · strong declension; genitive · plural · strong declension｜dear
+349  fall → Fall（noun）｜nominative · singular; dative · singular｜fall, drop (the act of falling or an instance thereof)
+350  deiner → dein（det） [closed]｜possessive (your (one person, informal)) · feminine · dative · singular; feminine · genitive · singular; plural · genitive｜your (one person, informal)
+351  sehe → sehen（verb）｜present tense · 1st person · singular; subjunctive I · 1st person · singular｜to see; to have sight
+352  egal → egal（adj）｜—｜all the same, unimportant
+353  kennen → kennen（verb）｜infinitive; present tense · 1st person · plural｜to know; to be acquainted with; to be familiar with
+354  deinem → dein（det） [closed]｜possessive (your (one person, informal)) · masculine · dative · singular; neuter · dative · singular｜your (one person, informal)
+355  vergessen → vergessen（verb）｜infinitive; present tense · 1st person · plural｜to forget (lose remembrance of)
+356  frage → Frage（noun）｜nominative · singular; genitive · singular｜question (interrogative sentence or phrase)
+357  mache → machen（verb）｜present tense · 1st person · singular; subjunctive I · 1st person · singular｜to make, to produce, to create (an object, arrangement, situation, etc.)
+358  komme → kommen（verb）｜present tense · 1st person · singular; subjunctive I · 1st person · singular｜to come; to arrive
+359  sage → sagen（verb）｜present tense · 1st person · singular; subjunctive I · 1st person · singular｜to say (to pronounce; communicate verbally)　｜大寫 Sage → Sage（noun）｜nominative · singular; genitive · singular｜saga, legend, myth, story, tale
+360  mag → mögen（verb）｜present tense · 1st person · singular; present tense · 3rd person · singular｜to like (something or someone)
+361  sieh → sehen（verb）｜imperative · 2nd person · singular｜to see; to have sight
+362  echt → echt（adv）｜—｜really (colloquial)
+363  gib → geben（verb）｜imperative · 2nd person · singular｜to give (changing ownership)
+364  eigentlich → eigentlich（adv）｜—｜really, actually, in truth (with that description being the more pertinent one)
+365  jeden → jeder（pron）｜masculine · accusative · singular · strong declension · mixed declension｜each
+366  dad → Dad（noun）｜nominative · singular; dative · singular｜dad; Dad
+367  gab → geben（verb）｜past tense · 1st person · singular; past tense · 3rd person · singular｜to give (changing ownership)
+368  uhr → Uhr（noun）｜nominative · singular; genitive · singular｜hours, o'clock (indicates the time within a twelve- or twenty-four-hour period)
+369  stadt → Stadt（noun）｜nominative · singular; genitive · singular｜city (a large settlement)
+370  männer → Mann（noun）｜nominative · plural; genitive · plural｜man, male human being
+371  baby → Baby（noun）｜nominative · singular; dative · singular｜baby (infant)
+372  fahren → fahren（verb）｜infinitive; present tense · 1st person · plural｜to drive (a vehicle)
+373  namen → Name（noun）｜nominative · plural; genitive · plural｜name (forename, Christian name, given name)
+374  bekommen → bekommen（verb）｜past participle; infinitive｜to receive; to get
+375  kopf → Kopf（noun）｜nominative · singular; dative · singular｜head
+376  hi → hi（intj） [closed]｜interjection (greeting)｜hi
+377  gehe → gehen（verb）｜present tense · 1st person · singular; subjunctive I · 1st person · singular｜to go, to walk
+378  kleine → klein（adj）｜feminine · nominative · singular · strong declension; nominative · plural · strong declension｜small, little, wee (in physical size or extent)　｜大寫 Kleine → Kleiner（noun）｜nominative · plural · strong declension; accusative · plural · strong declension｜boy, young man
+379  später → später（adv）｜—｜later
+380  glück → Glück（noun）｜nominative · singular; dative · singular｜happiness, joy, bliss (state or emotion)
+381  letzte → letzte（adj）｜feminine · nominative · singular · strong declension; nominative · plural · strong declension｜last　｜大寫 Letzte → Letzter（noun）｜nominative · plural · strong declension; accusative · plural · strong declension｜the last one (male or of unspecified gender)
+382  freunde → Freund（noun）｜nominative · plural; genitive · plural｜friend
+383  n → ein（article）｜—｜a, an
+384  all → all（det）｜—｜all　｜大寫 All → All（noun）｜nominative · singular; dative · singular｜cosmos
+385  darauf → darauf（adv）｜—｜on it, on that
+386  ende → Ende（noun）｜nominative · singular; dative · singular｜end, finish
+387  dr. →（不是德文字，斷詞時不可點）
+388  bald → bald（adv）｜—｜soon (near in time)
+389  töten → töten（verb）｜infinitive; present tense · 1st person · plural｜to kill
+390  dinge → Ding（noun）｜nominative · plural; genitive · plural｜thing
+391  meinst → meinen（verb）｜present tense · 2nd person · singular｜to think, to be of the opinion
+392  toll → toll（adj）｜masculine · singular · predicative; feminine · singular · predicative｜great, nice, wonderful
+393  eins → eins（num） [closed]｜number (counting)｜one
+394  minuten → Minute（noun）｜nominative · plural; genitive · plural｜minute (unit of time; unit of angle)
+395  vielen → viel（det） [closed]｜determiner · plural dative (vielen Dank = many thanks)｜many
+396  bereit → bereit（adj）｜masculine · singular · predicative; feminine · singular · predicative｜ready
+397  weit → weit（adj）｜masculine · singular · predicative; feminine · singular · predicative｜far
+398  ahnung → Ahnung（noun）｜nominative · singular; genitive · singular｜idea (keine Ahnung = no idea)
+399  seiner → sein（det） [closed]｜possessive (his) · feminine · dative · singular; feminine · genitive · singular; plural · genitive｜his; its
+400  bisschen → bisschen（adv）｜—｜(a) bit; (a) little　｜大寫 Bisschen → Biss（noun）｜neuter · strong declension · diminutive｜bite (instance or way of biting; wound from biting)
+401  tür → Tür（noun）｜nominative · singular; genitive · singular｜door (rigid plane on a hinge)
+402  auto → Auto（noun）｜nominative · singular; dative · singular｜car
+403  jungs → Junge（noun）｜nominative · plural · colloquial; genitive · plural · colloquial｜boy
+404  eure → euer（det） [closed]｜possessive (your (more than one person, informal)) · feminine · nominative · singular; feminine · accusative · singular; plural · nominative; plural · accusative｜your (more than one person, informal)
+405  augen → Auge（noun）｜nominative · plural; genitive · plural｜eye
+406  polizei → Polizei（noun）｜nominative · singular; genitive · singular｜police; law enforcement
+407  stehen → stehen（verb）｜infinitive; present tense · 1st person · plural｜to stand (to be upright, support oneself in an erect position)
+408  sterben → sterben（verb）｜infinitive; present tense · 1st person · plural｜to die
+409  hätten → haben（verb）｜subjunctive II · 1st person · plural; subjunctive II · 3rd person · plural｜to have, to own
+410  draußen → draußen（adv）｜—｜outside
+411  kenne → kennen（verb）｜present tense · 1st person · singular; subjunctive I · 1st person · singular｜to know; to be acquainted with; to be familiar with
+412  fast → fast（adv）｜—｜almost; nearly
+413  runter → runter（adv）｜—｜down, down here, downstairs (towards the speaker)
+414  vorbei → vorbei（adj）｜—｜over, past, up (of time)
+415  treffen → treffen（verb）｜infinitive; present tense · 1st person · plural｜to meet; to encounter　｜大寫 Treffen → Treffen（noun）｜nominative · singular; nominative · plural｜a meeting
+416  gerne → gerne（adv） [closed]｜adverb｜gladly; with a verb: like to (Ich koche gerne = I like cooking)
+417  dran → dran（adv）｜—｜(ich bin dran) it's my turn
+418  wurden → werden（verb）｜past tense · 1st person · plural; past tense · 3rd person · plural｜to become, to get
+419  arbeiten → arbeiten（verb）｜infinitive; present tense · 1st person · plural｜to work (to do a specific task by employing physical or mental powers)　｜大寫 Arbeiten → Arbeit（noun）｜nominative · plural; genitive · plural｜toil, regularly performed work, regularly pursued economic activity, labor, job, employment, occupation
+420  mom → mom（intj）｜—｜gimme a sec, hold on　｜大寫 Mom → Mom（noun）｜genitive｜mom
+421  verrückt → verrückt（adj）｜masculine · singular · predicative; feminine · singular · predicative｜crazy, mad
+422  neue → neu（adj）｜feminine · nominative · singular · strong declension; nominative · plural · strong declension｜new　｜大寫 Neue → Neues（noun）｜nominative · weak declension; accusative · weak declension｜nominalization of neues: something new
+423  ging → gehen（verb）｜past tense · 1st person · singular; past tense · 3rd person · singular｜to go, to walk
+424  hinter → hinter（prep） [closed]｜two-way preposition · dative (where?) or accusative (where to?)｜behind
+425  sorgen → sorgen（verb）｜infinitive; present tense · 1st person · plural｜to take care of, to care for, to look after　｜大寫 Sorgen → Sorge（noun）｜nominative · plural; genitive · plural｜concern, care, responsibility, aid
+426  einzige → einzig（adj）｜feminine · nominative · singular · strong declension; nominative · plural · strong declension｜only, sole
+427  jemanden → jemand（pron）｜accusative｜someone, somebody
+428  darum → darum（adv）｜—｜that's why
+429  tochter → Tochter（noun）｜nominative · singular; genitive · singular｜daughter
+430  braucht → brauchen（verb）｜present tense · 2nd person · plural; present tense · 3rd person · singular｜to need, to be in need of, to require
+431  idee → Idee（noun）｜nominative · singular; genitive · singular｜idea
+432  schwester → Schwester（noun）｜nominative · singular; genitive · singular｜sister
+433  drin → drin（adv）｜—｜inside
+434  ruhig → ruhig（adj）｜masculine · singular · predicative; feminine · singular · predicative｜quiet
+435  sah → sehen（verb）｜past tense · 1st person · singular; past tense · 3rd person · singular｜to see; to have sight
+436  ganzen → ganz（adj）｜masculine · genitive · singular · strong declension; neuter · genitive · singular · strong declension｜entire, whole, complete　｜大寫 Ganzen → Ganzes（noun）｜genitive · singular · strong declension; dative · plural · strong declension｜whole
+437  spät → spät（adj）｜masculine · singular · predicative; feminine · singular · predicative｜late
+438  ziemlich → ziemlich（adv）｜—｜pretty, quite, rather, fairly, kind of
+439  solltest → sollen（verb）｜past tense · 2nd person · singular; subjunctive II · 2nd person · singular｜should; to be obligated (to do something); ought; shall
+440  name → Name（noun）｜nominative · singular｜name (forename, Christian name, given name)
+441  sogar → sogar（adv）｜—｜even, actually, in fact
+442  kurz → kurz（adj）｜masculine · singular · predicative; feminine · singular · predicative｜short, quick, brief
+443  kerl → Kerl（noun）｜nominative · singular; dative · singular｜fellow, guy, chap, bloke
+444  frauen → Frau（noun）｜nominative · plural; genitive · plural｜woman (adult female human)
+445  liegt → liegen（verb）｜present tense · 2nd person · plural; present tense · 3rd person · singular｜to lie (to be in a horizontal position)
+446  suchen → suchen（verb）｜infinitive; present tense · 1st person · plural｜to search, to look for　｜大寫 Suchen → Suche（noun）｜nominative · plural; genitive · plural｜search
+447  finde → finden（verb）｜present tense · 1st person · singular; subjunctive I · 1st person · singular｜to find; to discover
+448  je → je（adv）｜—｜ever
+449  woher → woher（adv） [closed]｜question word (place)｜where from
+450  lang → lang（adj）｜masculine · singular · predicative; feminine · singular · predicative｜long; lengthy (in space or time)
+451  job → Job（noun）｜nominative · singular; dative · singular｜job, position, employment
+452  keiner → kein（det） [closed]｜negative article · feminine · dative · singular; feminine · genitive · singular; plural · genitive｜no, not a, not any
+453  seinem → sein（det） [closed]｜possessive (his) · masculine · dative · singular; neuter · dative · singular｜his; its
+454  hört → hören（verb）｜present tense · 2nd person · plural; present tense · 3rd person · singular｜to hear (to perceive sounds (or a sound) through the ear)
+455  verstehen → verstehen（verb）｜infinitive; present tense · 1st person · plural｜to understand
+456  spielen → spielen（verb）｜infinitive; present tense · 1st person · plural｜to play (engage in some activity for fun or entertainment)　｜大寫 Spielen → Spiel（noun）｜dative · plural｜a game (instance or way of playing)
+457  s. →（不是德文字，斷詞時不可點）
+458  überhaupt → überhaupt（adv）｜—｜at all (überhaupt nicht = not at all)
+459  teufel → Teufel（noun）｜nominative · singular; nominative · plural｜the Devil, Satan (supreme evil spirit in the Abrahamic religions)
+460  verstanden → verstehen（verb）｜past participle; past tense · 1st person · plural｜to understand　｜大寫 Verstanden → Verstand（noun）｜dative · plural｜intellect
+461  verloren → verlieren（verb）｜past tense · 1st person · plural; past tense · 3rd person · plural｜to lose (something, or a game)
+462  große → groß（adj）｜feminine · nominative · singular · strong declension; nominative · plural · strong declension｜big, large, large-scale　｜大寫 Große → Großer（noun）｜nominative · plural · strong declension; accusative · plural · strong declension｜great (referring to a male)
+463  hand → Hand（noun）｜nominative · singular; genitive · singular｜hand
+464  grund → Grund（noun）｜nominative · singular; dative · singular｜reason
+465  jahr → Jahr（noun）｜nominative · singular; nominative · plural｜year (solar year, the time it takes the Earth to complete one orbit of the Sun)
+466  kommst → kommen（verb）｜present tense · 2nd person · singular｜to come; to arrive
+467  mama → Mama（noun）｜nominative · singular; genitive · singular｜mum, mummy, mom, mommy
+468  ruhe → Ruhe（noun）｜nominative · singular; genitive · singular｜calm, relative quietness (absence of loud sounds)
+469  gewesen → sein（verb）｜past participle｜to be　｜大寫 Gewesen → Gewese（noun）｜dative · plural｜fuss (excessive activity, worry, bother, or talk about something)
+470  tod → Tod（noun）｜nominative · singular; dative · singular｜death
+471  stunden → Stunde（noun）｜nominative · plural; genitive · plural｜hour (unit of time consisting of 60 minutes)
+472  hoffe → hoffen（verb）｜present tense · 1st person · singular; subjunctive I · 1st person · singular｜to hope
+473  denkst → denken（verb）｜present tense · 2nd person · singular｜to think, to believe
+474  oben → oben（adv）｜—｜above
+475  gestern → gestern（adv） [closed]｜adverb｜yesterday
+476  versuchen → versuchen（verb）｜infinitive; present tense · 1st person · plural｜to try, to attempt (often with an uncertain result)　｜大寫 Versuchen → Versuch（noun）｜dative · plural｜attempt
+477  art → Art（noun）｜nominative · singular; genitive · singular｜kind, sort, type
+478  letzten → letzte（adj）｜masculine · genitive · singular · strong declension; neuter · genitive · singular · strong declension｜last　｜大寫 Letzten → Letzter（noun）｜genitive · singular · strong declension; dative · plural · strong declension｜the last one (male or of unspecified gender)
+479  schatz → Schatz（noun）｜nominative · singular; dative · singular｜darling (term of endearment)
+480  endlich → endlich（adv）｜—｜eventually, at last, finally
+481  he → he（intj）｜—｜An exclamation to get attention; hey
+482  nimm → nehmen（verb）｜imperative · 2nd person · singular｜to take (something into one's possession or on one's body)
+483  etwa → etwa（adv）｜—｜approximately
+484  erzählt → erzählen（verb）｜past participle; present tense · 2nd person · plural｜to tell, to narrate, to recount
+485  läuft → laufen（verb）｜present tense · 3rd person · singular｜to walk; to jog; to run (to move on foot; either at a normal or an increased speed)
+486  schwer → schwer（adj）｜masculine · singular · predicative; feminine · singular · predicative｜heavy, weighty
+487  anders → anders（adv）｜—｜different, differently
+488  miss → Miss（noun）｜nominative · singular; genitive · singular｜Miss (form of address)
+489  musste → müssen（verb）｜past tense · 1st person · singular; past tense · 3rd person · singular｜to have to (do something); must; to be obliged (to do something); to need (to do something).
+490  fünf → fünf（num） [closed]｜number｜five
+491  wasser → Wasser（noun）｜nominative · singular; nominative · plural｜water (H₂O)
+492  lässt → lassen（verb）｜present tense · 2nd person · singular; present tense · 3rd person · singular｜to allow; to permit; to let
+493  erste → erste（adj）｜feminine · nominative · singular · strong declension; nominative · plural · strong declension｜first　｜大寫 Erste → Erster（noun）｜nominative · plural · strong declension; accusative · plural · strong declension｜winner (person in first place) (male or of unspecified gender)
+494  versucht → versuchen（verb）｜past participle; present tense · 2nd person · plural｜to try, to attempt (often with an uncertain result)
+495  gekommen → kommen（verb）｜past participle｜to come; to arrive
+496  geschichte → Geschichte（noun）｜nominative · singular; genitive · singular｜story
+497  wenig → wenig（adj）｜—｜little, few (a small amount, a small number)
+498  holen → holen（verb）｜infinitive; present tense · 1st person · plural｜to (go) get, to fetch (to go somewhere and take something to bring back)
+499  bedeutet → bedeuten（verb）｜past participle; present tense · 2nd person · plural｜to imply, to mean, to signify, to indicate, to spell, to betoken
+500  nett → nett（adj）｜masculine · singular · predicative; feminine · singular · predicative｜nice; friendly; likable

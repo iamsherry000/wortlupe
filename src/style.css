@@ -1,0 +1,392 @@
+/* Wortlupe：工具型介面，好讀優先。深色模式跟系統走，手機直式優先。 */
+:root {
+  --bg: #f7f5f0;
+  --surface: #ffffff;
+  --text: #1d1f23;
+  --muted: #6a6f78;
+  --line: #e2ded5;
+  --accent: #1f5fbf;
+  --accent-soft: #e3ecfa;
+  --active: #fff1b8;
+  --sep: #b0470f;
+  --clause: #eef3e4;
+  --danger: #a3261b;
+  --shadow: 0 -6px 24px rgba(0, 0, 0, 0.12);
+  --radius: 14px;
+  --gap: 12px;
+  --reading-size: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  color-scheme: light dark;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #16181c;
+    --surface: #202329;
+    --text: #eceae5;
+    --muted: #9aa0a9;
+    --line: #33373e;
+    --accent: #8ab4f8;
+    --accent-soft: #263349;
+    --active: #5a4a12;
+    --sep: #f0a36b;
+    --clause: #26311f;
+    --danger: #ff8a80;
+    --shadow: 0 -6px 24px rgba(0, 0, 0, 0.5);
+  }
+}
+
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 18px;
+  line-height: 1.5;
+  padding-bottom: env(safe-area-inset-bottom);
+}
+button { font: inherit; color: inherit; }
+.sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+.muted { color: var(--muted); }
+.small { font-size: 15px; }
+[hidden] { display: none !important; }
+
+.bar {
+  position: sticky; top: 0; z-index: 5;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: calc(env(safe-area-inset-top) + 8px) 16px 8px;
+  background: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+.bar h1 { font-size: 20px; margin: 0; letter-spacing: 0.01em; }
+.bar-actions { display: flex; gap: 8px; }
+.bar button, #read, .card-bar button, #save {
+  min-height: 44px; padding: 0 16px; border-radius: 10px;
+  border: 1px solid var(--line); background: var(--surface); cursor: pointer;
+}
+/* P2.1：上面 #read 是 id 選擇器，權重高於 button.primary，把藍底蓋成白底（文字仍是白色 → 看不見）。
+   主要按鈕的樣式一律用 .bar/.card-bar 之外的 class 組合寫，權重要蓋得過上面的共用規則。 */
+button.primary, #read.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+@media (prefers-color-scheme: dark) { button.primary, #read.primary { color: #0e1726; } }
+button:disabled { opacity: 0.45; cursor: default; }
+button:focus-visible, .w:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
+
+main { padding: 16px; max-width: 720px; margin: 0 auto; }
+
+#message {
+  margin: 0 0 var(--gap); padding: 12px 14px; border-radius: 10px;
+  background: var(--accent-soft); border: 1px solid var(--line);
+}
+#message.error { background: transparent; border-color: var(--danger); color: var(--danger); }
+#hint { margin: 0 0 var(--gap); padding: 12px 14px; border-radius: 10px; border: 1px solid var(--sep); }
+
+#input {
+  width: 100%; min-height: 40vh; padding: 12px; border-radius: var(--radius);
+  border: 1px solid var(--line); background: var(--surface); color: var(--text);
+  font-size: var(--reading-size); line-height: 1.5; resize: vertical;
+}
+#read.wide { width: 100%; margin-top: var(--gap); }
+
+/* 閱讀頁：保留原始換行；底部留白讓最後一行也能捲到卡片上方 */
+#reader { padding-bottom: 60vh; }
+#text {
+  position: relative;
+  white-space: pre-wrap; overflow-wrap: anywhere;
+  font-size: var(--reading-size); line-height: 1.9;
+}
+.w { cursor: pointer; border-radius: 4px; padding: 1px 0; -webkit-tap-highlight-color: transparent; }
+.w:hover { background: var(--accent-soft); }
+.w.active { background: var(--active); }
+.w.sep-verb, .w.sep-prefix { text-decoration: underline dashed var(--sep); text-underline-offset: 6px; }
+.nw { color: var(--muted); }
+.nw[data-type="punct"], .nw[data-type="other"] { color: inherit; }
+#sep-line { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; overflow: visible; }
+#sep-line path { stroke: var(--sep); fill: none; stroke-width: 1.5; }
+
+/* 字卡：底部面板；擋到被點的字時改貼上方（.top） */
+#card {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 10;
+  max-height: 55vh; overflow-y: auto; overscroll-behavior: contain;
+  background: var(--surface); color: var(--text);
+  border-top: 1px solid var(--line); border-radius: var(--radius) var(--radius) 0 0;
+  box-shadow: var(--shadow);
+  padding: 0 16px calc(12px + env(safe-area-inset-bottom));
+}
+#card.top {
+  top: 0; bottom: auto; border-radius: 0 0 var(--radius) var(--radius);
+  border-top: 0; border-bottom: 1px solid var(--line);
+  padding-top: env(safe-area-inset-top);
+}
+.card-bar {
+  position: sticky; top: 0; background: var(--surface);
+  display: flex; align-items: center; gap: 8px; padding: 10px 0 6px;
+}
+.card-bar button { min-width: 44px; padding: 0 10px; }
+.card-token { flex: 1; text-align: center; font-weight: 600; font-size: 18px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.reading { padding: 8px 0 10px; border-top: 1px solid var(--line); }
+.reading:first-of-type { border-top: 0; }
+.reading h2 { margin: 0 0 2px; font-size: 24px; line-height: 1.25; }
+.reading h2 .article { color: var(--accent); font-weight: 600; }
+.field { margin: 2px 0; }
+[data-field="form"] { color: var(--muted); }
+[data-field="pos"] { font-style: italic; color: var(--muted); font-size: 16px; }
+[data-field="glosses"] { margin: 6px 0 0; padding-left: 1.3em; }
+[data-field="glosses"] li { margin: 2px 0; }
+.label { color: var(--muted); }
+.colloquial, .separable-hint, .contraction, .lowercase-note {
+  margin: 6px 0; padding: 8px 12px; border-radius: 10px; background: var(--accent-soft);
+}
+.separable-hint { border-left: 3px dashed var(--sep); }
+.notfound { font-size: 22px; font-weight: 600; margin: 8px 0 4px; }
+.card-error { color: var(--danger); }
+details.others { margin-top: 6px; border-top: 1px solid var(--line); padding-top: 6px; }
+details.others summary { cursor: pointer; color: var(--muted); min-height: 36px; }
+.card-foot { display: flex; align-items: center; gap: 10px; padding-top: 8px; border-top: 1px solid var(--line); }
+
+/* ---------- P2 文法 ---------- */
+/* 句尾最後一個字＋標點＋Grammar 按鈕不斷行，按鈕才不會掉到下一句開頭。
+   P2.1（M3）：整組 nowrap 會讓超長字（Rindfleisch…gesetz）撐破頁寬 → 字本身恢復可在任意處斷開，
+   只有「字尾 → 標點 → 按鈕」之間不斷。 */
+.s-end { white-space: nowrap; }
+.s-end .w { white-space: normal; overflow-wrap: anywhere; word-break: break-word; }
+#card { scroll-padding-top: 68px; } /* 面板裡捲動時，內容不要躲到頂端的 ◀ ▶ 列下面 */
+.g-btn {
+  font-size: 13px; line-height: 1; vertical-align: 0.15em;
+  margin: 0 0.35em 0 0.3em; padding: 5px 8px; min-height: 28px;
+  border-radius: 999px; border: 1px solid var(--line); background: var(--surface); color: var(--muted);
+  cursor: pointer; white-space: nowrap;
+}
+.g-btn:hover { color: var(--accent); border-color: var(--accent); }
+/* P2.1：視覺 28px 高不變，用偽元素把點擊區加大到至少 44×44（WCAG 2.5.5／Apple HIG） */
+.g-btn { position: relative; }
+.g-btn::after { content: ''; position: absolute; left: 50%; top: 50%; width: max(100%, 44px); height: 44px; transform: translate(-50%, -50%); }
+/* 句中標記：變位動詞實線底線、句尾動詞雙底線、從句淡底色、可分離動詞虛線（見 .sep-*） */
+.g-v2 { text-decoration: underline solid var(--accent); text-decoration-thickness: 2px; text-underline-offset: 5px; }
+.g-end { text-decoration: underline double var(--sep); text-decoration-thickness: 1.5px; text-underline-offset: 5px; }
+.g-clause { background: var(--clause); }
+.g-focus { background: var(--accent-soft); }
+.legend { color: var(--muted); margin: 2px 0 6px; }
+.legend span { margin-right: 10px; padding: 0 2px; white-space: nowrap; display: inline-block; }
+.rule { padding: 8px 0 10px; border-top: 1px solid var(--line); }
+.rule:first-of-type { border-top: 0; }
+.rule h3 { margin: 0 0 4px; font-size: 17px; line-height: 1.3; }
+.rule-id { font-size: 12px; font-weight: 600; color: var(--muted); border: 1px solid var(--line); border-radius: 6px; padding: 1px 5px; margin-right: 4px; vertical-align: 0.1em; }
+.rule p { margin: 4px 0; }
+.rule .what { font-size: 18px; }
+.rule .why, .rule .pattern { font-size: 16px; }
+.rule .pattern { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size: 14px; }
+.rule .pattern .label { font-family: inherit; }
+.no-rule { font-size: 20px; font-weight: 600; margin: 8px 0 4px; }
+.why-form { margin-top: 8px; padding-top: 6px; border-top: 2px solid var(--line); }
+.why-title { margin: 4px 0 2px; font-size: 15px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+
+.version { color: var(--muted); font-size: 14px; }
+#version { font-family: ui-monospace, "SF Mono", Menlo, monospace; }
+
+/* ---------- P2.7：整句翻譯（SPEC §4.6）---------- */
+button.mt-download { min-height: 44px; padding: 0 16px; border: 0; border-radius: 10px; background: var(--accent); color: var(--surface); font: inherit; font-weight: 600; }
+button.mt-download:disabled { opacity: 0.5; }
+
+/* 閱讀頁：每段下面的英文（P2.7 加修）。字比原文小一號、灰色，原文仍是主角 */
+.para-tr { display: block; margin: 2px 0 14px; padding-left: 10px; border-left: 3px solid var(--line);
+  color: var(--muted); font-size: 16px; line-height: 1.5; white-space: normal; overflow-wrap: anywhere; }
+.para-tr.failed { font-style: italic; }
+.para-tr[hidden] { display: none; }
+#text.mt-hidden .para-tr { display: none; }
+.mt-banner { display: flex; flex-wrap: wrap; align-items: center; gap: 6px 10px; margin: 0 0 12px; min-height: 44px; }
+.mt-banner[hidden] { display: none; }
+button.mt-toggle { min-height: 36px; padding: 0 12px; border: 1px solid var(--line); border-radius: 999px; background: var(--surface); color: var(--text); font: inherit; font-size: 14px; }
+
+/* ---------- P2.6：這句裡的形＋用法（SPEC §4.5）---------- */
+[data-field="form"] > p { margin: 0; }
+.in-sentence { font-size: 13px; color: var(--accent); white-space: nowrap; }
+details.more-forms summary { cursor: pointer; color: var(--muted); min-height: 32px; font-size: 15px; }
+details.more-forms ul { margin: 2px 0 4px; padding-left: 20px; color: var(--muted); font-size: 15px; }
+.usage { margin-top: 6px; }
+.usage-title { margin: 4px 0 2px; font-size: 15px; text-transform: uppercase; letter-spacing: 0.06em; color: var(--muted); }
+.usage ul { list-style: none; margin: 0; padding: 0; }
+.usage li { padding: 6px 10px; border-radius: 10px; margin: 4px 0; }
+.usage li.match { background: var(--accent-soft); }
+.usage-pattern { margin: 0; }
+.usage-example { margin: 2px 0 0; color: var(--muted); font-size: 15px; }
+
+/* ---------- 授權標示 ---------- */
+#about { margin-top: 40px; padding-top: 12px; border-top: 1px solid var(--line); color: var(--muted); font-size: 15px; }
+#about h2 { font-size: 16px; margin: 0 0 6px; color: var(--text); }
+#about p { margin: 6px 0; }
+#about a { color: var(--accent); }
+
+@media (prefers-reduced-motion: no-preference) {
+  #card { transition: transform 120ms cubic-bezier(0.2, 0.8, 0.2, 1); }
+}
+
+/* ---------- P6：單字本（SPEC §5.1）---------- */
+:root { --warn: #9a6200; --warn-soft: #fff4d6; --ok: #1f7a4d; --card-radius: 20px; --ease-out: cubic-bezier(0.2, 0.8, 0.2, 1); }
+@media (prefers-color-scheme: dark) { :root { --warn: #f2c14e; --warn-soft: #3a2f12; --ok: #7fd4a4; } }
+
+.bar { flex-wrap: wrap; row-gap: 8px; }
+.tabs {
+  order: 3; flex-basis: 100%; display: grid; grid-template-columns: 1fr 1fr; gap: 4px; padding: 3px;
+  border-radius: 12px; background: var(--line);
+}
+.tabs button {
+  min-height: 38px; border: 0; border-radius: 9px; background: transparent; color: var(--muted);
+  font-weight: 600; font-size: 16px; cursor: pointer; transition: background 160ms var(--ease-out), color 160ms var(--ease-out);
+}
+.tabs button[aria-selected="true"] { background: var(--surface); color: var(--text); box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12); }
+body[data-tab="words"] .bar-actions,
+body[data-tab="words"] #message,
+body[data-tab="words"] #compose,
+body[data-tab="words"] #reader,
+body[data-tab="words"] #about { display: none !important; }
+
+#words .wide { width: 100%; }
+/* :where() 讓這條共用樣式權重只有一個 id，底下的 .primary、.pv-actions 等才蓋得過（否則主要按鈕白底白字） */
+#words :where(button:not(.split-word):not(.split-all):not(.pv-suggest)) {
+  min-height: 44px; padding: 0 14px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); cursor: pointer;
+}
+#words button.primary { background: var(--accent); border-color: var(--accent); color: #fff; font-weight: 600; }
+@media (prefers-color-scheme: dark) { #words button.primary { color: #0e1726; } }
+#wb-message { margin: 0 0 var(--gap); padding: 12px 14px; border-radius: 10px; background: var(--accent-soft); border: 1px solid var(--line); }
+#wb-message.error { background: transparent; border-color: var(--danger); color: var(--danger); }
+
+.wb-hero {
+  padding: 18px 18px 16px; border-radius: var(--card-radius); border: 1px solid var(--line);
+  background: linear-gradient(160deg, var(--surface) 0%, var(--surface) 55%, var(--accent-soft) 160%);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.4) inset, 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+.wb-kicker { margin: 0; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+#wb-due { margin: 2px 0 0; font-size: 20px; }
+#wb-due .num { font-size: 44px; font-weight: 700; letter-spacing: -0.02em; margin-right: 6px; font-variant-numeric: tabular-nums; }
+#wb-due-note { margin: 2px 0 12px; }
+.wb-actions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 12px 0 4px; }
+#wb-export-box { margin: 8px 0; display: grid; gap: 6px; }
+#wb-export-text { width: 100%; font: 13px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; padding: 10px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); color: var(--text); }
+.wb-h { font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 20px 0 6px; }
+#wb-groups, #wb-items, #wb-preview, .wb-sum-groups { list-style: none; margin: 0; padding: 0; }
+.wb-group {
+  display: grid; grid-template-columns: 1fr auto; grid-template-rows: auto auto; align-items: center;
+  padding: 10px 14px; margin: 6px 0; border-radius: 12px; background: var(--surface); border: 1px solid var(--line); cursor: pointer;
+  transition: transform 140ms var(--ease-out), border-color 140ms var(--ease-out);
+}
+.wb-group:hover { border-color: var(--accent); transform: translateY(-1px); }
+.wb-group .g-name { font-weight: 600; }
+.wb-group .g-hint { grid-row: 2; color: var(--muted); font-size: 14px; }
+.wb-group .count { grid-row: 1 / span 2; grid-column: 2; font-size: 24px; font-weight: 700; font-variant-numeric: tabular-nums; }
+.wb-group[data-group="Known"] .count { color: var(--ok); }
+
+.wb-subbar { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+.wb-subbar h2 { margin: 0; font-size: 20px; }
+#wb-progress { margin-left: auto; font-variant-numeric: tabular-nums; }
+
+#wb-input { width: 100%; min-height: 30vh; padding: 12px; border-radius: var(--radius); border: 1px solid var(--line);
+  background: var(--surface); color: var(--text); font-size: 18px; line-height: 1.5; resize: vertical; }
+#wb-input.compact { min-height: 0; height: 6.5em; }
+#wb-preview-btn { margin: 10px 0; }
+#wb-preview { display: grid; gap: 8px; padding-bottom: 88px; }
+.pv-row {
+  position: relative; padding: 10px 12px 8px 14px; border-radius: 12px; background: var(--surface);
+  border: 1px solid var(--line); border-left: 4px solid var(--accent);
+}
+.pv-row.nf { border-left-color: var(--muted); border-left-style: dashed; }
+.pv-row.check { border-left-color: var(--warn); background: linear-gradient(90deg, var(--warn-soft), var(--surface) 70%); }
+.pv-row.bad-article { border-left-color: var(--danger); }
+@media (prefers-reduced-motion: no-preference) {
+  .pv-row { animation: pv-in 220ms var(--ease-out) both; animation-delay: calc(var(--i, 0) * 18ms); }
+  @keyframes pv-in { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+}
+.pv-german { display: flex; flex-wrap: wrap; align-items: baseline; gap: 4px 10px; }
+.pv-typed { font-size: 20px; font-weight: 600; }
+.flag-dup { font-size: 13px; color: var(--accent); }
+.pv-note { margin: 2px 0; }
+.pv-note .label { font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; margin-right: 8px; }
+.pv-note-text { white-space: pre-wrap; }
+.pv-dict { display: flex; flex-direction: column; gap: 1px; font-size: 15px; color: var(--muted); margin-top: 2px; }
+.pv-display { color: var(--text); font-weight: 600; }
+.pv-from, .pv-restored { font-size: 14px; color: var(--accent); }
+.pv-gloss { color: var(--text); }
+.pv-dict.notfound .nf { font-style: italic; }
+button.pv-suggest {
+  align-self: flex-start; margin-top: 4px; min-height: 36px; padding: 0 12px; border-radius: 999px;
+  border: 1px dashed var(--accent); background: var(--accent-soft); color: var(--accent); font: inherit; font-size: 15px; cursor: pointer;
+}
+.flag-article { margin: 6px 0 0; color: var(--danger); font-weight: 600; font-size: 15px; }
+.flag-nomeaning { margin: 6px 0 0; color: var(--muted); font-size: 14px; font-style: italic; }
+.flag-check { margin-top: 6px; }
+.flag-check p { margin: 0 0 4px; font-size: 15px; color: var(--warn); }
+.split-words { display: flex; flex-wrap: wrap; gap: 6px; }
+button.split-word, button.split-all {
+  min-height: 36px; padding: 0 12px; border-radius: 999px; border: 1px solid var(--warn); background: var(--surface);
+  color: var(--text); font: inherit; font-size: 15px; cursor: pointer;
+}
+button.split-word:disabled { opacity: 0.5; }
+button.split-all { border-style: dashed; color: var(--muted); }
+.pv-actions { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
+#words .pv-actions button { min-height: 34px; padding: 0 10px; font-size: 14px; color: var(--muted); border-radius: 999px; }
+.wb-commit-bar { position: sticky; bottom: 0; padding: 10px 0 calc(10px + env(safe-area-inset-bottom)); background: linear-gradient(transparent, var(--bg) 35%); }
+
+/* 複習卡：點一下翻面，背面「Your note」與「Dictionary」分開 */
+#wb-card {
+  position: relative; min-height: 46vh; padding: 22px 20px 18px; border-radius: var(--card-radius); cursor: pointer;
+  background: radial-gradient(120% 90% at 0% 0%, var(--accent-soft) 0%, transparent 55%), var(--surface);
+  border: 1px solid var(--line);
+  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset, 0 2px 6px rgba(0, 0, 0, 0.06), 0 18px 40px rgba(0, 0, 0, 0.08);
+  -webkit-tap-highlight-color: transparent; outline-offset: 4px;
+}
+#wb-card:focus-visible { outline: 3px solid var(--accent); }
+#wb-card .front { display: flex; flex-direction: column; justify-content: center; min-height: calc(46vh - 40px); text-align: center; }
+#wb-card[data-side="back"] { background: var(--surface); }
+#wb-card.again { border-color: var(--warn); }
+@media (prefers-reduced-motion: no-preference) {
+  #wb-card .front:not([hidden]), #wb-card .back:not([hidden]) { animation: card-in 90ms var(--ease-out); }
+  @keyframes card-in { from { opacity: 0.2; transform: scale(0.985); } to { opacity: 1; transform: none; } }
+}
+.dir-label { margin: 0 0 10px; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
+.prompt { margin: 0; font-size: 34px; line-height: 1.2; font-weight: 700; overflow-wrap: anywhere; }
+.prompt.meaning { font-size: 28px; font-weight: 600; white-space: pre-wrap; }
+.prompt-src { margin: 8px 0 0; font-size: 13px; color: var(--muted); }
+.restored { margin: 6px 0 0; font-size: 16px; color: var(--accent); }
+.tap-hint { margin: 18px 0 0; font-size: 13px; color: var(--muted); }
+.back .mini { margin: 0 0 8px; font-size: 15px; color: var(--muted); }
+.back .answer.de { margin: 0; font-size: 30px; font-weight: 700; }
+.back .sec { margin-top: 12px; padding-top: 10px; border-top: 1px solid var(--line); }
+.back .sec:first-child { margin-top: 0; padding-top: 0; border-top: 0; }
+.back .answer .sec:first-child { margin-top: 0; padding-top: 0; border-top: 0; }
+.section-title { margin: 0 0 4px; font-size: 12px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.sec-note { border-left: 3px solid var(--accent); padding-left: 10px !important; }
+.your-note { margin: 0; font-size: 22px; white-space: pre-wrap; }
+.d-reading { margin: 4px 0 8px; }
+.d-reading p { margin: 1px 0; }
+.d-head { font-size: 20px; font-weight: 600; }
+.d-head .article { color: var(--accent); }
+.d-pos { font-style: italic; color: var(--muted); font-size: 15px; }
+.d-reading ol { margin: 4px 0 0; padding-left: 1.3em; }
+.d-breakdown, .d-usage { list-style: none; margin: 4px 0; padding: 0; }
+.d-breakdown li, .d-usage li { margin: 4px 0; }
+.d-gloss { font-size: 15px; }
+.back .notfound { font-size: 20px; font-weight: 600; margin: 4px 0; }
+.wb-grade { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 12px; }
+#words .wb-grade button { min-height: 52px; font-weight: 600; }
+#words #wb-forgot { color: var(--danger); border-color: var(--danger); }
+#words #wb-know { background: var(--accent); border-color: var(--accent); color: #fff; }
+@media (prefers-color-scheme: dark) { #words #wb-know { color: #0e1726; } }
+
+#wb-summary h2 { margin: 8px 0; }
+.wb-sum-groups li { display: flex; justify-content: space-between; padding: 8px 12px; margin: 4px 0; border-radius: 10px; background: var(--surface); border: 1px solid var(--line); }
+.wb-sum-groups .plus { color: var(--ok); }
+.wb-sum-groups .minus { color: var(--danger); }
+#wb-done { margin-top: 12px; }
+
+.wb-item { padding: 10px 12px; margin: 6px 0; border-radius: 12px; background: var(--surface); border: 1px solid var(--line); }
+.wb-word { display: flex; flex-wrap: wrap; gap: 4px 10px; align-items: baseline; font-size: 18px; }
+.nf-tag { font-size: 13px; color: var(--muted); font-style: italic; }
+.wb-note { white-space: pre-wrap; font-size: 15px; }
+.wb-meta { font-size: 14px; color: var(--muted); }
+.wb-controls { display: flex; gap: 8px; margin-top: 6px; }
+.wb-controls select { min-height: 40px; padding: 0 8px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); color: var(--text); font: inherit; font-size: 15px; }
+#words .wb-delete { min-height: 40px; font-size: 14px; color: var(--muted); }
+#words .wb-delete.confirm { color: var(--danger); border-color: var(--danger); }
+
+/* beta 標記：9/27 Sherry 拍板先部署 beta，WhatsApp 省略主詞句的講解仍在修 */
+.beta { font-size: 0.55em; font-weight: 600; vertical-align: middle; padding: 0.1em 0.45em; border-radius: 0.4em; border: 1px solid currentColor; opacity: 0.7; text-transform: uppercase; letter-spacing: 0.04em; }

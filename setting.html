@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Wortlupe 設定教學</title>
+  <meta name="description" content="五分鐘在 iPhone 設定好 Wortlupe：WhatsApp 拷貝德文，輕點手機背面兩下，逐字查單字、看文法。">
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <style>
+    :root {
+      --bg: #f6f4ef;
+      --surface: #ffffff;
+      --ink: #1d1d1f;
+      --muted: #5f6368;
+      --line: #e3dfd6;
+      --accent: #1f5fbf;
+      --accent-ink: #ffffff;
+      --chip: #eaf1fc;
+      --chip-ink: #174a94;
+      --ok: #1e7a45;
+      --warn-bg: #fff6e0;
+      --warn-line: #f0d48a;
+      --block: #f1f0ec;
+      --radius: 14px;
+      --gap: 16px;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg: #16181c;
+        --surface: #1f2228;
+        --ink: #eceef1;
+        --muted: #a3a9b3;
+        --line: #33373f;
+        --accent: #7fb0ff;
+        --accent-ink: #0d1b33;
+        --chip: #22324d;
+        --chip-ink: #bcd4ff;
+        --ok: #6fd39a;
+        --warn-bg: #2d2717;
+        --warn-line: #6b5a26;
+        --block: #282c33;
+      }
+    }
+    :root[data-theme="dark"] {
+      --bg: #16181c; --surface: #1f2228; --ink: #eceef1; --muted: #a3a9b3; --line: #33373f;
+      --accent: #7fb0ff; --accent-ink: #0d1b33; --chip: #22324d; --chip-ink: #bcd4ff;
+      --ok: #6fd39a; --warn-bg: #2d2717; --warn-line: #6b5a26; --block: #282c33;
+    }
+    * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font: 17px/1.65 -apple-system, BlinkMacSystemFont, "PingFang TC", "Noto Sans TC", "Segoe UI", sans-serif;
+    }
+    main { max-width: 680px; margin: 0 auto; padding: 24px 16px 64px; }
+    .lang { margin: 0; text-align: right; font-size: 14px; }
+    header.hero { padding: 8px 0 20px; }
+    .eyebrow { color: var(--accent); font-weight: 700; font-size: 14px; letter-spacing: .06em; }
+    h1 { font-size: 28px; line-height: 1.3; margin: 6px 0 10px; }
+    .lead { color: var(--muted); margin: 0; }
+    .need { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; padding: 0; list-style: none; }
+    .need li { background: var(--surface); border: 1px solid var(--line); border-radius: 999px; padding: 4px 12px; font-size: 15px; }
+
+    section.step {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 20px 18px;
+      margin-top: var(--gap);
+    }
+    .step-head { display: flex; align-items: center; gap: 12px; margin-bottom: 4px; }
+    .num {
+      flex: none; width: 34px; height: 34px; border-radius: 50%;
+      background: var(--accent); color: var(--accent-ink);
+      display: grid; place-items: center; font-weight: 800;
+    }
+    h2 { font-size: 21px; margin: 0; line-height: 1.35; }
+    .why { color: var(--muted); font-size: 15px; margin: 4px 0 12px 46px; }
+    ol.do { margin: 0; padding-left: 22px; }
+    ol.do > li { margin: 10px 0; padding-left: 4px; }
+    ol.do ul { margin: 6px 0 0; padding-left: 20px; }
+    .ui {
+      display: inline-block; background: var(--chip); color: var(--chip-ink);
+      border-radius: 6px; padding: 0 7px; font-weight: 600; white-space: nowrap;
+    }
+    .zh { color: var(--muted); font-size: 14px; }
+    .note {
+      background: var(--warn-bg); border: 1px solid var(--warn-line);
+      border-radius: 10px; padding: 10px 14px; margin-top: 14px; font-size: 15px;
+    }
+    .note strong { display: block; margin-bottom: 2px; }
+
+    .copy-row { display: flex; gap: 8px; align-items: stretch; margin-top: 8px; }
+    .copy-row code {
+      flex: 1; min-width: 0; overflow-wrap: anywhere;
+      background: var(--block); border-radius: 8px; padding: 8px 10px; font-size: 14px;
+      font-family: ui-monospace, "SF Mono", Menlo, monospace;
+    }
+    button.copy {
+      flex: none; border: 0; border-radius: 8px; padding: 0 14px; min-height: 44px;
+      background: var(--accent); color: var(--accent-ink); font: inherit; font-size: 15px; font-weight: 700;
+    }
+    button.copy.done { background: var(--ok); }
+
+    /* 捷徑完成後的樣子：用 CSS 畫四個動作方塊，讓第一次用捷徑的人對照 */
+    figure.mock { margin: 18px 0 4px; }
+    figure.mock figcaption { font-size: 14px; color: var(--muted); margin-bottom: 8px; }
+    .blocks { display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; }
+    .block {
+      min-width: 0; overflow-wrap: anywhere;
+      background: var(--block); border-radius: 12px; padding: 10px 12px; font-size: 15px; line-height: 1.5;
+    }
+    .block b { font-weight: 700; }
+    .var { display: inline-block; background: var(--accent); color: var(--accent-ink); border-radius: 6px; padding: 0 6px; font-size: 14px; font-weight: 600; }
+    .arrow { text-align: center; color: var(--muted); font-size: 14px; line-height: 1; }
+
+    .uses { display: grid; gap: 12px; margin-top: 8px; }
+    .use { border: 1px solid var(--line); border-radius: 12px; padding: 12px 14px; }
+    .use h3 { margin: 0 0 6px; font-size: 17px; }
+    .use ol { margin: 0; padding-left: 20px; }
+    .tag { font-size: 13px; font-weight: 700; color: var(--ok); margin-left: 6px; }
+
+    details { border-top: 1px solid var(--line); padding: 12px 0; }
+    details:first-of-type { border-top: 0; }
+    summary { font-weight: 700; cursor: pointer; min-height: 44px; display: flex; align-items: center; }
+    details p { margin: 6px 0 0; color: var(--muted); }
+
+    footer { margin-top: 28px; color: var(--muted); font-size: 14px; text-align: center; }
+    footer a { color: var(--accent); }
+    a { color: var(--accent); }
+  </style>
+</head>
+<body>
+<main>
+  <p class="lang"><a href="setting-en.html" lang="en" hreflang="en">English</a></p>
+  <header class="hero">
+    <div class="eyebrow">WORTLUPE · iPhone 設定教學</div>
+    <h1>在 WhatsApp 看到德文，輕點手機背面兩下就能逐字查</h1>
+    <p class="lead">Wortlupe 會把一整段德文變成「每個字都能點」的閱讀頁：點一下看原形、詞性、英文解釋，每一句還能展開文法講解。跟著下面三步設定一次，以後就不用再設定了。</p>
+    <ul class="need">
+      <li>📱 iPhone</li>
+      <li>🧭 Safari 瀏覽器</li>
+      <li>⏱ 約 5 分鐘</li>
+    </ul>
+  </header>
+
+  <section class="step" id="step1">
+    <div class="step-head"><span class="num">1</span><h2>把 Wortlupe 放到主畫面</h2></div>
+    <p class="why">這樣它就像一個 App，而且沒有網路也能用。</p>
+    <ol class="do">
+      <li>用 <strong>Safari</strong> 打開這個網址（一定要用 Safari，Chrome 做不到）：
+        <div class="copy-row"><code id="app-url">https://wortlupe.iamsherry000.workers.dev</code><button class="copy" type="button" data-copy="app-url">拷貝</button></div>
+      </li>
+      <li>點畫面下方的分享按鈕（方框加一個向上的箭頭）。</li>
+      <li>往下滑，點 <span class="ui">Add to Home Screen</span> <span class="zh">（加入主畫面）</span>，再點右上角的 <span class="ui">Add</span> <span class="zh">（新增）</span>。</li>
+      <li>回到主畫面，點 Wortlupe 的圖示打開<strong>一次</strong>。它會趁這次把字典存進手機，之後就能離線用。</li>
+    </ol>
+  </section>
+
+  <section class="step" id="step2">
+    <div class="step-head"><span class="num">2</span><h2>建一個「Wortlupe」捷徑</h2></div>
+    <p class="why">捷徑負責把你拷貝或分享的德文送進 Wortlupe。這一步最長，跟著做就好。</p>
+    <ol class="do">
+      <li>打開 iPhone 內建的 <span class="ui">Shortcuts</span> <span class="zh">（捷徑）</span> App。找不到的話，在主畫面往下滑搜尋「Shortcuts」或「捷徑」。</li>
+      <li>點右上角的 <span class="ui">＋</span> 新增一個捷徑，把名字改成 <strong>Wortlupe</strong>。</li>
+      <li>打開 <span class="ui">Show in Share Sheet</span> <span class="zh">（在分享表單中顯示）</span>，讓它出現在分享選單裡：
+        <ul>
+          <li><strong>新版 iOS：</strong>點畫面最上方的捷徑名稱（旁邊有個小的 ⌄）→ <span class="ui">Details</span> <span class="zh">（詳細資訊）</span>。</li>
+          <li><strong>舊版 iOS：</strong>點畫面最下方的 <span class="ui">ⓘ</span>。</li>
+        </ul>
+      </li>
+      <li>接收的類型只留 <span class="ui">Text</span> <span class="zh">（文字）</span>，其他全部取消。</li>
+      <li>回到編輯畫面，最上方會多出一行 <span class="ui">Receive Text from Share Sheet</span>。點裡面的 <span class="ui">If there's no input</span> <span class="zh">（如果沒有輸入）</span>，改成 <span class="ui">Get Clipboard</span> <span class="zh">（取得剪貼簿）</span>。
+        <div class="note"><strong>這一步最重要</strong>改了之後，同一個捷徑就能同時用在「分享選單」和「背面輕點」。</div>
+      </li>
+      <li>點下方的搜尋欄，找 <span class="ui">URL Encode</span> <span class="zh">（URL 編碼）</span>，點它加進來。確認它寫的是 <span class="ui">Shortcut Input</span> <span class="zh">（捷徑輸入）</span>。</li>
+      <li>再搜尋 <span class="ui">Text</span> <span class="zh">（文字）</span> 加進來。在文字框裡貼上下面這串網址：
+        <div class="copy-row"><code id="short-url">https://wortlupe.iamsherry000.workers.dev/#t=</code><button class="copy" type="button" data-copy="short-url">拷貝</button></div>
+        貼好之後，游標停在最後面，點鍵盤上方出現的 <span class="ui">URL Encoded Text</span> <span class="zh">（URL 編碼的文字）</span>，把它接在網址後面。
+      </li>
+      <li>最後搜尋 <span class="ui">Open URLs</span> <span class="zh">（打開 URL）</span> 加進來，確認它寫的是 <span class="ui">Text</span>。</li>
+      <li>點右上角 <span class="ui">Done</span> <span class="zh">（完成）</span> 儲存。</li>
+    </ol>
+
+    <figure class="mock">
+      <figcaption>完成後，你的捷徑應該長這樣（由上往下四塊）：</figcaption>
+      <div class="blocks">
+        <div class="block"><b>Receive</b> Text <b>from</b> Share Sheet<br>If there's no input: <b>Get Clipboard</b></div>
+        <div class="arrow">↓</div>
+        <div class="block"><b>URL Encode</b> <span class="var">Shortcut Input</span></div>
+        <div class="arrow">↓</div>
+        <div class="block"><b>Text</b><br>https://wortlupe.iamsherry000.workers.dev/#t=<span class="var">URL Encoded Text</span></div>
+        <div class="arrow">↓</div>
+        <div class="block"><b>Open URLs</b> <span class="var">Text</span></div>
+      </div>
+    </figure>
+  </section>
+
+  <section class="step" id="step3">
+    <div class="step-head"><span class="num">3</span><h2>設定「輕點手機背面兩下」</h2></div>
+    <p class="why">以後拷貝完德文，不用切換 App，敲兩下手機背面就好。</p>
+    <ol class="do">
+      <li>打開 <span class="ui">Settings</span> <span class="zh">（設定）</span>。</li>
+      <li>依序點 <span class="ui">Accessibility</span> <span class="zh">（輔助使用）</span> → <span class="ui">Touch</span> <span class="zh">（觸控）</span> → 拉到最下面的 <span class="ui">Back Tap</span> <span class="zh">（背面輕點）</span>。</li>
+      <li>點 <span class="ui">Double Tap</span> <span class="zh">（點兩下）</span>，往下找到捷徑區，選 <strong>Wortlupe</strong>。</li>
+    </ol>
+  </section>
+
+  <section class="step" id="use">
+    <div class="step-head"><span class="num">✓</span><h2>開始使用</h2></div>
+    <p class="why">第一次使用時，iPhone 會問你能不能讀剪貼簿、能不能打開網址，兩個都選 <span class="ui">Allow</span> <span class="zh">（允許）</span>。</p>
+    <div class="uses">
+      <div class="use">
+        <h3>輕點背面<span class="tag">最快</span></h3>
+        <ol>
+          <li>在 WhatsApp 長按一則德文訊息，點 <span class="ui">Copy</span> <span class="zh">（拷貝）</span>。</li>
+          <li>輕點手機背面兩下。Wortlupe 會自動打開，文字已經放好了。</li>
+        </ol>
+      </div>
+      <div class="use">
+        <h3>分享選單</h3>
+        <ol>
+          <li><strong>WhatsApp：</strong>長按訊息 → <span class="ui">Forward</span> <span class="zh">（轉寄）</span> → 右下角的分享圖示 → <strong>Wortlupe</strong>。</li>
+          <li><strong>Safari、Mail、備忘錄：</strong>選取一段文字 → <span class="ui">Share</span> <span class="zh">（分享）</span> → <strong>Wortlupe</strong>。</li>
+        </ol>
+      </div>
+      <div class="use">
+        <h3>不用捷徑的手動方式</h3>
+        <ol>
+          <li>拷貝德文 → 打開主畫面的 Wortlupe → 點 <span class="ui">Paste</span>。</li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section class="step" id="faq">
+    <div class="step-head"><span class="num">?</span><h2>常見問題</h2></div>
+    <details>
+      <summary>分享選單裡找不到 Wortlupe</summary>
+      <p>先確認第 2 步的 Show in Share Sheet 有打開。它可能排在很後面：在分享選單最下面點 Edit Actions（編輯動作），把 Wortlupe 移到前面。</p>
+    </details>
+    <details>
+      <summary>Wortlupe 打開了，但文字沒有進去</summary>
+      <p>可能是舊版還留在手機裡。在 Wortlupe 頁面往下拉重新整理一次。也請檢查第 2 步的網址最後有沒有接上「URL Encoded Text」。</p>
+    </details>
+    <details>
+      <summary>敲背面沒有反應</summary>
+      <p>確認第 3 步選的是 Wortlupe。有手機殼的話要敲得用力一點，敲在手機背面中間偏上的位置。</p>
+    </details>
+    <details>
+      <summary>為什麼打開的是 Safari，不是主畫面上的 Wortlupe？</summary>
+      <p>這是 iPhone 的限制，捷徑只能用 Safari 打開網頁。兩邊都能離線使用，查字和文法講解都一樣。</p>
+    </details>
+    <details>
+      <summary>我的訊息會被傳到網路上嗎？</summary>
+      <p>不會。文字放在網址的 # 後面，瀏覽器不會把這一段送出去；查字和文法分析全部在手機裡完成。</p>
+    </details>
+  </section>
+
+  <footer>
+    <p><a href="./">打開 Wortlupe</a></p>
+  </footer>
+</main>
+<script>
+  // 拷貝按鈕：初學者手打長網址容易打錯
+  document.querySelectorAll('button.copy').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const text = document.getElementById(btn.dataset.copy).textContent.trim();
+      try {
+        await navigator.clipboard.writeText(text);
+        btn.textContent = '已拷貝';
+        btn.classList.add('done');
+        setTimeout(() => { btn.textContent = '拷貝'; btn.classList.remove('done'); }, 2000);
+      } catch {
+        btn.textContent = '請長按網址拷貝';
+      }
+    });
+  });
+</script>
+</body>
+</html>

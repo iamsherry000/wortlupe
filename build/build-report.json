@@ -1,0 +1,1023 @@
+{
+ "target": 40000,
+ "freqRankUsed": 181620,
+ "lemmasFromFreq": 40000,
+ "lemmas": 39856,
+ "lexiconEntries": 41454,
+ "forms": 246341,
+ "formRecords": 1225333,
+ "gzipBytes": 12693721,
+ "gzipBytesDeployed": 6855005,
+ "shards": 64,
+ "runtimeMaxShardBytes": 605918,
+ "freqFile": "de_full.txt",
+ "droppedNounNoGender": [
+  "SMS",
+  "BS",
+  "h",
+  "PPS",
+  "c.",
+  "Barbie",
+  "Bio",
+  "Gabardine",
+  "Mute",
+  "Ps",
+  "T",
+  "Cicero",
+  "Rassenfrage",
+  "Hühner",
+  "Zwerge",
+  "Freunde",
+  "Aquarien",
+  "Globen",
+  "Netze",
+  "Träume",
+  "Drogen",
+  "Angelika",
+  "GJ",
+  "Klötze",
+  "Geheimdienste",
+  "Brüder",
+  "Papiere",
+  "Lieblings",
+  "Utensilien",
+  "Borreliose",
+  "Medien",
+  "Pampers",
+  "Halali",
+  "Aktive",
+  "Informationen",
+  "Nr.",
+  "Sizilianisch",
+  "Franke",
+  "Oliv",
+  "Möpse",
+  "Hegen",
+  "Kernspin",
+  "Hunderttausende",
+  "Zehntausende",
+  "Wirren",
+  "Gunsten",
+  "Flüssigkeitszufuhr",
+  "Arschritze",
+  "Fandango",
+  "Lauflänge",
+  "Blanket",
+  "Klatschbase"
+ ],
+ "droppedNounNoPlural": [
+  "Urdu",
+  "Rappen",
+  "VHS",
+  "ä",
+  "Einstein",
+  "Kees",
+  "Erika",
+  "Balrog",
+  "Don",
+  "Er",
+  "Go",
+  "Matador",
+  "Nu",
+  "Porto",
+  "Stasis",
+  "Super",
+  "Tower",
+  "Walker",
+  "Yen",
+  "Zuviel",
+  "GAU",
+  "Knete",
+  "Striemen",
+  "Geisteswissenschaften",
+  "Kosmetika",
+  "Saus",
+  "Schulden",
+  "Marschmusik",
+  "Magistra",
+  "Iren",
+  "Petrus",
+  "Festspiele",
+  "Kopfschmerzen",
+  "Noten",
+  "Fug",
+  "Quanten",
+  "Enzephalitis",
+  "Burgund",
+  "Startkapital",
+  "Regent",
+  "Bulimie",
+  "Banja",
+  "Geheimratsecken",
+  "Cherusker",
+  "Nuklearenergie",
+  "Herpes",
+  "Simonie",
+  "Weisel",
+  "Sternenmeer",
+  "Scharia",
+  "Jammertal",
+  "Unterlass",
+  "Kopf-an-Kopf-Rennen",
+  "Karpaltunnelsyndrom",
+  "CD-Player",
+  "Empfangschef",
+  "Tschetschene",
+  "Columbo",
+  "Herrschaften",
+  "Wesentliche",
+  "Holpern",
+  "Latex",
+  "Feinste",
+  "Blaue",
+  "Schöne",
+  "Armen",
+  "Armen",
+  "ISIS",
+  "erstenmal",
+  "Stadtwerke",
+  "Nitrogen",
+  "Regierungsgewalt",
+  "Anziehsachen",
+  "Burmeister",
+  "Romanes",
+  "Rohleder",
+  "Skipiste",
+  "Mining",
+  "Rektaszension",
+  "Böhmische",
+  "Fluglärm",
+  "Megajoule",
+  "Habit",
+  "Nachhinein",
+  "Vorhinein",
+  "Landesinneres",
+  "Tropus",
+  "Sojus",
+  "Pipapo",
+  "abgeschrägtes Dodekaeder",
+  "Ohrenschmerzen",
+  "Scheißhandy",
+  "Redestab",
+  "Windspiel",
+  "Volontariat",
+  "Handgeld",
+  "Anbetracht",
+  "Lebensfähigkeit",
+  "Windkanal",
+  "Brautschau",
+  "Omega-3-Fettsäure",
+  "68er",
+  "Eclair",
+  "Googolplex",
+  "Voland",
+  "Nazideutschland",
+  "Gehtnichtmehr"
+ ],
+ "healthCheck": {
+  "scannedKeys": 246364,
+  "rejectedCount": 140,
+  "rejected": [
+   {
+    "form": "Afarit",
+    "lemma": "Ifrit",
+    "pos": "noun",
+    "tags": "definite,nominative,plural"
+   },
+   {
+    "form": "Afarit",
+    "lemma": "Ifrit",
+    "pos": "noun",
+    "tags": "definite,genitive,plural"
+   },
+   {
+    "form": "Afarit",
+    "lemma": "Ifrit",
+    "pos": "noun",
+    "tags": "dative,definite,plural"
+   },
+   {
+    "form": "Afarit",
+    "lemma": "Ifrit",
+    "pos": "noun",
+    "tags": "accusative,definite,plural"
+   },
+   {
+    "form": "Flummis",
+    "lemma": "Gummi",
+    "pos": "noun",
+    "tags": "plural"
+   },
+   {
+    "form": "Fruchtmuses",
+    "lemma": "Pflaumenmus",
+    "pos": "noun",
+    "tags": "genitive,singular"
+   },
+   {
+    "form": "Mäntel",
+    "lemma": "Börsenmantel",
+    "pos": "noun",
+    "tags": "plural"
+   },
+   {
+    "form": "Ruhrpöttisch",
+    "lemma": "Herz",
+    "pos": "noun",
+    "tags": "also"
+   },
+   {
+    "form": "Wachstumsraten",
+    "lemma": "Inflationsrate",
+    "pos": "noun",
+    "tags": "feminine,plural"
+   },
+   {
+    "form": "Zider",
+    "lemma": "Cidre",
+    "pos": "noun",
+    "tags": "masculine,rare,strong"
+   },
+   {
+    "form": "alternatively",
+    "lemma": "Hirsch",
+    "pos": "noun",
+    "tags": "Austria,Southern-Germany"
+   },
+   {
+    "form": "alternatively",
+    "lemma": "Hirsch",
+    "pos": "noun",
+    "tags": "Austria,southern-Germany"
+   },
+   {
+    "form": "aufgemuntert",
+    "lemma": "einkellern",
+    "pos": "verb",
+    "tags": "participle,past"
+   },
+   {
+    "form": "aufmuntern",
+    "lemma": "einkellern",
+    "pos": "verb",
+    "tags": ""
+   },
+   {
+    "form": "besuchten",
+    "lemma": "gutbesucht",
+    "pos": "adj",
+    "tags": "comparative,mixed,nominative,plural"
+   },
+   {
+    "form": "besuchten",
+    "lemma": "gutbesucht",
+    "pos": "adj",
+    "tags": "comparative,genitive,mixed,plural"
+   },
+   {
+    "form": "besuchten",
+    "lemma": "gutbesucht",
+    "pos": "adj",
+    "tags": "comparative,dative,mixed,plural"
+   },
+   {
+    "form": "besuchten",
+    "lemma": "gutbesucht",
+    "pos": "adj",
+    "tags": "accusative,comparative,mixed,plural"
+   },
+   {
+    "form": "declension",
+    "lemma": "Evangelium",
+    "pos": "noun",
+    "tags": "Latinate"
+   },
+   {
+    "form": "distinguiere",
+    "lemma": "sinnieren",
+    "pos": "verb",
+    "tags": "first-person,present,singular"
+   },
+   {
+    "form": "e",
+    "lemma": "amtshandeln",
+    "pos": "verb",
+    "tags": "first-person,formal,rare,singular,subjunctive,subjunctive-ii"
+   },
+   {
+    "form": "e",
+    "lemma": "amtshandeln",
+    "pos": "verb",
+    "tags": "formal,rare,singular,subjunctive,subjunctive-ii,third-person"
+   },
+   {
+    "form": "en",
+    "lemma": "amtshandeln",
+    "pos": "verb",
+    "tags": "first-person,indicative,plural,preterite"
+   },
+   {
+    "form": "en",
+    "lemma": "amtshandeln",
+    "pos": "verb",
+    "tags": "first-person,formal,plural,rare,subjunctive,subjunctive-ii"
+   },
+   {
+    "form": "en",
+    "lemma": "amtshandeln",
+    "pos": "verb",
+    "tags": "indicative,plural,preterite,third-person"
+   },
+   {
+    "form": "en",
+    "lemma": "amtshandeln",
+    "pos": "verb",
+    "tags": "formal,plural,rare,subjunctive,subjunctive-ii,third-person"
+   },
+   {
+    "form": "erhaltenen",
+    "lemma": "guterhalten",
+    "pos": "adj",
+    "tags": "comparative,mixed,nominative,plural"
+   },
+   {
+    "form": "erhaltenen",
+    "lemma": "guterhalten",
+    "pos": "adj",
+    "tags": "comparative,genitive,mixed,plural"
+   },
+   {
+    "form": "erhaltenen",
+    "lemma": "guterhalten",
+    "pos": "adj",
+    "tags": "comparative,dative,mixed,plural"
+   },
+   {
+    "form": "erhaltenen",
+    "lemma": "guterhalten",
+    "pos": "adj",
+    "tags": "accusative,comparative,mixed,plural"
+   },
+   {
+    "form": "est",
+    "lemma": "amtshandeln",
+    "pos": "verb",
+    "tags": "formal,rare,second-person,singular,subjunctive,subjunctive-ii"
+   },
+   {
+    "form": "et",
+    "lemma": "amtshandeln",
+    "pos": "verb",
+    "tags": "formal,plural,rare,second-person,subjunctive,subjunctive-ii"
+   },
+   {
+    "form": "etalierest",
+    "lemma": "studieren",
+    "pos": "verb",
+    "tags": "second-person,singular,subjunctive-i"
+   },
+   {
+    "form": "fiel",
+    "lemma": "durchfallen",
+    "pos": "verb",
+    "tags": "first-person,indicative,preterite,singular"
+   },
+   {
+    "form": "fiel",
+    "lemma": "durchfallen",
+    "pos": "verb",
+    "tags": "indicative,preterite,singular,third-person"
+   },
+   {
+    "form": "fiele",
+    "lemma": "durchfallen",
+    "pos": "verb",
+    "tags": "first-person,formal,rare,singular,subjunctive,subjunctive-ii"
+   },
+   {
+    "form": "fiele",
+    "lemma": "durchfallen",
+    "pos": "verb",
+    "tags": "formal,rare,singular,subjunctive,subjunctive-ii,third-person"
+   },
+   {
+    "form": "fielen",
+    "lemma": "durchfallen",
+    "pos": "verb",
+    "tags": "first-person,indicative,plural,preterite"
+   },
+   {
+    "form": "fielen",
+    "lemma": "durchfallen",
+    "pos": "verb",
+    "tags": "first-person,formal,plural,rare,subjunctive,subjunctive-ii"
+   },
+   {
+    "form": "fielen",
+    "lemma": "durchfallen",
+    "pos": "verb",
+    "tags": "indicative,plural,preterite,third-person"
+   },
+   {
+    "form": "fielen",
+    "lemma": "durchfallen",
+    "pos": "verb",
+    "tags": "formal,plural,rare,subjunctive,subjunctive-ii,third-person"
+   },
+   {
+    "form": "fielest",
+    "lemma": "durchfallen",
+    "pos": "verb",
+    "tags": "formal,rare,second-person,singular,subjunctive,subjunctive-ii"
+   },
+   {
+    "form": "fielet",
+    "lemma": "durchfallen",
+    "pos": "verb",
+    "tags": "formal,plural,rare,second-person,subjunctive,subjunctive-ii"
+   },
+   {
+    "form": "fielst",
+    "lemma": "durchfallen",
+    "pos": "verb",
+    "tags": "indicative,preterite,second-person,singular"
+   },
+   {
+    "form": "fielst",
+    "lemma": "durchfallen",
+    "pos": "verb",
+    "tags": "formal,rare,second-person,singular,subjunctive,subjunctive-ii"
+   },
+   {
+    "form": "fielt",
+    "lemma": "durchfallen",
+    "pos": "verb",
+    "tags": "indicative,plural,preterite,second-person"
+   },
+   {
+    "form": "fielt",
+    "lemma": "durchfallen",
+    "pos": "verb",
+    "tags": "formal,plural,rare,second-person,subjunctive,subjunctive-ii"
+   },
+   {
+    "form": "gelaunten",
+    "lemma": "schlecht gelaunt",
+    "pos": "adj",
+    "tags": "comparative,mixed,nominative,plural"
+   },
+   {
+    "form": "gelaunten",
+    "lemma": "schlecht gelaunt",
+    "pos": "adj",
+    "tags": "comparative,genitive,mixed,plural"
+   },
+   {
+    "form": "gelaunten",
+    "lemma": "schlecht gelaunt",
+    "pos": "adj",
+    "tags": "comparative,dative,mixed,plural"
+   },
+   {
+    "form": "gelaunten",
+    "lemma": "schlecht gelaunt",
+    "pos": "adj",
+    "tags": "accusative,comparative,mixed,plural"
+   },
+   {
+    "form": "gelegenen",
+    "lemma": "nahe gelegen",
+    "pos": "adj",
+    "tags": "mixed,nominative,plural"
+   },
+   {
+    "form": "gelegenen",
+    "lemma": "nahe gelegen",
+    "pos": "adj",
+    "tags": "genitive,mixed,plural"
+   },
+   {
+    "form": "gelegenen",
+    "lemma": "nahe gelegen",
+    "pos": "adj",
+    "tags": "dative,mixed,plural"
+   },
+   {
+    "form": "gelegenen",
+    "lemma": "nahe gelegen",
+    "pos": "adj",
+    "tags": "accusative,mixed,plural"
+   },
+   {
+    "form": "gelegeneren",
+    "lemma": "nahe gelegen",
+    "pos": "adj",
+    "tags": "comparative,mixed,nominative,plural"
+   },
+   {
+    "form": "gelegeneren",
+    "lemma": "nahe gelegen",
+    "pos": "adj",
+    "tags": "comparative,genitive,mixed,plural"
+   },
+   {
+    "form": "gelegeneren",
+    "lemma": "nahe gelegen",
+    "pos": "adj",
+    "tags": "comparative,dative,mixed,plural"
+   },
+   {
+    "form": "gelegeneren",
+    "lemma": "nahe gelegen",
+    "pos": "adj",
+    "tags": "accusative,comparative,mixed,plural"
+   },
+   {
+    "form": "gelegensten",
+    "lemma": "nahe gelegen",
+    "pos": "adj",
+    "tags": "mixed,nominative,plural,superlative"
+   },
+   {
+    "form": "gelegensten",
+    "lemma": "nahe gelegen",
+    "pos": "adj",
+    "tags": "genitive,mixed,plural,superlative"
+   },
+   {
+    "form": "gelegensten",
+    "lemma": "nahe gelegen",
+    "pos": "adj",
+    "tags": "dative,mixed,plural,superlative"
+   },
+   {
+    "form": "gelegensten",
+    "lemma": "nahe gelegen",
+    "pos": "adj",
+    "tags": "accusative,mixed,plural,superlative"
+   },
+   {
+    "form": "geschliffenen",
+    "lemma": "fein geschliffen",
+    "pos": "adj",
+    "tags": "mixed,nominative,plural"
+   },
+   {
+    "form": "geschliffenen",
+    "lemma": "fein geschliffen",
+    "pos": "adj",
+    "tags": "genitive,mixed,plural"
+   },
+   {
+    "form": "geschliffenen",
+    "lemma": "fein geschliffen",
+    "pos": "adj",
+    "tags": "dative,mixed,plural"
+   },
+   {
+    "form": "geschliffenen",
+    "lemma": "fein geschliffen",
+    "pos": "adj",
+    "tags": "accusative,mixed,plural"
+   },
+   {
+    "form": "geschliffeneren",
+    "lemma": "fein geschliffen",
+    "pos": "adj",
+    "tags": "comparative,mixed,nominative,plural"
+   },
+   {
+    "form": "geschliffeneren",
+    "lemma": "fein geschliffen",
+    "pos": "adj",
+    "tags": "comparative,genitive,mixed,plural"
+   },
+   {
+    "form": "geschliffeneren",
+    "lemma": "fein geschliffen",
+    "pos": "adj",
+    "tags": "comparative,dative,mixed,plural"
+   },
+   {
+    "form": "geschliffeneren",
+    "lemma": "fein geschliffen",
+    "pos": "adj",
+    "tags": "accusative,comparative,mixed,plural"
+   },
+   {
+    "form": "geschliffensten",
+    "lemma": "fein geschliffen",
+    "pos": "adj",
+    "tags": "mixed,nominative,plural,superlative"
+   },
+   {
+    "form": "geschliffensten",
+    "lemma": "fein geschliffen",
+    "pos": "adj",
+    "tags": "genitive,mixed,plural,superlative"
+   },
+   {
+    "form": "geschliffensten",
+    "lemma": "fein geschliffen",
+    "pos": "adj",
+    "tags": "dative,mixed,plural,superlative"
+   },
+   {
+    "form": "geschliffensten",
+    "lemma": "fein geschliffen",
+    "pos": "adj",
+    "tags": "accusative,mixed,plural,superlative"
+   },
+   {
+    "form": "gleichen",
+    "lemma": "immer gleich",
+    "pos": "adj",
+    "tags": "mixed,nominative,plural"
+   },
+   {
+    "form": "gleichen",
+    "lemma": "immer gleich",
+    "pos": "adj",
+    "tags": "genitive,mixed,plural"
+   },
+   {
+    "form": "gleichen",
+    "lemma": "immer gleich",
+    "pos": "adj",
+    "tags": "dative,mixed,plural"
+   },
+   {
+    "form": "gleichen",
+    "lemma": "immer gleich",
+    "pos": "adj",
+    "tags": "accusative,mixed,plural"
+   },
+   {
+    "form": "guten",
+    "lemma": "sehr gut",
+    "pos": "adj",
+    "tags": "mixed,nominative,plural"
+   },
+   {
+    "form": "guten",
+    "lemma": "sehr gut",
+    "pos": "adj",
+    "tags": "genitive,mixed,plural"
+   },
+   {
+    "form": "guten",
+    "lemma": "sehr gut",
+    "pos": "adj",
+    "tags": "dative,mixed,plural"
+   },
+   {
+    "form": "guten",
+    "lemma": "sehr gut",
+    "pos": "adj",
+    "tags": "accusative,mixed,plural"
+   },
+   {
+    "form": "kniee",
+    "lemma": "hinknieen",
+    "pos": "verb",
+    "tags": "first-person,present,singular"
+   },
+   {
+    "form": "knieest",
+    "lemma": "hinknieen",
+    "pos": "verb",
+    "tags": "second-person,singular,subjunctive-i"
+   },
+   {
+    "form": "knieet",
+    "lemma": "hinknieen",
+    "pos": "verb",
+    "tags": "plural,second-person,subjunctive-i"
+   },
+   {
+    "form": "kranken",
+    "lemma": "psychisch krank",
+    "pos": "adj",
+    "tags": "mixed,nominative,plural"
+   },
+   {
+    "form": "kranken",
+    "lemma": "psychisch krank",
+    "pos": "adj",
+    "tags": "genitive,mixed,plural"
+   },
+   {
+    "form": "kranken",
+    "lemma": "psychisch krank",
+    "pos": "adj",
+    "tags": "dative,mixed,plural"
+   },
+   {
+    "form": "kranken",
+    "lemma": "psychisch krank",
+    "pos": "adj",
+    "tags": "accusative,mixed,plural"
+   },
+   {
+    "form": "krankeren",
+    "lemma": "psychisch krank",
+    "pos": "adj",
+    "tags": "comparative,mixed,nominative,plural"
+   },
+   {
+    "form": "krankeren",
+    "lemma": "psychisch krank",
+    "pos": "adj",
+    "tags": "comparative,genitive,mixed,plural"
+   },
+   {
+    "form": "krankeren",
+    "lemma": "psychisch krank",
+    "pos": "adj",
+    "tags": "comparative,dative,mixed,plural"
+   },
+   {
+    "form": "krankeren",
+    "lemma": "psychisch krank",
+    "pos": "adj",
+    "tags": "accusative,comparative,mixed,plural"
+   },
+   {
+    "form": "krankesten",
+    "lemma": "psychisch krank",
+    "pos": "adj",
+    "tags": "mixed,nominative,plural,superlative"
+   },
+   {
+    "form": "krankesten",
+    "lemma": "psychisch krank",
+    "pos": "adj",
+    "tags": "genitive,mixed,plural,superlative"
+   },
+   {
+    "form": "krankesten",
+    "lemma": "psychisch krank",
+    "pos": "adj",
+    "tags": "dative,mixed,plural,superlative"
+   },
+   {
+    "form": "krankesten",
+    "lemma": "psychisch krank",
+    "pos": "adj",
+    "tags": "accusative,mixed,plural,superlative"
+   },
+   {
+    "form": "kranksten",
+    "lemma": "psychisch krank",
+    "pos": "adj",
+    "tags": "mixed,nominative,plural,superlative"
+   },
+   {
+    "form": "kranksten",
+    "lemma": "psychisch krank",
+    "pos": "adj",
+    "tags": "genitive,mixed,plural,superlative"
+   },
+   {
+    "form": "kranksten",
+    "lemma": "psychisch krank",
+    "pos": "adj",
+    "tags": "dative,mixed,plural,superlative"
+   },
+   {
+    "form": "kranksten",
+    "lemma": "psychisch krank",
+    "pos": "adj",
+    "tags": "accusative,mixed,plural,superlative"
+   },
+   {
+    "form": "kränkeren",
+    "lemma": "psychisch krank",
+    "pos": "adj",
+    "tags": "comparative,mixed,nominative,plural"
+   },
+   {
+    "form": "kränkeren",
+    "lemma": "psychisch krank",
+    "pos": "adj",
+    "tags": "comparative,genitive,mixed,plural"
+   },
+   {
+    "form": "kränkeren",
+    "lemma": "psychisch krank",
+    "pos": "adj",
+    "tags": "comparative,dative,mixed,plural"
+   },
+   {
+    "form": "kränkeren",
+    "lemma": "psychisch krank",
+    "pos": "adj",
+    "tags": "accusative,comparative,mixed,plural"
+   },
+   {
+    "form": "kränkesten",
+    "lemma": "psychisch krank",
+    "pos": "adj",
+    "tags": "mixed,nominative,plural,superlative"
+   },
+   {
+    "form": "kränkesten",
+    "lemma": "psychisch krank",
+    "pos": "adj",
+    "tags": "genitive,mixed,plural,superlative"
+   },
+   {
+    "form": "kränkesten",
+    "lemma": "psychisch krank",
+    "pos": "adj",
+    "tags": "dative,mixed,plural,superlative"
+   },
+   {
+    "form": "kränkesten",
+    "lemma": "psychisch krank",
+    "pos": "adj",
+    "tags": "accusative,mixed,plural,superlative"
+   },
+   {
+    "form": "kränksten",
+    "lemma": "psychisch krank",
+    "pos": "adj",
+    "tags": "mixed,nominative,plural,superlative"
+   },
+   {
+    "form": "kränksten",
+    "lemma": "psychisch krank",
+    "pos": "adj",
+    "tags": "genitive,mixed,plural,superlative"
+   },
+   {
+    "form": "kränksten",
+    "lemma": "psychisch krank",
+    "pos": "adj",
+    "tags": "dative,mixed,plural,superlative"
+   },
+   {
+    "form": "kränksten",
+    "lemma": "psychisch krank",
+    "pos": "adj",
+    "tags": "accusative,mixed,plural,superlative"
+   },
+   {
+    "form": "laufenden",
+    "lemma": "frei laufend",
+    "pos": "adj",
+    "tags": "mixed,nominative,plural"
+   },
+   {
+    "form": "laufenden",
+    "lemma": "frei laufend",
+    "pos": "adj",
+    "tags": "genitive,mixed,plural"
+   },
+   {
+    "form": "laufenden",
+    "lemma": "frei laufend",
+    "pos": "adj",
+    "tags": "dative,mixed,plural"
+   },
+   {
+    "form": "laufenden",
+    "lemma": "frei laufend",
+    "pos": "adj",
+    "tags": "accusative,mixed,plural"
+   },
+   {
+    "form": "melker",
+    "lemma": "Schweizer",
+    "pos": "noun",
+    "tags": "Swiss,feminine"
+   },
+   {
+    "form": "n",
+    "lemma": "Rallye",
+    "pos": "noun",
+    "tags": "Switzerland"
+   },
+   {
+    "form": "occasionally",
+    "lemma": "Quinoa",
+    "pos": "noun",
+    "tags": ""
+   },
+   {
+    "form": "occasionally",
+    "lemma": "Nieswurz",
+    "pos": "noun",
+    "tags": ""
+   },
+   {
+    "form": "pages",
+    "lemma": "welcher",
+    "pos": "pron",
+    "tags": "genitive,masculine,singular"
+   },
+   {
+    "form": "postpositioned",
+    "lemma": "brut",
+    "pos": "adj",
+    "tags": "predicative"
+   },
+   {
+    "form": "s",
+    "lemma": "Börsenmantel",
+    "pos": "noun",
+    "tags": "genitive"
+   },
+   {
+    "form": "s",
+    "lemma": "Würstel",
+    "pos": "noun",
+    "tags": "genitive"
+   },
+   {
+    "form": "scientific",
+    "lemma": "Krake",
+    "pos": "noun",
+    "tags": "traditional"
+   },
+   {
+    "form": "seldom",
+    "lemma": "Vaterschaft",
+    "pos": "noun",
+    "tags": "plural"
+   },
+   {
+    "form": "seldom",
+    "lemma": "Elternschaft",
+    "pos": "noun",
+    "tags": "plural"
+   },
+   {
+    "form": "sie",
+    "lemma": "ihr",
+    "pos": "pron",
+    "tags": "feminine,nominative,personal,pronoun,singular,third-person"
+   },
+   {
+    "form": "sie",
+    "lemma": "ihr",
+    "pos": "pron",
+    "tags": "accusative,feminine,personal,pronoun,singular,third-person"
+   },
+   {
+    "form": "st",
+    "lemma": "amtshandeln",
+    "pos": "verb",
+    "tags": "indicative,preterite,second-person,singular"
+   },
+   {
+    "form": "st",
+    "lemma": "amtshandeln",
+    "pos": "verb",
+    "tags": "formal,rare,second-person,singular,subjunctive,subjunctive-ii"
+   },
+   {
+    "form": "t",
+    "lemma": "amtshandeln",
+    "pos": "verb",
+    "tags": "indicative,plural,preterite,second-person"
+   },
+   {
+    "form": "t",
+    "lemma": "amtshandeln",
+    "pos": "verb",
+    "tags": "formal,plural,rare,second-person,subjunctive,subjunctive-ii"
+   },
+   {
+    "form": "vollen",
+    "lemma": "halb voll",
+    "pos": "adj",
+    "tags": "mixed,nominative,plural"
+   },
+   {
+    "form": "vollen",
+    "lemma": "halb voll",
+    "pos": "adj",
+    "tags": "genitive,mixed,plural"
+   },
+   {
+    "form": "vollen",
+    "lemma": "halb voll",
+    "pos": "adj",
+    "tags": "dative,mixed,plural"
+   },
+   {
+    "form": "vollen",
+    "lemma": "halb voll",
+    "pos": "adj",
+    "tags": "accusative,mixed,plural"
+   },
+   {
+    "form": "weichend",
+    "lemma": "abweichen",
+    "pos": "verb",
+    "tags": "participle,present"
+   }
+  ]
+ }
+}

@@ -1,0 +1,7 @@
+{
+  "_說明": "手寫（SPEC §3）：A1–B1 介系詞支配的格，只收標準德文文法沒有爭議的分類（Charles 2026-09-26 指定清單）。Wechsel = 位置用 Dativ、方向用 Akkusativ。口語裡 wegen／trotz／während／statt 常接 Dativ，但標準語是 Genitiv。",
+  "aus": "Dat", "bei": "Dat", "mit": "Dat", "nach": "Dat", "seit": "Dat", "von": "Dat", "zu": "Dat", "gegenüber": "Dat",
+  "durch": "Akk", "für": "Akk", "gegen": "Akk", "ohne": "Akk", "um": "Akk", "bis": "Akk",
+  "an": "Wechsel", "auf": "Wechsel", "hinter": "Wechsel", "in": "Wechsel", "neben": "Wechsel", "über": "Wechsel", "unter": "Wechsel", "vor": "Wechsel", "zwischen": "Wechsel",
+  "wegen": "Gen", "trotz": "Gen", "während": "Gen", "statt": "Gen"
+}

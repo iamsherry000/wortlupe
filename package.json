@@ -1,0 +1,17 @@
+{
+  "name": "wortlupe",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "description": "Wortlupe：離線德文點讀＋文法拆解（npm 只用於建置與測試，上線產物無依賴）",
+  "scripts": {
+    "build:data": "node build/build-data.mjs",
+    "test": "vitest run",
+    "test:e2e": "playwright test",
+    "serve": "node tests/e2e/server.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.55.0",
+    "vitest": "^3.2.4"
+  }
+}

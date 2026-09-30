@@ -1,0 +1,31 @@
+# 強制收錄的字形（不論詞頻排名）。建置時會經由變化形表對回原形後納入 lexicon。
+# 來源一：TESTS.md §1–§6、§8 golden set 出現的德文字（2026-09-26 抽出，已去掉英文、人名、單字母、詞綴、§7 的編造字）
+# 來源二：功能詞（冠詞、代名詞、介系詞、連接詞、助動詞、情態動詞）
+# 一行可放多個字，空白分隔；# 開頭為註解
+
+# --- golden set ---
+Abend Alles Anmeldebestätigung Arbeit Arbeitserlaubnis Aufenthalt Aufenthaltserlaubnis Auto Bahnhof Band Bank Becken
+Begrenzung Bestätigung Bis Buch Bundesausbildungsförderungsgesetz Bus Büro Computer Ecken Eile Ende Erlaubnis Fehler
+Fenster Film Frau Garten Gehst Geld Geschichte Geschwindigkeit Geschwindigkeitsbegrenzung Geschäft Gib Hallo Hast Haus
+Hause Haustürschlüssel Hey Häuser Häusern Imbiss Kannst Kannste Karte Kartoffel Kind Kinder Kindergarten Kindern Kino
+Komm Kommst Krankenversicherungskarte Könnten Leben Lebensmittelgeschäft Lehrer Lust Lösung Mach Mann Mannes Meeting
+Mittel Moin Morgen Mädchen Männern Nachmittag Ne Nein Nichts Nummer Paket Rufst Salz Schlüssel Sprung Staaten Stadt
+Stau Staub Staubecken Stube Tube Tür Uhr Vereinigten Versicherung Versicherungsnummer Wach Wachs Wachstube Wann Was
+Wechsel Wenn Wie Zeit Zeitung Zug ab aber abfahren an anfangen anmelden anrufen arbeiten auf aufstehe aufstehen bessere
+bin bitte blau bleibe dann denn dich ein eine einkaufen erzählen erzählt esse essen fahre fahren fährst fährt fängt gebaut
+gebe geben gecancelt gefahren gefällt gehe gehen geht gehts gelesen gern geschlossen gespielt gestern gewusst ging gingen
+gleich groß großen großer größte gut hab habe haben hat helfen her heut heute hier hätte im in ins ist kann kaufe keine
+klar kochen komme kommen kommst konnte krank kurz käme las leider lerne lesen los machen machst mich mir mit morgen muss
+nach nicht nichts nix noch passiert rufe schön sein sieben sieht sind so spielen später stehe teuer um verdienen
+vereinigen verstehe verstehen vor war weil werde werden wir wird wissen wohnen wohnt wurde würde zu zum zumachen zwei
+krank Versicherung Aufenthalt
+
+# --- 功能詞 ---
+der die das des dem den ein eine einer eines einem einen kein keine keiner keines keinem keinen
+ich du er sie es wir ihr mich dich sich uns euch mir dir ihm ihn ihnen mein dein sein unser euer
+dieser diese dieses jener welcher man jemand niemand etwas alles
+in an auf aus bei mit nach seit von zu durch für gegen ohne um bis entlang über unter vor hinter neben zwischen wegen trotz während statt
+am im ins zum zur beim vom ans aufs
+und oder aber denn sondern doch weil dass wenn ob als obwohl damit bevor nachdem während sobald seitdem falls
+nicht nie auch nur schon noch sehr ja nein
+haben sein werden können müssen dürfen sollen wollen mögen möchten lassen

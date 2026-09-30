@@ -1,0 +1,20 @@
+Betreff: Rückmeldung zum Projektstand und nächste Schritte
+
+Liebe Kolleginnen und Kollegen,
+
+vielen Dank für eure ausführlichen Rückmeldungen nach unserem Treffen am Dienstag. Ich habe versucht, die wichtigsten Punkte zusammenzufassen, damit wir bis zur Präsentation beim Kunden alle auf demselben Stand sind.
+
+Zunächst die gute Nachricht: Der erste Prototyp ist weitgehend fertig und läuft inzwischen stabil. Die Rückmeldungen aus der internen Testphase waren überwiegend positiv, vor allem was die Bedienbarkeit und die Ladezeiten betrifft. Einige Nutzerinnen und Nutzer haben allerdings bemängelt, dass die Navigation auf kleineren Bildschirmen unübersichtlich wirkt. Wir sollten diesen Hinweis ernst nehmen, bevor wir die Anwendung einem größeren Kreis zugänglich machen.
+
+Weniger erfreulich ist der Zeitplan. Durch die krankheitsbedingten Ausfälle im letzten Monat sind wir bei der Schnittstelle zum Abrechnungssystem deutlich in Verzug geraten. Nach aktueller Einschätzung werden wir den ursprünglich vereinbarten Termin nicht halten können. Ich schlage daher vor, dem Kunden offen zu kommunizieren, dass sich die Auslieferung um etwa zwei Wochen verschiebt, und ihm gleichzeitig einen verbindlichen neuen Termin zu nennen. Aus meiner Sicht ist es besser, jetzt ehrlich zu sein, als später unter Zeitdruck Kompromisse bei der Qualität eingehen zu müssen.
+
+Damit wir die Verzögerung möglichst gering halten, würde ich die Aufgaben für die kommenden Wochen gern etwas anders verteilen. Könntet ihr mir bis Freitag mitteilen, wie viel Kapazität ihr realistischerweise noch habt? Mir ist bewusst, dass viele von euch parallel an anderen Projekten arbeiten, und ich möchte niemanden überlasten.
+
+Außerdem möchte ich anregen, dass wir künftig regelmäßiger kurze Abstimmungen einplanen. In den letzten Wochen sind einige Missverständnisse entstanden, die sich mit einem kurzen Gespräch leicht hätten vermeiden lassen. Ein wöchentlicher Termin von einer halben Stunde würde aus meiner Sicht bereits genügen.
+
+Zum Schluss noch ein organisatorischer Hinweis: Die Unterlagen für die Präsentation liegen ab sofort im gemeinsamen Ordner. Bitte schaut sie euch bis Mittwoch an und tragt eure Anmerkungen direkt in das Dokument ein, damit ich sie vor dem Termin einarbeiten kann.
+
+Falls es Fragen oder Bedenken gibt, meldet euch gern jederzeit bei mir, entweder per E-Mail oder telefonisch.
+
+Viele Grüße und ein schönes Wochenende
+Sherry

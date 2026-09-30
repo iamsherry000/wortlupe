@@ -1,0 +1,166 @@
+{
+ "seed": 20260927,
+ "uniqueRejected": 62,
+ "items": [
+  {
+   "form": "kranksten",
+   "lemma": "psychisch krank",
+   "pos": "adj",
+   "tags": "accusative,mixed,plural,superlative",
+   "verdict": "bad",
+   "note": "多字原形只取最後一個字"
+  },
+  {
+   "form": "Flummis",
+   "lemma": "Gummi",
+   "pos": "noun",
+   "tags": "plural",
+   "verdict": "bad",
+   "note": "Wiktionary 資料錯：Flummis 是 Flummi 的複數（字典裡 Flummi 本身也有這個形，照樣查得到）"
+  },
+  {
+   "form": "kränksten",
+   "lemma": "psychisch krank",
+   "pos": "adj",
+   "tags": "accusative,mixed,plural,superlative",
+   "verdict": "bad",
+   "note": "多字原形只取最後一個字"
+  },
+  {
+   "form": "s",
+   "lemma": "Börsenmantel",
+   "pos": "noun",
+   "tags": "genitive",
+   "verdict": "bad",
+   "note": "只剩詞尾 s"
+  },
+  {
+   "form": "et",
+   "lemma": "amtshandeln",
+   "pos": "verb",
+   "tags": "formal,plural,rare,second-person,subjunctive,subjunctive-ii",
+   "verdict": "bad",
+   "note": "只剩詞尾（amtshandeln 汙染，P2.2 已知）"
+  },
+  {
+   "form": "pages",
+   "lemma": "welcher",
+   "pos": "pron",
+   "tags": "genitive,masculine,singular",
+   "verdict": "bad",
+   "note": "英文字混進 welcher 的變化表"
+  },
+  {
+   "form": "kniee",
+   "lemma": "hinknieen",
+   "pos": "verb",
+   "tags": "first-person,present,singular",
+   "verdict": "bad",
+   "note": "可分離動詞拆開後的字幹形（kniee … hin）。單獨查這個字時對到 hinknieen 是錯的對應：單獨的 kniee 是 knieen 的形，knieen 本身有這一筆、照樣查得到；拆開的句子由 G06 重組"
+  },
+  {
+   "form": "gleichen",
+   "lemma": "immer gleich",
+   "pos": "adj",
+   "tags": "accusative,mixed,plural",
+   "verdict": "bad",
+   "note": "多字原形只取最後一個字"
+  },
+  {
+   "form": "gelegensten",
+   "lemma": "nahe gelegen",
+   "pos": "adj",
+   "tags": "accusative,mixed,plural,superlative",
+   "verdict": "bad",
+   "note": "多字原形只取最後一個字"
+  },
+  {
+   "form": "geschliffeneren",
+   "lemma": "fein geschliffen",
+   "pos": "adj",
+   "tags": "accusative,comparative,mixed,plural",
+   "verdict": "bad",
+   "note": "多字原形只取最後一個字"
+  },
+  {
+   "form": "en",
+   "lemma": "amtshandeln",
+   "pos": "verb",
+   "tags": "formal,plural,rare,subjunctive,subjunctive-ii,third-person",
+   "verdict": "bad",
+   "note": "只剩詞尾"
+  },
+  {
+   "form": "kranken",
+   "lemma": "psychisch krank",
+   "pos": "adj",
+   "tags": "accusative,mixed,plural",
+   "verdict": "bad",
+   "note": "多字原形只取最後一個字"
+  },
+  {
+   "form": "melker",
+   "lemma": "Schweizer",
+   "pos": "noun",
+   "tags": "Swiss,feminine",
+   "verdict": "bad",
+   "note": "Swiss 標記的資料殘渣，跟 Schweizer 無關"
+  },
+  {
+   "form": "fielet",
+   "lemma": "durchfallen",
+   "pos": "verb",
+   "tags": "formal,plural,rare,second-person,subjunctive,subjunctive-ii",
+   "verdict": "bad",
+   "note": "可分離動詞拆開後的字幹形（fielet … durch）。單獨查這個字時對到 durchfallen 是錯的對應：單獨的 fielet 是 fallen 的形，fallen 本身有這一筆、照樣查得到；拆開的句子由 G06 重組"
+  },
+  {
+   "form": "s",
+   "lemma": "Würstel",
+   "pos": "noun",
+   "tags": "genitive",
+   "verdict": "bad",
+   "note": "只剩詞尾 s"
+  },
+  {
+   "form": "occasionally",
+   "lemma": "Quinoa",
+   "pos": "noun",
+   "tags": "",
+   "verdict": "bad",
+   "note": "英文字混進變化表"
+  },
+  {
+   "form": "krankesten",
+   "lemma": "psychisch krank",
+   "pos": "adj",
+   "tags": "accusative,mixed,plural,superlative",
+   "verdict": "bad",
+   "note": "多字原形只取最後一個字"
+  },
+  {
+   "form": "weichend",
+   "lemma": "abweichen",
+   "pos": "verb",
+   "tags": "participle,present",
+   "verdict": "bad",
+   "note": "現在分詞少了前綴（應為 abweichend）；weichen 本身有 weichend，照樣查得到"
+  },
+  {
+   "form": "n",
+   "lemma": "Rallye",
+   "pos": "noun",
+   "tags": "Switzerland",
+   "verdict": "bad",
+   "note": "只剩詞尾 n"
+  },
+  {
+   "form": "gelegeneren",
+   "lemma": "nahe gelegen",
+   "pos": "adj",
+   "tags": "accusative,comparative,mixed,plural",
+   "verdict": "bad",
+   "note": "多字原形只取最後一個字"
+  }
+ ]
+}
