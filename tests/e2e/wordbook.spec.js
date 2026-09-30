@@ -341,6 +341,154 @@ test('T8 對抗性：IndexedDB 寫入失敗 → 明確錯誤，不假裝已匯�
   await expect(page.locator('.wb-group[data-group="New"] .count')).toHaveText('0');
 });
 
+test.describe('P6.6（SPEC §5.1 F，Tester P6 報告 F1–F8）', () => {
+  test('F1 Termn appointmnet：預覽標 Check split、Did you mean Termin?、appointmnet 是 Your note', async ({ page }) => {
+    const rows = await preview(page, 'Termn appointmnet');
+    await expect(rows).toHaveCount(1);
+    expect(await rowTexts(rows)).toEqual(['Termn ‖ appointmnet']);
+    await expect(rows.nth(0).locator('.flag-check')).toContainText('Check split');
+    await expect(rows.nth(0).locator('.pv-suggest')).toHaveText('Did you mean Termin?');
+  });
+
+  test('F2 Kühlschrnak fridge：建議只修德文段，按了 fridge 仍是 note', async ({ page }) => {
+    const rows = await preview(page, 'Kühlschrnak fridge');
+    await expect(rows.nth(0).locator('.pv-suggest')).toHaveText('Did you mean Kühlschrank?');
+    await act(page, rows.nth(0).locator('.pv-suggest'));
+    expect(await rowTexts(page.locator('#wb-preview .pv-row'))).toEqual(['Kühlschrank ‖ fridge']);
+    await expect(page.locator('#wb-preview')).not.toContainText('Bridge');
+  });
+
+  test('F3 每一筆都有 Fix：重選分界、併到上一筆（有 note 也行，收在 Fix 裡）、刪除', async ({ page }) => {
+    const rows = await preview(page, 'Ausweis\nId - card\nTermn appointmnet');
+    await expect(rows).toHaveCount(3);
+    for (let k = 0; k < 3; k++) await expect(rows.nth(k).locator('.pv-fix')).toHaveCount(1);
+    // 有 note 的那筆外面沒有 Merge（§5.1 E），Fix 裡面有
+    await expect(rows.nth(1).locator('.pv-actions > .pv-merge')).toHaveCount(0);
+    await rows.nth(1).locator('.pv-fix').click();
+    await act(page, rows.nth(1).locator('.fix-panel .fix-merge'));
+    expect(await rowTexts(page.locator('#wb-preview .pv-row'))).toEqual(['Ausweis ‖ Id - card', 'Termn ‖ appointmnet']);
+    // 重選分界：整行都是德文
+    const r = page.locator('#wb-preview .pv-row').nth(1);
+    await r.locator('.pv-fix').click();
+    await act(page, r.locator('.fix-panel .split-all'));
+    expect(await rowTexts(page.locator('#wb-preview .pv-row'))).toEqual(['Ausweis ‖ Id - card', 'Termn appointmnet']);
+    // 刪除
+    const r2 = page.locator('#wb-preview .pv-row').nth(1);
+    await r2.locator('.pv-fix').click();
+    await act(page, r2.locator('.fix-panel .fix-delete'));
+    await expect(page.locator('#wb-preview .pv-row')).toHaveCount(1);
+  });
+
+  test('F4 長網址／無空白長字串不撐破版面（預覽、複習卡、清單，390 px 不可橫向捲動）', async ({ page }) => {
+    const url = 'https://www.bundesregierung.de/breg-de/service/terminvereinbarung-buergeramt-anmeldung-wohnsitz-2026-09-30-extra-lange-adresse';
+    const blob = 'x'.repeat(3000);
+    await preview(page, `Termin - ${url}\nArzt - ${blob}`);
+    const noHScroll = () => page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth);
+    expect(await noHScroll()).toBe(true);
+    await page.locator('#wb-commit').click();
+    await expect(page.locator('#wb-home')).toBeVisible();
+    await startReview(page);
+    for (let k = 0; k < 4; k++) {
+      await page.locator('#wb-card').click();
+      await expect(page.locator('#wb-card')).toHaveAttribute('data-side', 'back');
+      expect(await noHScroll()).toBe(true);
+      expect(await page.locator('#wb-card').evaluate((el) => el.scrollWidth <= el.clientWidth + 1)).toBe(true);
+      if (await page.locator('#wb-summary').isVisible()) break;
+      await page.locator('#wb-unsure').click();
+      if (await page.locator('#wb-summary').isVisible()) break;
+    }
+    await page.locator('#tab-words').click();
+    await page.locator('#wb-all').click();
+    await expect(page.locator('#wb-items')).toHaveAttribute('data-state', 'ready');
+    expect(await noHScroll()).toBe(true);
+  });
+
+  test('F5 匯入後首頁不先閃舊數字', async ({ page }) => {
+    await preview(page, 'die Rechnung - 帳單\nTermin\nArzt - doctor');
+    // 從按下 Add 起每個影格記一次（首頁看得到時的數字）
+    await page.evaluate(() => {
+      window.__dueSamples = [];
+      const tick = () => {
+        const home = document.getElementById('wb-home');
+        if (home && !home.hidden && home.offsetParent !== null) window.__dueSamples.push(document.querySelector('#wb-due .num')?.textContent);
+        if (window.__dueSamples.length < 60) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    });
+    await page.locator('#wb-commit').click();
+    await expect(page.locator('#wb-due .num')).toHaveText('6');
+    await page.waitForFunction(() => window.__dueSamples.length >= 20);
+    const samples = await page.evaluate(() => window.__dueSamples);
+    expect(samples.length).toBeGreaterThan(0);
+    expect(new Set(samples)).toEqual(new Set(['6']));
+  });
+
+  test('F6 Add N 是去重後實際新增的數量；併進既有字另外顯示；0 筆時停用並說明', async ({ page }) => {
+    await preview(page, Array.from({ length: 300 }, () => 'gehen - go').join('\n'));
+    await expect(page.locator('#wb-commit')).toHaveText('Add 1 word');
+    await page.locator('#wb-commit').click();
+    await expect(page.locator('#wb-home')).toBeVisible();
+    await page.locator('#wb-add').click();
+    await page.locator('#wb-input').fill('ging - walked\nTermin');
+    await page.locator('#wb-preview-btn').click();
+    await expect(page.locator('#wb-preview')).toHaveAttribute('data-state', 'ready');
+    await expect(page.locator('#wb-commit')).toHaveText('Add 1 word');
+    await expect(page.locator('#wb-commit-note')).toContainText('1 merged into existing');
+    // 全部移除 → 0 筆：停用＋說明
+    await act(page, page.locator('#wb-preview .pv-row').nth(1).locator('.pv-remove'));
+    await act(page, page.locator('#wb-preview .pv-row').nth(0).locator('.pv-remove'));
+    await expect(page.locator('#wb-commit')).toBeDisabled();
+    await expect(page.locator('#wb-commit-note')).toContainText('Nothing to add');
+  });
+
+  test('F7 條列符號不出現在預覽標題', async ({ page }) => {
+    const rows = await preview(page, '- Wohnung - apartment\n• Miete rent 房租\n1. Hose trousers');
+    expect(await rows.locator('.pv-typed').allTextContents()).toEqual(['Wohnung', 'Miete', 'Hose']);
+  });
+
+  test('F8 輸入框字型與 App 一致；390 寬首頁三顆按鈕都是一行', async ({ page }) => {
+    await openWords(page);
+    const fonts = await page.evaluate(() => [getComputedStyle(document.body).fontFamily, getComputedStyle(document.getElementById('wb-input')).fontFamily]);
+    expect(fonts[1]).toBe(fonts[0]);
+    const hs = await page.evaluate(() => ['wb-add', 'wb-all', 'wb-export'].map((id) => document.getElementById(id).getBoundingClientRect().height));
+    expect(new Set(hs).size).toBe(1);
+    expect(hs[0]).toBeLessThanOrEqual(48);
+  });
+
+  test('§5.1 F 翻卡：點下去到第一個含新內容的影格 p95 ≤ 100 ms；淡入動畫 ≤ 150 ms', async ({ page }) => {
+    await importText(page, Array.from({ length: 30 }, (_, k) => ['Rechnung', 'Termin', 'Arzt', 'Wohnung', 'Bank', 'Haus'][k % 6] + ` - n${k}`).join('\n'));
+    await startReview(page);
+    const r = await page.evaluate(async () => {
+      const card = document.getElementById('wb-card');
+      const times = [];
+      let ok = true;
+      for (let k = 0; k < 40; k++) {
+        const want = card.dataset.side === 'back' ? 'front' : 'back';
+        const t = performance.now();
+        card.click();
+        // 第一個影格：rAF 回呼在這個影格畫之前跑，這時 DOM 已經是新的一面
+        await new Promise((res) => requestAnimationFrame(() => res()));
+        times.push(performance.now() - t);
+        const el = card.querySelector(`.${want}`);
+        if (card.dataset.side !== want || el.hidden || !el.textContent.trim()) ok = false;
+      }
+      const anim = getComputedStyle(card.querySelector('.front')).animationDuration;
+      return { times, ok, anim };
+    });
+    const sorted = [...r.times].sort((a, b) => a - b);
+    const p95 = sorted[Math.ceil(sorted.length * 0.95) - 1];
+    console.log(`TK 翻卡 40 次：中位數 ${sorted[20].toFixed(0)}、p95 ${p95.toFixed(0)}、最高 ${sorted.at(-1).toFixed(0)} ms；動畫 ${r.anim}`);
+    expect(r.ok).toBe(true);
+    expect(p95).toBeLessThanOrEqual(100);
+    const animMs = r.anim.split(',').map((s) => parseFloat(s) * (s.trim().endsWith('ms') ? 1 : 1000));
+    expect(Math.max(...animMs)).toBeLessThanOrEqual(150);
+  });
+
+  test('§5.1 F About 標英文詞表（SCOWL）授權', async ({ page }) => {
+    await expect(page.locator('#about')).toContainText('SCOWL');
+  });
+});
+
 test.describe('交付截圖（docs/screenshots/p6-*.png）', () => {
   for (const scheme of ['light', 'dark']) {
     test(`截圖 P6 Import 預覽（Sherry 9/30 真實樣本，${scheme}）`, async ({ page }) => {
@@ -352,6 +500,14 @@ test.describe('交付截圖（docs/screenshots/p6-*.png）', () => {
       await page.screenshot({ path: `docs/screenshots/p6-import${scheme === 'dark' ? '-dark' : ''}.png`, animations: 'disabled' });
     });
   }
+  test('截圖 P6.6 Check split＋Fix（Tester F1–F3 的輸入）', async ({ page }) => {
+    await openApp(page);
+    const rows = await preview(page, 'Ausweis\nID card\n=身分證\nTermn appointmnet\nKühlschrnak fridge\nMama mom');
+    await rows.nth(1).locator('.pv-fix').click();
+    await expect(page.locator('#wb-preview .fix-panel')).toBeVisible();
+    await page.evaluate(() => { const el = document.querySelector('#wb-preview'); window.scrollTo(0, el.getBoundingClientRect().top + window.scrollY - document.querySelector('.bar').offsetHeight - 12); });
+    await page.screenshot({ path: 'docs/screenshots/p6-fix.png', animations: 'disabled' });
+  });
   test('截圖 P6 Review 卡片正面／背面', async ({ page }) => {
     await importText(page, 'die Rechnung bill 帳單\nKündigungsfrist');
     await startReview(page);

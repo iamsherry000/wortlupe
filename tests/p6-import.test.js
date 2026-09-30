@@ -46,7 +46,8 @@ describe('Golden Set K — 單行分界', () => {
       const { entries } = await pv(line);
       expect(entries).toHaveLength(1);
       expect(pair(entries[0])).toBe(want.replace(/ ‖$/, ''));
-      expect(entries[0].flags.checkSplit).toBe(false); // 分界清楚：不標 Check split
+      // 分界清楚：不標 Check split。P6.6（SPEC §5.1 F）起德英同形落在分界上一律標 → bill（bellen 的命令式）那行要標
+      expect(entries[0].flags.checkSplit).toBe(line === 'die Rechnung bill 帳單');
     });
   }
 

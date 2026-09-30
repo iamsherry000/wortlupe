@@ -4,7 +4,7 @@
 // 兩者都由 tests/p1-unit.test.js 的 TN 測試檢查。
 // P2.6（§6.1）：DATA_BUILD 由 build/stamp-runtime.mjs 自動寫入（標籤表指紋），資料重建就自動換版，不用手動記得加一
 const DATA_BUILD = '5ffb86ce';
-const VERSION = `wortlupe-p6-beta-2-${DATA_BUILD}`;
+const VERSION = `wortlupe-p6-beta-3-${DATA_BUILD}`;
 // P2.7：翻譯模型（41 MB）存在自己的快取，第一次按下載才抓；換版時不清（src/translate.js）
 const MT_CACHE = 'wortlupe-mt';
 const SHARD_COUNT = 64; // 要跟 src/shard.js 一致（P2.5）
@@ -65,6 +65,7 @@ const ASSETS = [
   './data/closed-class.json',
   './data/lowercase-nouns.json',
   './data/usage.json',
+  './data/english-words.json', // P6.6：單字本的離線英文詞表（SCOWL）
   './data/runtime/tagsets.json',
   ...Array.from({ length: SHARD_COUNT }, (_, n) => `./data/runtime/f-${String(n).padStart(2, '0')}.json`),
 ];

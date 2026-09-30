@@ -98,7 +98,20 @@ export function createDictionary({ base = './', fetchImpl = (u) => fetch(u) } = 
   }
 
   // 同步判斷「這個字現在就能查」：能的話介面直接畫卡片，不用等下一個 tick（T6）
-  dict.isReadyFor = (w) => !!dict.lookup && [...shardsFor([w])].every((n) => loaded.has(n));
+  // P6.6（SPEC §5.1 F）：離線英文詞表（SCOWL），只有單字本用得到 → 第一次批次貼上才載入，不拖慢閱讀頁冷啟動
+  let englishPromise = null;
+  dict.english = () => {
+    if (!englishPromise) {
+      englishPromise = getJSON('data/english-words.json').then((d) => {
+        if (!d || typeof d.words !== 'string') throw new DictionaryError('english-words.json: format is damaged');
+        return new Set(d.words.split('\n'));
+      });
+      englishPromise.catch(() => { englishPromise = null; });
+    }
+    return englishPromise;
+  };
+
+  dict.isReadyFor =(w) => !!dict.lookup && [...shardsFor([w])].every((n) => loaded.has(n));
   dict.ready = () => readyPromise;
   return dict;
 }

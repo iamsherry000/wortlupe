@@ -87,9 +87,10 @@ export function closestLemma(word, dict) {
 
 // 德文段的字（已知其中有查不到的）→ 建議字串或 null。
 // 先試「拆開寫的複合詞」（feiren abend → Feierabend），再試逐字換掉查不到的字（全部都找得到才給）。
-export function suggestSpelling(words, dict, isKnown = () => false) {
+// allowCompound：整行沒有英文、沒有中文時才試拆開寫的複合詞（SPEC §5.1 F）
+export function suggestSpelling(words, dict, isKnown = () => false, allowCompound = true) {
   if (!words.length) return null;
-  if (words.length > 1) {
+  if (words.length > 1 && allowCompound) {
     const joined = closestLemma(words.join(''), dict);
     if (joined) return joined;
   }

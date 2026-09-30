@@ -261,6 +261,20 @@ body[data-tab="words"] #about { display: none !important; }
 #wb-due .num { font-size: 44px; font-weight: 700; letter-spacing: -0.02em; margin-right: 6px; font-variant-numeric: tabular-nums; }
 #wb-due-note { margin: 2px 0 12px; }
 .wb-actions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 12px 0 4px; }
+/* F8：390 寬時 Add words 不折成兩行 */
+#words .wb-actions button { white-space: nowrap; padding: 0 6px; font-size: 16px; }
+/* F4：任何長度的德文、note、網址都不可撐破版面 */
+#words { overflow-wrap: anywhere; min-width: 0; }
+#words .pv-row, #words .wb-item, #words .pv-german > *, #words .wb-word > *, #words .pv-dict > * { min-width: 0; max-width: 100%; }
+.pv-note-text, .your-note, .wb-note, .pv-typed, .prompt, .d-gloss, #wb-card li { overflow-wrap: anywhere; word-break: break-word; }
+/* Fix（§5.1 F：每一筆都救得回來） */
+.fix-panel { margin-top: 8px; padding: 10px 12px; border-radius: 10px; background: var(--bg); border: 1px dashed var(--line); }
+.fix-title { margin: 0 0 6px; font-size: 14px; color: var(--muted); }
+.fix-actions { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; margin-top: 8px; }
+#words .fix-actions button { min-height: 36px; font-size: 14px; border-radius: 999px; }
+#words .fix-actions .fix-delete { color: var(--danger); }
+#words .pv-actions .pv-fix.open { color: var(--text); border-color: var(--text); }
+#wb-commit-note { margin: 0 0 6px; }
 #wb-export-box { margin: 8px 0; display: grid; gap: 6px; }
 #wb-export-text { width: 100%; font: 13px/1.4 ui-monospace, SFMono-Regular, Menlo, monospace; padding: 10px; border-radius: 10px; border: 1px solid var(--line); background: var(--surface); color: var(--text); }
 .wb-h { font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 20px 0 6px; }
@@ -280,7 +294,7 @@ body[data-tab="words"] #about { display: none !important; }
 .wb-subbar h2 { margin: 0; font-size: 20px; }
 #wb-progress { margin-left: auto; font-variant-numeric: tabular-nums; }
 
-#wb-input { width: 100%; min-height: 30vh; padding: 12px; border-radius: var(--radius); border: 1px solid var(--line);
+#wb-input { font-family: inherit; width: 100%; min-height: 30vh; padding: 12px; border-radius: var(--radius); border: 1px solid var(--line);
   background: var(--surface); color: var(--text); font-size: 18px; line-height: 1.5; resize: vertical; }
 #wb-input.compact { min-height: 0; height: 6.5em; }
 #wb-preview-btn { margin: 10px 0; }
@@ -329,18 +343,25 @@ button.split-all { border-style: dashed; color: var(--muted); }
 /* 複習卡：點一下翻面，背面「Your note」與「Dictionary」分開 */
 #wb-card {
   position: relative; min-height: 46vh; padding: 22px 20px 18px; border-radius: var(--card-radius); cursor: pointer;
-  background: radial-gradient(120% 90% at 0% 0%, var(--accent-soft) 0%, transparent 55%), var(--surface);
-  border: 1px solid var(--line);
-  box-shadow: 0 1px 0 rgba(255, 255, 255, 0.5) inset, 0 2px 6px rgba(0, 0, 0, 0.06), 0 18px 40px rgba(0, 0, 0, 0.08);
+  background: var(--surface);
+  border: 1px solid var(--line); border-top: 3px solid var(--accent-soft);
+  /* P6.6：原本的放射漸層底色也拿掉（翻面時整塊漸層要重畫）；：原本 18px/40px 的大陰影＋翻面換底色，每翻一次整張卡重畫，翻卡量到 p95 113 ms；
+     陰影縮小、正反面同一個底色，翻面只重畫卡片內容 */
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06), 0 6px 14px rgba(0, 0, 0, 0.06);
   -webkit-tap-highlight-color: transparent; outline-offset: 4px;
 }
 #wb-card:focus-visible { outline: 3px solid var(--accent); }
+/* P6.6（§5.1 F 翻卡 ≤ 100 ms）：正反面疊在同一格、兩面都先排好版；翻面只切 visibility／opacity，
+   不重新排版（原本 display:none ↔ block 每翻一次都要重排整張背面）。hidden 屬性照樣設（語意、無障礙樹） */
+#wb-card { display: grid; overflow-wrap: anywhere; }
+#wb-card > .front, #wb-card > .back { grid-area: 1 / 1; min-width: 0; }
+#wb-card > .front[hidden], #wb-card > .back[hidden] { display: block !important; visibility: hidden; opacity: 0; pointer-events: none; }
+#wb-card > .front[hidden] { display: flex !important; }
 #wb-card .front { display: flex; flex-direction: column; justify-content: center; min-height: calc(46vh - 40px); text-align: center; }
-#wb-card[data-side="back"] { background: var(--surface); }
 #wb-card.again { border-color: var(--warn); }
 @media (prefers-reduced-motion: no-preference) {
-  #wb-card .front:not([hidden]), #wb-card .back:not([hidden]) { animation: card-in 90ms var(--ease-out); }
-  @keyframes card-in { from { opacity: 0.2; transform: scale(0.985); } to { opacity: 1; transform: none; } }
+  /* 淡入 90 ms（≤ 150 ms）；新的一面第一個影格就已經畫出來 */
+  #wb-card > .front, #wb-card > .back { transition: opacity 90ms var(--ease-out); }
 }
 .dir-label { margin: 0 0 10px; font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); font-weight: 600; }
 .prompt { margin: 0; font-size: 34px; line-height: 1.2; font-weight: 700; overflow-wrap: anywhere; }
@@ -367,6 +388,8 @@ button.split-all { border-style: dashed; color: var(--muted); }
 .d-gloss { font-size: 15px; }
 .back .notfound { font-size: 20px; font-weight: 600; margin: 4px 0; }
 .wb-grade { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 12px; }
+/* 三個按鈕的位置一直留著（翻面不推動版面、不重排） */
+#wb-review .wb-grade[hidden] { display: grid !important; visibility: hidden; }
 #words .wb-grade button { min-height: 52px; font-weight: 600; }
 #words #wb-forgot { color: var(--danger); border-color: var(--danger); }
 #words #wb-know { background: var(--accent); border-color: var(--accent); color: #fff; }

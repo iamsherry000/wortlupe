@@ -51,18 +51,23 @@ export function initWordbook({ getDict, onEnter = () => {} }) {
     $('tab-read').setAttribute('aria-selected', String(tab === 'read'));
     $('tab-words').setAttribute('aria-selected', String(tab === 'words'));
     ui.words.hidden = tab !== 'words';
-    if (tab === 'words') { onEnter(); goHome(); }
+    if (tab === 'words') {
+      onEnter();
+      show(null); // 舊畫面（可能是上次的首頁數字）先收起來，讀好再秀
+      goHome();
+    }
   }
   $('tab-read').addEventListener('click', () => setTab('read'));
   $('tab-words').addEventListener('click', () => setTab('words'));
 
   // ---------- 首頁 ----------
+  // P6.6（§5.1 F）：先把新數字讀好、畫好，才把首頁秀出來——不先閃舊數字
   async function goHome(keepMessage = false) {
     if (!keepMessage) say('');
     ui.exportBox.hidden = true;
-    show(ui.home);
     try {
       const [counts, queue] = await Promise.all([wb.counts(), wb.queue()]);
+      show(ui.home);
       ui.due.replaceChildren(h('span', { class: 'num' }, String(queue.length)), ' due today');
       ui.start.disabled = queue.length === 0;
       const total = Object.values(counts).reduce((a, b) => a + b, 0);
@@ -71,6 +76,7 @@ export function initWordbook({ getDict, onEnter = () => {} }) {
       ui.groups.replaceChildren(...GROUPS.map((g, k) => h('li', { class: 'wb-group', 'data-group': g, role: 'button', tabindex: '0' },
         h('span', { class: 'g-name' }, g), h('span', { class: 'g-hint' }, GROUP_HINT[k]), h('span', { class: 'count' }, String(counts[g])))));
     } catch (e) {
+      show(ui.home);
       say(e.message || 'Could not read your word list on this phone.', true);
     }
   }
@@ -123,6 +129,8 @@ export function initWordbook({ getDict, onEnter = () => {} }) {
       const r = await importPreview(ui.input.value, dict);
       entries = r.entries;
       skipped = r.skipped;
+      hadRows = entries.length > 0;
+      openFix.clear();
       existing = new Set((await wb.all().catch(() => [])).map((w) => w.key));
       renderPreview();
       ui.preview.dataset.state = 'ready';
@@ -164,19 +172,53 @@ export function initWordbook({ getDict, onEnter = () => {} }) {
     return h('div', { class: 'pv-dict' }, ...parts);
   }
 
+  // Check split 的原因（SPEC §5.1 F：不確定就標，而且講清楚為什麼）
+  const CHECK_TEXT = {
+    boundary: 'a word here is both German and English — tap the word where your note starts:',
+    unknown: 'a word isn’t in the dictionary (typo, or part of your note?) — tap the word where your note starts:',
+    note: 'a line below was read as your note but contains a German word — use Fix if that’s wrong.',
+    first: 'this looks like a meaning with no German word above it — use Fix.',
+    comma: 'not every part is in the dictionary — tap the word where your note starts:',
+  };
+  const splitChips = (e) => h('div', { class: 'split-words' },
+    ...e.splitWords.map((w, k) => h('button', { type: 'button', class: 'split-word', 'data-act': 'split', 'data-k': String(k), disabled: k === 0 }, w.text)),
+    h('button', { type: 'button', class: 'split-all', 'data-act': 'split', 'data-k': String(e.splitWords.length) }, 'All German'));
+
+  let hadRows = false; // 這次預覽原本有筆數（被刪光 → 按鈕停用並說明；一開始就沒有 → 不顯示按鈕）
+  const openFix = new Set();
+
+  // 「Add N words」是去重後實際會新增的字數；併進既有字的另外寫（SPEC §5.1 F：數字要真）
+  function commitCounts() {
+    const keys = new Set(entries.filter((e) => e.key && String(e.german || '').trim()).map((e) => e.key));
+    let fresh = 0, merged = 0;
+    for (const k of keys) if (existing.has(k)) merged++; else fresh++;
+    return { fresh, merged };
+  }
+  function updateCommit() {
+    const { fresh, merged } = commitCounts();
+    const note = $('wb-commit-note');
+    ui.commit.hidden = !hadRows;
+    ui.commit.disabled = fresh + merged === 0;
+    ui.commit.textContent = fresh || !merged ? `Add ${plural(fresh, 'word')}` : `Update ${plural(merged, 'word')}`;
+    note.hidden = !hadRows;
+    note.textContent = fresh + merged === 0 ? 'Nothing to add — every line was removed.'
+      : merged ? `${merged} merged into existing (your notes are added, familiarity stays)` : '';
+  }
+
   function renderPreview() {
     ui.skipped.hidden = !skipped;
-    ui.skipped.textContent = skipped ? `Skipped ${plural(skipped, 'line')} (only emoji, numbers or links).` : '';
+    ui.skipped.textContent = skipped ? `Skipped ${plural(skipped, 'line')} (only symbols, emoji, numbers or links).` : '';
     ui.input.classList.toggle('compact', entries.length > 0);
     if (!entries.length) {
       ui.preview.replaceChildren();
-      ui.commit.hidden = true;
-      if (ui.preview.dataset.state !== 'error') say('Nothing to add. Paste words, one per line.');
+      updateCommit();
+      if (!hadRows && ui.preview.dataset.state !== 'error') say('Nothing to add. Paste words, one per line.');
       return;
     }
     ui.preview.replaceChildren(...entries.map((e, i) => {
       const f = e.flags;
       const cls = ['pv-row', f.checkSplit ? 'check' : '', f.article ? 'bad-article' : '', e.status === 'notfound' ? 'nf' : ''].filter(Boolean).join(' ');
+      const fixing = openFix.has(e.id);
       const row = h('li', { class: cls, 'data-i': String(i), style: `--i:${Math.min(i, 12)}` },
         h('div', { class: 'pv-german' }, h('span', { class: 'pv-typed', lang: 'de' }, e.german),
           existing.has(e.key) ? h('span', { class: 'flag-dup' }, 'Already in your list — your note will be added') : null),
@@ -184,21 +226,24 @@ export function initWordbook({ getDict, onEnter = () => {} }) {
         dictSummary(e),
         f.article ? h('p', { class: 'flag-article' }, `Article: ${f.article.dict} (you wrote ${f.article.wrote})`) : null,
         f.checkSplit ? h('div', { class: 'flag-check' },
-          h('p', {}, h('b', {}, 'Check split'), ' — tap the word where your note starts:'),
-          h('div', { class: 'split-words' },
-            ...e.splitWords.map((w, k) => h('button', { type: 'button', class: 'split-word', 'data-act': 'split', 'data-k': String(k), disabled: k === 0 }, w.text)),
-            h('button', { type: 'button', class: 'split-all', 'data-act': 'split', 'data-k': String(e.splitWords.length) }, 'All German'))) : null,
+          h('p', {}, h('b', {}, 'Check split'), ` — ${CHECK_TEXT[f.checkReason] || CHECK_TEXT.boundary}`),
+          ['note', 'first'].includes(f.checkReason) || fixing ? null : splitChips(e)) : null,
         f.noMeaning ? h('p', { class: 'flag-nomeaning' }, 'No meaning yet — only German → meaning will be quizzed') : null,
         h('div', { class: 'pv-actions' },
-          // SPEC §5.1 E（P6.5）：已有 Your note 的那筆不給 Merge（bald ‖ soon 按了會誤併進上一筆）；
-          // 沒 note 的才給、普通樣式——Sherry 用 = 標解釋，不需要醒目提示
+          // SPEC §5.1 E（P6.5）：已有 Your note 的那筆外面不給 Merge（收在 Fix 裡，§5.1 F）；沒 note 的才給、普通樣式
           i > 0 && e.note === null ? h('button', { type: 'button', class: 'pv-merge', 'data-act': 'merge' }, 'Merge into previous') : null,
-          e.note !== null ? h('button', { type: 'button', class: 'pv-split', 'data-act': 'splitnew' }, 'Split into new word') : null,
-          h('button', { type: 'button', class: 'pv-remove', 'data-act': 'remove', 'aria-label': `Remove ${e.german}` }, 'Remove')));
+          h('button', { type: 'button', class: fixing ? 'pv-fix open' : 'pv-fix', 'data-act': 'fix', 'aria-expanded': String(fixing) }, 'Fix'),
+          h('button', { type: 'button', class: 'pv-remove', 'data-act': 'remove', 'aria-label': `Remove ${e.german}` }, 'Remove')),
+        // SPEC §5.1 F：每一筆都救得回來——重選分界、併到上一筆當解釋、拆出掛錯的解釋、刪除
+        fixing ? h('div', { class: 'fix-panel' },
+          h('p', { class: 'fix-title' }, 'Where does your note start?'), splitChips(e),
+          h('div', { class: 'fix-actions' },
+            i > 0 ? h('button', { type: 'button', class: 'fix-merge', 'data-act': 'merge' }, 'Use this whole entry as the note of the one above') : null,
+            e.note !== null ? h('button', { type: 'button', class: 'fix-splitnew', 'data-act': 'splitnew' }, 'Move the last note line out as a new word') : null,
+            h('button', { type: 'button', class: 'fix-delete', 'data-act': 'remove' }, 'Delete this entry'))) : null);
       return row;
     }));
-    ui.commit.hidden = false;
-    ui.commit.textContent = `Add ${plural(entries.length, 'word')}`;
+    updateCommit();
   }
 
   ui.previewBtn.addEventListener('click', runPreview);
@@ -208,7 +253,14 @@ export function initWordbook({ getDict, onEnter = () => {} }) {
     const i = Number(btn.closest('.pv-row').dataset.i);
     const dict = getDict();
     const act = btn.dataset.act;
+    if (act === 'fix') {
+      const id = entries[i].id;
+      if (openFix.has(id)) openFix.delete(id); else openFix.add(id);
+      renderPreview();
+      return;
+    }
     ui.preview.dataset.state = 'busy';
+    openFix.delete(entries[i] && entries[i].id); // 做完一個修正就把 Fix 收起來
     try {
       if (act === 'remove') entries = removeEntry(entries, i);
       else if (act === 'merge') entries = await mergeIntoPrevious(entries, i, dict);
@@ -227,16 +279,17 @@ export function initWordbook({ getDict, onEnter = () => {} }) {
     try {
       const r = await wb.importEntries(entries);
       entries = [];
+      hadRows = false;
       ui.input.value = '';
-      renderPreview();
+      ui.preview.replaceChildren();
       ui.preview.dataset.state = 'empty';
       await goHome(true);
       say(`Added ${plural(r.added, 'word')}${r.merged ? `, updated ${plural(r.merged, 'word')} already in your list` : ''}.`);
+      updateCommit();
     } catch (e) {
       // 寫入失敗：預覽留著、講清楚沒存進去（TESTS §12 對抗性：不可假裝已匯入）
       say(`${e && /^Could not save/.test(e.message) ? e.message : 'Could not save.'} Nothing was added — your preview is still here, try again.`, true);
-    } finally {
-      ui.commit.disabled = false;
+      updateCommit();
     }
   });
 

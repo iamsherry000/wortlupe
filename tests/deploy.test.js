@@ -61,7 +61,7 @@ describe('SPEC §8 部署範圍', () => {
 
   it('部署 只含上線產物（白名單），而且 sw.js 快取清單的每個檔都在', () => {
     const paths = deployFiles().map((f) => f.path);
-    const allowed = /^(index\.html|setting(-en)?\.html|sw\.js|mt\/[\w.-]+|manifest\.webmanifest|icons\/[\w.-]+|src\/.+\.(js|css)|data\/(lexicon|colloquial|prepositions|gloss-overrides|closed-class|lowercase-nouns|usage)\.json|data\/runtime\/[\w.-]+\.json)$/;
+    const allowed = /^(index\.html|setting(-en)?\.html|sw\.js|mt\/[\w.-]+|manifest\.webmanifest|icons\/[\w.-]+|src\/.+\.(js|css)|data\/(lexicon|colloquial|prepositions|gloss-overrides|closed-class|lowercase-nouns|usage|english-words)\.json|data\/runtime\/[\w.-]+\.json)$/;
     expect(paths.filter((p) => !allowed.test(p)), '白名單以外的檔會被上傳').toEqual([]);
     const sw = readFileSync(join(ROOT, 'sw.js'), 'utf8');
     const listed = [...sw.matchAll(/'\.\/([^']+)'/g)].map((m) => m[1]);
