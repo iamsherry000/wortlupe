@@ -23,7 +23,8 @@ const RESTORE_POS = new Set(['verb', 'noun', 'adj']);
 // 常見德文（bald、Gift、Mama）照樣當一筆德文；罕見德文讀法（ID＝das Id）當英文解釋行
 const COMMON_RANK = 5000;
 // 行首條列符號（SPEC §5.1 F）：- • * · 1. 1)，後面要有空白
-const BULLET = /^(?:[-•*·‣▪]|\d{1,3}[.)])\s+/u;
+// P6.7：en dash – 也算（– Lampe lamp）
+const BULLET = /^(?:[-–•*·‣▪]|\d{1,3}[.)])\s+/u;
 
 let nextId = 1;
 
@@ -42,7 +43,11 @@ function makeCtx(dict, english) {
     const r = dict.lookup(w, { sentenceInitial: initial });
     if (r.found) {
       const rank = Math.min(...r.candidates.map((c) => c.entry.rank || Infinity));
-      return { common: rank <= COMMON_RANK };
+      // P6.7 N3：首字大寫（不是全大寫縮寫）、字典裡是名詞 → 「這是新的德文行」。
+      // 規格寫詞頻前 5000，但它自己的例子 Mode（6278）、Taste（16495）都在 5000 外 → 不設詞頻門檻，改用
+      // 「Titlecase 名詞」區分 Mode／Taste／Selfie（德文名詞）與 ID（全大寫縮寫＝英文解釋）；回報 PM
+      const titleNoun = /^\p{Lu}\p{Ll}/u.test(w) && r.candidates.some((c) => c.pos === 'noun' && /^\p{Lu}/u.test(c.lemma));
+      return { common: rank <= COMMON_RANK, titleNoun };
     }
     if (dict.lowercaseNouns && dict.lowercaseNouns[lower]) return { common: false };
     return null;
@@ -79,10 +84,14 @@ function greedy(line, words, ctx) {
   const englishOnly = (w) => isEnglish(w.text) && !germanInfo(w.text, false);
   // 解釋行：每個字都是英文、沒有常見德文
   // （上面還沒有任何一筆、而且第一個字查得到德文時不當解釋行：Mama mom 是一筆德文＋解釋，不是沒有主人的解釋）
-  if (!hasCJK && (ctx.hasPrev || !germanInfo(w0.text, true))
-    && words.every((w, k) => isEnglish(w.text) && !(germanInfo(w.text, k === 0) || {}).common)) {
+  // P6.7 N3（SPEC §5.1 F）：第一個字是 Titlecase 字典名詞 → 新的德文行（Schal scarf ⏎ Mode fashion）
+  const g0 = germanInfo(w0.text, true);
+  const looksLikeNote = !hasCJK && words.every((w, k) => isEnglish(w.text) && !(germanInfo(w.text, k === 0) || {}).common);
+  if (looksLikeNote && (ctx.hasPrev || !g0) && !(g0 && g0.titleNoun)) {
     return { kind: 'note', text: line, germanInside: words.some((w, k) => germanInfo(w.text, k === 0)) };
   }
+  // 反過來：整行也可能是上一行的英文解釋（Bank account）→ 當新的德文行，但一定標（不留「沒把握又沒標」的路徑）
+  const maybeNote = looksLikeNote && ctx.hasPrev;
   const cutAt = (end, checkSplit, reason) => {
     if (end >= words.length) return { kind: 'entry', german: line, note: null, checkSplit, reason };
     const cut = words[end].start;
@@ -92,23 +101,24 @@ function greedy(line, words, ctx) {
     const anyEnglish = words.some(englishOnly);
     if (!anyEnglish && !hasCJK && words.length > 1 && closestLemma(words.map((w) => w.text).join(''), ctx.dict)) {
       // 拆開寫的複合詞（feiren abend → Feierabend）：整段當德文段、照樣標
-      return { ...cutAt(words.length, true, 'unknown'), compound: true };
+      return { ...cutAt(words.length, true, 'typo'), compound: true };
     }
-    return cutAt(1, true, 'unknown');
+    // 第一個字打錯（有拼字建議）→ typo；連建議都沒有 → unknown（P6.7 N1：理由要對得上真正原因）
+    return cutAt(1, true, closestLemma(w0.text, ctx.dict) ? 'typo' : 'unknown');
   }
   let end = 1;
-  let unsure = false;
+  let unsure = null;
   while (end < words.length) {
     const w = words[end];
     if (CJK.test(w.text)) break;
     const g = germanInfo(w.text, false);
     const en = isEnglish(w.text);
     if (!g) {
-      if (!en) unsure = true; // 查不到也不是英文：可能是打錯的德文，也可能是解釋
+      if (!en) unsure = 'unknown'; // 查不到也不是英文：可能是打錯的德文，也可能是解釋
       break;
     }
     if (en) {
-      unsure = true;
+      unsure = 'boundary'; // 德英同形
       const restNotGerman = words.slice(end + 1).some((x) => CJK.test(x.text) || !germanInfo(x.text, false));
       // 行尾最後一個字德英同形、又不是封閉詞類（Mama mom 的 mom）：多半是她寫的英文解釋 → 在前面切（照樣標）
       const lastOpen = end === words.length - 1 && !g.closed;
@@ -116,7 +126,8 @@ function greedy(line, words, ctx) {
     }
     end++;
   }
-  return cutAt(end, unsure, unsure ? 'boundary' : null);
+  if (!unsure && maybeNote) unsure = 'maybeNote';
+  return cutAt(end, !!unsure, unsure);
 }
 
 function allGerman(text, ctx) {
@@ -259,8 +270,10 @@ function finish(e, dict, ctx) {
       const ws = wordsOf(e.german).map((w) => w.text);
       const lineWords = wordsOf(e.line || e.german);
       const allowCompound = !CJK.test(e.line || '') && !lineWords.some((w) => ctx.isEnglish(w.text) && !ctx.germanInfo(w.text, false));
-      sug = suggestSpelling(ws, dict, (w) => !!ctx.germanInfo(w, false), allowCompound);
-      if (sug === e.german) sug = null;
+      // P6.7 N2：英文字不給建議（so what → "so Chat"、self photo → "elf Photon"、soon → "Sohn" 都不准出現）
+      sug = suggestSpelling(ws, dict, (w) => !!ctx.germanInfo(w, false) || ctx.isEnglish(w), allowCompound);
+      // 建議跟她打的字一樣（只差標點，Na und? so what? → Na und so what）＝沒有建議
+      if (sug === e.german || sug === ws.join(' ')) sug = null;
     }
     hit = { a: a0, suggestion: sug };
     ctx.memo.set(e.german, hit);
@@ -364,7 +377,10 @@ export async function splitIntoNew(entries, i, dict) {
   await dict.ensure(wordsOf(text).map((w) => w.text));
   ctx.hasPrev = true;
   const p = parseLine(text, ctx);
-  const fresh = newEntry({ line: text, german: p.kind === 'entry' ? p.german : text, note: p.kind === 'entry' ? p.note : null, checkSplit: p.kind === 'entry' && p.checkSplit, reason: p.reason });
+  // 拆出來的那行看起來是解釋（self photo）→ 照樣成一筆，但標 Check split（像第一行就是解釋）
+  const fresh = p.kind === 'entry'
+    ? newEntry({ line: text, german: p.german, note: p.note, checkSplit: p.checkSplit, reason: p.reason })
+    : newEntry({ line: text, german: text, note: null, checkSplit: true, reason: 'first' });
   return [...entries.slice(0, i), await refresh(rest, dict), await refresh(fresh, dict), ...entries.slice(i + 1)];
 }
 

@@ -175,7 +175,9 @@ export function initWordbook({ getDict, onEnter = () => {} }) {
   // Check split 的原因（SPEC §5.1 F：不確定就標，而且講清楚為什麼）
   const CHECK_TEXT = {
     boundary: 'a word here is both German and English — tap the word where your note starts:',
-    unknown: 'a word isn’t in the dictionary (typo, or part of your note?) — tap the word where your note starts:',
+    unknown: 'a word is neither in the dictionary nor in the English word list — tap the word where your note starts:',
+    typo: 'the German word isn’t in the dictionary — maybe a typo (see the suggestion). Tap the word where your note starts:',
+    maybeNote: 'this line could also be your note for the line above — use Fix if it is.',
     note: 'a line below was read as your note but contains a German word — use Fix if that’s wrong.',
     first: 'this looks like a meaning with no German word above it — use Fix.',
     comma: 'not every part is in the dictionary — tap the word where your note starts:',
@@ -227,7 +229,7 @@ export function initWordbook({ getDict, onEnter = () => {} }) {
         f.article ? h('p', { class: 'flag-article' }, `Article: ${f.article.dict} (you wrote ${f.article.wrote})`) : null,
         f.checkSplit ? h('div', { class: 'flag-check' },
           h('p', {}, h('b', {}, 'Check split'), ` — ${CHECK_TEXT[f.checkReason] || CHECK_TEXT.boundary}`),
-          ['note', 'first'].includes(f.checkReason) || fixing ? null : splitChips(e)) : null,
+          ['note', 'first', 'maybeNote'].includes(f.checkReason) || fixing ? null : splitChips(e)) : null,
         f.noMeaning ? h('p', { class: 'flag-nomeaning' }, 'No meaning yet — only German → meaning will be quizzed') : null,
         h('div', { class: 'pv-actions' },
           // SPEC §5.1 E（P6.5）：已有 Your note 的那筆外面不給 Merge（收在 Fix 裡，§5.1 F）；沒 note 的才給、普通樣式

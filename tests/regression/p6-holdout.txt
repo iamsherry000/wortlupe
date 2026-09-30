@@ -1,0 +1,158 @@
+# Wortlupe P6 集外組（Tester 2026-09-30，RD 沒看過）
+# 用法：「=== INPUT ===」與「=== EXPECTED ===」之間整塊原樣貼進單字本（含空行；sich beschweren über 後面是 Tab）。
+# 共 80 行非空（58 行 Part 1 真實單字筆記風格＋22 行 Part 2 條列／片語／標點）。
+# 驗收後依 TESTS §0 TH 轉進 tests/regression/（RD 可看），下一輪 Tester 要另寫新的一組。
+=== INPUT ===
+德文單字 9/30 VHS
+
+der Anruf - call 電話
+zurückrufen = call back
+die Überweisung: bank transfer 轉帳
+Steuererklärung 報稅
+eigentlich actually 其實
+Bescheid geben
+= let someone know
+Mahnung
+
+催繳通知
+sich beschweren über	to complain about
+die Hausordnung | house rules
+Nebenkosten – utilities, 水電費
+Kita
+daycare
+der Mieter tenant
+Vermieter 房東!!
+kündigen – to cancel (contract)
+abholen pick up 接
+Ausweis
+ID card
+=身分證
+die Kaution deposit 押金
+übrigens by the way
+Feierabend machen
+= call it a day
+Rechnug
+invoice?
+Termn appointmnet
+Kühlschrnak fridge
+Wohnungsbesichtigung 看房
+Termin vereinbaren make an appointment
+Arm poor
+also so / therefore
+Handy mobile phone
+Winter winter
+Rock skirt
+fast almost
+bekommen get (NOT become!)
+E-Mail - email
+Das ist mir Wurst = I don't care 🤷
+Keine Ahnung no idea 不知道
+Arzt, Apotheke, Rezept
+Milch, Käse, blablub
+Schatz
+Liebling
+😂😂
+2026
+www.dm.de
+🙏
+schwanger pregnant
+die Hebamme midwife 助產士
+Umzug
+搬家
+ÜBERSTUNDEN overtime
+die See sea / der See lake
+Quatschkopfigkeit
+gingen went
+
+- Wohnung - apartment
+• Miete rent 房租
+1. Hose trousers
+sich kümmern um + Akk. take care of
+Wie geht's? how are you
+der/die Kollege/in colleague
+nach Hause gehen go home 回家
+doch yes (contradicting) 還是
+Mama mom
+Pause break
+Die Rechnung bitte! the bill please
+Ich bin fertig I'm done / exhausted
+in Ordnung OK
+Stau traffic jam
+super great
+Moment mal wait a sec
+leider unfortunately 可惜
+Gute Besserung get well soon
+---
+Termin absagen - cancel appointment
+Mist
+damn
+=== EXPECTED ===
+# 格式：輸入 → 期望「德文段 ‖ Your note」；[CS] = 標 Check split 也算對（不確定時不猜）；[SKIP] = 略過
+# 判定：沒標 Check split 卻切錯 = 不通過（TESTS §12 TK 分界）
+德文單字 9/30 VHS → [CS]（第一行就是解釋行／標題）
+der Anruf - call 電話 → der Anruf ‖ call 電話
+zurückrufen = call back → zurückrufen ‖ call back
+die Überweisung: bank transfer 轉帳 → die Überweisung ‖ bank transfer 轉帳
+Steuererklärung 報稅 → Steuererklärung ‖ 報稅
+eigentlich actually 其實 → eigentlich ‖ actually 其實
+Bescheid geben ⏎ = let someone know → Bescheid geben ‖ let someone know
+Mahnung ⏎ ⏎ 催繳通知 → Mahnung ‖ 催繳通知
+sich beschweren über ⇥ to complain about → sich beschweren über ‖ to complain about
+die Hausordnung | house rules → die Hausordnung ‖ house rules
+Nebenkosten – utilities, 水電費 → Nebenkosten ‖ utilities, 水電費
+Kita ⏎ daycare → Kita ‖ daycare（或 daycare 那筆標 Check split）
+der Mieter tenant → der Mieter ‖ tenant
+Vermieter 房東!! → Vermieter ‖ 房東!!
+kündigen – to cancel (contract) → kündigen ‖ to cancel (contract)
+abholen pick up 接 → abholen ‖ pick up 接
+Ausweis ⏎ ID card ⏎ =身分證 → Ausweis ‖ ID card ⏎ 身分證（或 ID card 那筆標 Check split）
+die Kaution deposit 押金 → die Kaution ‖ deposit 押金
+übrigens by the way → übrigens ‖ by the way
+Feierabend machen ⏎ = call it a day → Feierabend machen ‖ call it a day
+Rechnug ⏎ invoice? → Rechnug ‖ invoice?，Did you mean Rechnung?
+Termn appointmnet → Termn ‖ appointmnet，Did you mean Termin?（或 [CS]）
+Kühlschrnak fridge → Kühlschrnak ‖ fridge，Did you mean Kühlschrank?（或 [CS]）
+Wohnungsbesichtigung 看房 → Wohnungsbesichtigung ‖ 看房
+Termin vereinbaren make an appointment → Termin vereinbaren ‖ make an appointment
+Arm poor → Arm ‖ poor
+also so / therefore → also ‖ so / therefore 或 [CS]
+Handy mobile phone → Handy ‖ mobile phone 或 [CS]
+Winter winter → Winter ‖ winter 或 [CS]
+Rock skirt → Rock ‖ skirt
+fast almost → fast ‖ almost
+bekommen get (NOT become!) → bekommen ‖ get (NOT become!)
+E-Mail - email → E-Mail ‖ email
+Das ist mir Wurst = I don't care 🤷 → Das ist mir Wurst ‖ I don't care 🤷
+Keine Ahnung no idea 不知道 → Keine Ahnung ‖ no idea 不知道
+Arzt, Apotheke, Rezept → 三筆 Arzt／Apotheke／Rezept
+Milch, Käse, blablub → 一筆 [CS]
+Schatz ⏎ Liebling → 兩筆（沒有 =，不准自己判成解釋）
+😂😂 / 2026 / www.dm.de / 🙏 → [SKIP] ×4
+schwanger pregnant → schwanger ‖ pregnant
+die Hebamme midwife 助產士 → die Hebamme ‖ midwife 助產士
+Umzug ⏎ 搬家 → Umzug ‖ 搬家
+ÜBERSTUNDEN overtime → ÜBERSTUNDEN ‖ overtime（存原形 Überstunde）
+die See sea / der See lake → die See ‖ sea / der See lake 或 [CS]
+Quatschkopfigkeit → Not in dictionary，零文法欄位，無建議
+gingen went → gingen ‖ went（存 gehen）
+- Wohnung - apartment → Wohnung ‖ apartment
+• Miete rent 房租 → Miete ‖ rent 房租
+1. Hose trousers → Hose ‖ trousers
+sich kümmern um + Akk. take care of → [CS] 可
+Wie geht's? how are you → Wie geht's? ‖ how are you
+der/die Kollege/in colleague → [CS] 可
+nach Hause gehen go home 回家 → nach Hause gehen ‖ go home 回家
+doch yes (contradicting) 還是 → doch ‖ yes (contradicting) 還是
+Mama mom → Mama ‖ mom 或 [CS]
+Pause break → Pause ‖ break
+Die Rechnung bitte! the bill please → Die Rechnung bitte! ‖ the bill please
+Ich bin fertig I'm done / exhausted → Ich bin fertig ‖ I'm done / exhausted 或 [CS]
+in Ordnung OK → in Ordnung ‖ OK 或 [CS]
+Stau traffic jam → Stau ‖ traffic jam
+super great → super ‖ great
+Moment mal wait a sec → Moment mal ‖ wait a sec
+leider unfortunately 可惜 → leider ‖ unfortunately 可惜
+Gute Besserung get well soon → Gute Besserung ‖ get well soon
+--- → [SKIP]（規格沒寫純符號行，見報告規格疑點）
+Termin absagen - cancel appointment → Termin absagen ‖ cancel appointment
+Mist ⏎ damn → Mist ‖ damn

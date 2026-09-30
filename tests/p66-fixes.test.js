@@ -132,3 +132,91 @@ describe('§5.1 F 前後空白（含全形空白）去掉、中間一字不動',
     expect(entries[0].note).toBe('全形　空白');
   });
 });
+
+// ---------- P6.7 收尾（SPEC §5.1 F「P6.7 收尾」，Tester P6.6 報告 N1–N3） ----------
+import { splitIntoNew } from '../src/wordbook/parse.js';
+
+describe('P6.7 N1 Check split 的理由對應真正的原因', () => {
+  it('N1 查不到也不是英文 → 理由不是「德英同形」', async () => {
+    const { entries } = await pv('Farbe colr 顏色\nEnde endx');
+    const flagged = entries.filter((e) => e.flags.checkSplit);
+    expect(flagged.length).toBeGreaterThan(0);
+    for (const e of flagged) expect(e.flags.checkReason).not.toBe('boundary');
+  });
+  it('N1 德英同形 → 理由是 boundary', async () => {
+    const { entries } = await pv('gehen will go');
+    expect(entries[0].flags.checkReason).toBe('boundary');
+  });
+  it('N1 第一個字打錯、有建議 → 理由是 typo', async () => {
+    const { entries } = await pv('Termn appointmnet');
+    expect(entries[0].flags.checkReason).toBe('typo');
+  });
+  it('N1 德文段後面接查不到的字 → 理由是 unknown', async () => {
+    const { entries } = await pv('Arzt blorp zzz');
+    expect(entries[0].flags.checkReason).toBe('unknown');
+  });
+});
+
+describe('P6.7 英文詞表加 en_GB', () => {
+  for (const [line, want] of [
+    ['Farbe colour 顏色', 'Farbe ‖ colour 顏色'],
+    ['Lieblingsfarbe favourite colour', 'Lieblingsfarbe ‖ favourite colour'],
+    ['Staubsauger hoover', 'Staubsauger ‖ hoover'],
+    ['Führerschein licence', 'Führerschein ‖ licence'],
+  ]) {
+    it(`en_GB ${line}`, async () => {
+      const { entries } = await pv(line);
+      expect(pair(entries[0])).toBe(want);
+      expect(entries[0].flags.checkSplit).toBe(false);
+    });
+  }
+});
+
+describe('P6.7 N2 英文字不給拼字建議', () => {
+  it('N2 Na und? so what? → All German 後沒有 "Na und so Chat" 這種建議', async () => {
+    let { entries } = await pv('Na und? so what?');
+    entries = await splitAt(entries, 0, entries[0].splitWords.length, dict);
+    expect(entries[0].flags.suggestion).toBe(null);
+  });
+  it('N2 被 Fix 移出來的解釋行（self photo）沒有建議、而且標 Check split', async () => {
+    let { entries } = await pv('Kunde\ncustomer\nSelfie\n= self photo');
+    const i = entries.findIndex((e) => (e.note || '').includes('self photo'));
+    expect(i).toBeGreaterThanOrEqual(0);
+    entries = await splitIntoNew(entries, i, dict);
+    const moved = entries.find((e) => e.german === 'self photo');
+    expect(moved).toBeTruthy();
+    expect(moved.flags.suggestion).toBe(null);
+    expect(moved.flags.checkSplit).toBe(true);
+  });
+  it('N2 第一行就是 = soon → 沒有 "Did you mean Sohn?"', async () => {
+    const { entries } = await pv('= soon');
+    expect(entries[0].flags.suggestion).toBe(null);
+  });
+  it('N2 查不到也不是英文的字照樣給建議（fiets bike 的 fiets 可以有，bike 不可以被改）', async () => {
+    const { entries } = await pv('Kündigunsfrist notice');
+    expect(entries[0].flags.suggestion).toBe('Kündigungsfrist');
+  });
+});
+
+describe('P6.7 N3 上一筆後面、大寫字典名詞（詞頻前 5000）開頭的行 → 新的德文行', () => {
+  it('N3 Schal scarf ⏎ Mode fashion → 兩筆', async () => {
+    const { entries } = await pv('Schal scarf\nMode fashion');
+    expect(entries.map(pair)).toEqual(['Schal ‖ scarf', 'Mode ‖ fashion']);
+  });
+  it('N3 Rente pension ⏎ Taste key (keyboard) → 兩筆', async () => {
+    const { entries } = await pv('Rente pension\nTaste key (keyboard)');
+    expect(entries.map((e) => e.german)).toEqual(['Rente', 'Taste']);
+  });
+  it('N3 Ausweis ⏎ ID card 照舊是解釋（ID 不是常見名詞）', async () => {
+    const { entries } = await pv('Ausweis\nID card');
+    expect(entries.map(pair)).toEqual(['Ausweis ‖ ID card']);
+  });
+});
+
+describe('P6.7 en dash 也算條列符號', () => {
+  it('– Lampe lamp → Lampe ‖ lamp', async () => {
+    const { entries } = await pv('– Lampe lamp');
+    expect(pair(entries[0])).toBe('Lampe ‖ lamp');
+    expect(entries[0].line).toBe('Lampe lamp');
+  });
+});

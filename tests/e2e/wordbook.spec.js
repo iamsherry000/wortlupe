@@ -458,33 +458,64 @@ test.describe('P6.6（SPEC §5.1 F，Tester P6 報告 F1–F8）', () => {
   test('§5.1 F 翻卡：點下去到第一個含新內容的影格 p95 ≤ 100 ms；淡入動畫 ≤ 150 ms', async ({ page }) => {
     await importText(page, Array.from({ length: 30 }, (_, k) => ['Rechnung', 'Termin', 'Arzt', 'Wohnung', 'Bank', 'Haus'][k % 6] + ` - n${k}`).join('\n'));
     await startReview(page);
+    // P6.7（SPEC §5.1 F 正式量法）：模擬真實使用——每次翻完「等淡入結束」再翻，連翻 40 次取 p95。
+    // 淡入長度量的是真正在跑的那個動畫（新的一面上的 CSS transition，用 getAnimations()；
+    // P6.6 讀 .front 的 animationDuration 永遠是 0s，Tester T1 抓到）。「每影格連翻」壓力測只記錄不判定。
     const r = await page.evaluate(async () => {
       const card = document.getElementById('wb-card');
+      const frame = () => new Promise((res) => requestAnimationFrame(() => res()));
       const times = [];
+      const fades = [];
       let ok = true;
       for (let k = 0; k < 40; k++) {
         const want = card.dataset.side === 'back' ? 'front' : 'back';
         const t = performance.now();
         card.click();
         // 第一個影格：rAF 回呼在這個影格畫之前跑，這時 DOM 已經是新的一面
-        await new Promise((res) => requestAnimationFrame(() => res()));
+        await frame();
         times.push(performance.now() - t);
         const el = card.querySelector(`.${want}`);
         if (card.dataset.side !== want || el.hidden || !el.textContent.trim()) ok = false;
+        const anims = el.getAnimations();
+        fades.push(anims.length ? Math.max(...anims.map((a) => Number(a.effect.getComputedTiming().endTime) || 0)) : 0);
+        await Promise.all(anims.map((a) => a.finished.catch(() => {})));
+        await frame();
       }
-      const anim = getComputedStyle(card.querySelector('.front')).animationDuration;
-      return { times, ok, anim };
+      // 壓力測（只記錄）：每個影格翻一次
+      const stress = [];
+      for (let k = 0; k < 40; k++) {
+        const t = performance.now();
+        card.click();
+        await frame();
+        stress.push(performance.now() - t);
+      }
+      return { times, fades, ok, stress };
     });
-    const sorted = [...r.times].sort((a, b) => a - b);
-    const p95 = sorted[Math.ceil(sorted.length * 0.95) - 1];
-    console.log(`TK 翻卡 40 次：中位數 ${sorted[20].toFixed(0)}、p95 ${p95.toFixed(0)}、最高 ${sorted.at(-1).toFixed(0)} ms；動畫 ${r.anim}`);
+    const pct = (xs, p) => { const s = [...xs].sort((a, b) => a - b); return s[Math.ceil(s.length * p) - 1]; };
+    const p95 = pct(r.times, 0.95);
+    const fadeMax = Math.max(...r.fades);
+    console.log(`TK 翻卡（正式量法，等淡入結束再翻，40 次）：中位數 ${pct(r.times, 0.5).toFixed(0)}、p95 ${p95.toFixed(0)}、最高 ${Math.max(...r.times).toFixed(0)} ms；淡入 ${Math.min(...r.fades)}–${fadeMax} ms`);
+    console.log(`TK 翻卡（壓力測，每影格連翻，只記錄）：中位數 ${pct(r.stress, 0.5).toFixed(0)}、p95 ${pct(r.stress, 0.95).toFixed(0)} ms`);
     expect(r.ok).toBe(true);
     expect(p95).toBeLessThanOrEqual(100);
-    const animMs = r.anim.split(',').map((s) => parseFloat(s) * (s.trim().endsWith('ms') ? 1 : 1000));
-    expect(Math.max(...animMs)).toBeLessThanOrEqual(150);
+    // 真的有淡入（不是量到 0），而且 ≤ 150 ms
+    expect(fadeMax).toBeGreaterThan(0);
+    expect(fadeMax).toBeLessThanOrEqual(150);
+  });
+
+  test('P6.7 N1 理由文字：查不到的字不寫成「德英同形」', async ({ page }) => {
+    const rows = await preview(page, 'Farbe colr 顏色\nArzt blorp zzz');
+    for (let k = 0; k < 2; k++) await expect(rows.nth(k).locator('.flag-check')).not.toContainText('both German and English');
+    await expect(rows.nth(0).locator('.flag-check')).toContainText('neither in the dictionary nor in the English word list');
+  });
+
+  test('P6.7 N3 Schal scarf ⏎ Mode fashion → 兩筆', async ({ page }) => {
+    const rows = await preview(page, 'Schal scarf\nMode fashion');
+    expect(await rowTexts(rows)).toEqual(['Schal ‖ scarf', 'Mode ‖ fashion']);
   });
 
   test('§5.1 F About 標英文詞表（SCOWL）授權', async ({ page }) => {
+    await expect(page.locator('#about')).toContainText('en_GB');
     await expect(page.locator('#about')).toContainText('SCOWL');
   });
 });
