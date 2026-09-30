@@ -88,4 +88,4 @@ Deployment is a Cloudflare Workers static-assets site (`npx wrangler deploy`). `
 
 ## Support
 
-If Wortlupe helps you read German, you can [sponsor the project](https://github.com/sponsors/iamsherry000). Thank you!
+If Wortlupe helps you read German, you can [buy me a coffee on Ko-fi](https://ko-fi.com/iamsherry000). Thank you!
