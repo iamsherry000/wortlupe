@@ -67,9 +67,20 @@ function distance(a, b, max) {
 }
 
 // 一個拼法 → 最接近的原形（距離小的先，同距離取詞頻高的）；沒有就 null
+const memoCache = new WeakMap();
 export function closestLemma(word, dict) {
   const w = String(word).toLowerCase();
   if (w.length < 3) return null; // 太短的字，距離 2 幾乎什麼都對得上，不給建議
+  // 同一個字在切分界與給建議時各查一次 → 記起來（P6.8 TK 效能）
+  let memo = memoCache.get(dict);
+  if (!memo) memoCache.set(dict, (memo = new Map()));
+  if (memo.has(w)) return memo.get(w);
+  const found = searchLemma(w, dict);
+  memo.set(w, found);
+  return found;
+}
+
+function searchLemma(w, dict) {
   const idx = lemmaIndex(dict);
   const wm = letterMask(w);
   let best = null;

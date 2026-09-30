@@ -198,13 +198,18 @@ describe('P6.7 N2 英文字不給拼字建議', () => {
   });
 });
 
-describe('P6.7 N3 上一筆後面、大寫字典名詞（詞頻前 5000）開頭的行 → 新的德文行', () => {
-  it('N3 Schal scarf ⏎ Mode fashion → 兩筆', async () => {
+// P6.7 的「首字大寫名詞＝新德文行」已被 SPEC §5.1 F「P6.8 統一判準」取代：整行都是英文字 → 預設當上一筆的解釋、一律標
+describe('P6.7→P6.8 N3 德英都說得通的整行英文：當上一筆的解釋、一律標（Fix 一鍵改成新的一筆）', () => {
+  it('N3 Schal scarf ⏎ Mode fashion → 一筆、標', async () => {
     const { entries } = await pv('Schal scarf\nMode fashion');
-    expect(entries.map(pair)).toEqual(['Schal ‖ scarf', 'Mode ‖ fashion']);
+    expect(entries.map(pair)).toEqual(['Schal ‖ scarf\nMode fashion']);
+    expect(entries[0].flags.checkSplit).toBe(true);
   });
-  it('N3 Rente pension ⏎ Taste key (keyboard) → 兩筆', async () => {
-    const { entries } = await pv('Rente pension\nTaste key (keyboard)');
+  it('N3 Rente pension ⏎ Taste key (keyboard) → 一筆、標；Fix 拆出來成新的一筆', async () => {
+    let { entries } = await pv('Rente pension\nTaste key (keyboard)');
+    expect(entries.map((e) => e.german)).toEqual(['Rente']);
+    expect(entries[0].flags.checkSplit).toBe(true);
+    entries = await splitIntoNew(entries, 0, dict);
     expect(entries.map((e) => e.german)).toEqual(['Rente', 'Taste']);
   });
   it('N3 Ausweis ⏎ ID card 照舊是解釋（ID 不是常見名詞）', async () => {
@@ -218,5 +223,98 @@ describe('P6.7 en dash 也算條列符號', () => {
     const { entries } = await pv('– Lampe lamp');
     expect(pair(entries[0])).toBe('Lampe ‖ lamp');
     expect(entries[0].line).toBe('Lampe lamp');
+  });
+});
+
+// ---------- P6.8 統一判準（SPEC §5.1 F「P6.8」，Tester P6.7 報告 F1–F3、N-a、N-b） ----------
+const flaggedSomewhere = (entries) => entries.some((e) => e.flags.checkSplit);
+
+describe('P6.8 F1 上一筆後面、整行都是英文字 → 預設當上一筆的解釋，一律標', () => {
+  it('F1 Konto ⏎ Bank account ⏎ Termin ⏎ Date with doctor ⏎ Stelle ⏎ Job opening', async () => {
+    const { entries } = await pv('Konto\nBank account\nTermin\nDate with doctor\nStelle\nJob opening');
+    expect(entries.map(pair)).toEqual(['Konto ‖ Bank account', 'Termin ‖ Date with doctor', 'Stelle ‖ Job opening']);
+    expect(entries.every((e) => e.flags.checkSplit && e.flags.checkReason === 'note')).toBe(true);
+  });
+  for (const [a, b] of [['Spielplatz', 'Park for kids'], ['Mannschaft', 'Team of players'], ['Schuh', 'Boot for winter'],
+    ['Handschuh', 'Hand glove'], ['Sportverein', 'Sport club'], ['Schal scarf', 'Mode fashion']]) {
+    it(`F1 ${a} ⏎ ${b} → 一筆、解釋含 ${b}、標`, async () => {
+      const { entries } = await pv(`${a}\n${b}`);
+      expect(entries).toHaveLength(1);
+      expect(entries[0].note.split('\n')).toContain(b);
+      expect(entries[0].flags.checkSplit).toBe(true);
+    });
+  }
+  it('F1 Sparkonto ⏎ Bank account 帳戶（中英混寫）→ 一筆、標', async () => {
+    const { entries } = await pv('Sparkonto\nBank account 帳戶');
+    expect(entries.map(pair)).toEqual(['Sparkonto ‖ Bank account 帳戶']);
+    expect(entries[0].flags.checkSplit).toBe(true);
+  });
+  it('F1 Kündigung ⏎ Notice period → 解釋（Notice 不是德文，不必標）', async () => {
+    const { entries } = await pv('Kündigung\nNotice period');
+    expect(entries.map(pair)).toEqual(['Kündigung ‖ Notice period']);
+  });
+  it('F1 Kunst ⏎ Art：沒有靜默（要嘛併成解釋有標，要嘛兩筆而 Art 那筆有標）', async () => {
+    const { entries } = await pv('Kunst\nArt');
+    expect(flaggedSomewhere(entries)).toBe(true);
+    if (entries.length === 2) expect(entries[1].flags.checkSplit).toBe(true);
+  });
+  it('F1 第一個字是德文、不是英文 → 新的一筆（Kündigungsfrist 解約期限）', async () => {
+    const { entries } = await pv('Termin\nKündigungsfrist 解約期限');
+    expect(entries.map(pair)).toEqual(['Termin', 'Kündigungsfrist ‖ 解約期限']);
+  });
+  it('F1 沒有上一筆的單獨同形字（Mama）→ 一筆德文、不標', async () => {
+    const { entries } = await pv('Mama');
+    expect(entries.map(pair)).toEqual(['Mama']);
+    expect(entries[0].flags.checkSplit).toBe(false);
+  });
+});
+
+describe('P6.8 N-a 英文縮寫算英文字', () => {
+  for (const [line, want] of [['Es regnet it\'s raining 下雨', 'Es regnet ‖ it\'s raining 下雨'], ['Wo ist das Klo? where\'s the loo', 'Wo ist das Klo? ‖ where\'s the loo']]) {
+    it(`N-a ${line}`, async () => {
+      const { entries } = await pv(line);
+      expect(pair(entries[0])).toBe(want);
+      expect(entries[0].flags.checkSplit).toBe(false);
+    });
+  }
+});
+
+describe('P6.8 N-b 行尾與前一個字同拼法 → 英文解釋、不標（有沒有上一筆都一樣）', () => {
+  for (const w of ['Angst', 'Rucksack', 'Kindergarten', 'Kitsch', 'Zeitgeist', 'Handy', 'Kind', 'Hotel']) {
+    it(`N-b ${w} ${w.toLowerCase()}`, async () => {
+      for (const text of [`${w} ${w.toLowerCase()}`, `Haus\n${w} ${w.toLowerCase()}`]) {
+        const { entries } = await pv(text);
+        const e = entries[entries.length - 1];
+        expect(pair(e)).toBe(`${w} ‖ ${w.toLowerCase()}`);
+        expect(e.flags.checkSplit).toBe(false);
+      }
+    });
+  }
+});
+
+describe('P6.8 F3 括號、引號內不切開', () => {
+  it('F3 Hausarzt ⏎ GP (BrE), family doctor → 整段是解釋', async () => {
+    const { entries } = await pv('Hausarzt\nGP (BrE), family doctor');
+    expect(entries.map(pair)).toEqual(['Hausarzt ‖ GP (BrE), family doctor']);
+  });
+  it('F3 Wohnung ⏎ Flat (BrE) → 整段是解釋', async () => {
+    const { entries } = await pv('Wohnung\nFlat (BrE)');
+    expect(entries.map(pair)).toEqual(['Wohnung ‖ Flat (BrE)']);
+  });
+  it('F3 同一行：Arzt (doctor, GP) → 德文段不帶半個括號', async () => {
+    const { entries } = await pv('Arzt (doctor, GP)');
+    expect(pair(entries[0])).toBe('Arzt ‖ (doctor, GP)');
+  });
+  it('F3 Fix 點字重選分界也不切開括號', async () => {
+    let { entries } = await pv('Arzt (doctor, GP)');
+    entries = await splitAt(entries, 0, 2, dict); // 點 GP：落在括號裡 → 退到括號前
+    expect(pair(entries[0])).toBe('Arzt ‖ (doctor, GP)');
+  });
+});
+
+describe('P6.8 F2 理由只寫畫面上真的有的東西', () => {
+  it('F2 寫 typo 就一定有建議', async () => {
+    const { entries } = await pv('Wohnung\nFlat (BrE)\nKonto\nbank account 帳戶\nTermn appointmnet\nfiets bike\nGP (x');
+    for (const e of entries) if (e.flags.checkReason === 'typo') expect(e.flags.suggestion, pair(e)).toBeTruthy();
   });
 });

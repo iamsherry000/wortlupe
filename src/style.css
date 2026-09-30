@@ -413,3 +413,16 @@ button.split-all { border-style: dashed; color: var(--muted); }
 
 /* beta 標記：9/27 Sherry 拍板先部署 beta，WhatsApp 省略主詞句的講解仍在修 */
 .beta { font-size: 0.55em; font-weight: 600; vertical-align: middle; padding: 0.1em 0.45em; border-radius: 0.4em; border: 1px solid currentColor; opacity: 0.7; text-transform: uppercase; letter-spacing: 0.04em; }
+
+/* ---------- P6.8：存生字的原句、一鍵改成新的一筆 ---------- */
+.wb-example, .wb-ctx { list-style: none; margin: 4px 0 0; padding: 0; }
+.wb-example li { margin: 4px 0; font-size: 17px; font-style: italic; }
+.wb-ctx li { font-size: 14px; color: var(--muted); font-style: italic; }
+#words button.flag-make-new { margin-top: 6px; min-height: 36px; font-size: 14px; border-radius: 999px; }
+/* 很多筆時不做進場動畫、不畫漸層底（2000 行貼上不卡） */
+#wb-preview.many .pv-row { animation: none !important; }
+#wb-preview.many .pv-row.check { background: var(--warn-soft); }
+/* 畫面外的預覽列不排版、不繪製（貼 2000 行時，下一次動作不再卡十幾秒） */
+#wb-preview.many .pv-row { content-visibility: auto; contain-intrinsic-size: auto 140px; }
+.pv-more-row { list-style: none; }
+#words button.pv-more { width: 100%; min-height: 44px; color: var(--accent); border-style: dashed; }

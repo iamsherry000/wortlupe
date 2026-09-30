@@ -311,6 +311,8 @@ test('T8 對抗性：2000 行、整段 WhatsApp 對話、全中文、全英文�
     '這是一段全中文的文字\n完全沒有德文',
     'this is all english\nnothing german here',
   ];
+  // P6.8 查到：一次把 2000 筆全畫出來（約 3 萬個節點）之後，下一次預覽載字典分片時整頁卡 10 秒以上
+  // → 預覽改成一次畫 200 筆＋Show more；這支照原本的順序（先 2000 行、再 WhatsApp）驗不會再卡
   await openWords(page);
   await page.locator('#wb-add').click();
   for (const t of inputs) {
@@ -318,6 +320,14 @@ test('T8 對抗性：2000 行、整段 WhatsApp 對話、全中文、全英文�
     await page.locator('#wb-preview-btn').click();
     await expect(page.locator('#wb-preview')).toHaveAttribute('data-state', 'ready', { timeout: 15_000 });
   }
+  // P6.8：2000 行的預覽分頁顯示（一次 200 筆＋Show more），全部都會匯入
+  await page.locator('#wb-input').fill(inputs[0]);
+  await page.locator('#wb-preview-btn').click();
+  await expect(page.locator('#wb-preview')).toHaveAttribute('data-state', 'ready', { timeout: 15_000 });
+  await expect(page.locator('#wb-preview .pv-row')).toHaveCount(200);
+  await expect(page.locator('#wb-commit')).toHaveText(/Add \d+ words/);
+  await page.locator('#wb-preview .pv-more').click();
+  await expect(page.locator('#wb-preview .pv-row')).toHaveCount(400);
   await page.locator('#wb-input').fill('   \n\n \t ');
   await page.locator('#wb-preview-btn').click();
   await expect(page.locator('#wb-message')).toContainText('Nothing to add');
@@ -442,8 +452,9 @@ test.describe('P6.6（SPEC §5.1 F，Tester P6 報告 F1–F8）', () => {
   });
 
   test('F7 條列符號不出現在預覽標題', async ({ page }) => {
-    const rows = await preview(page, '- Wohnung - apartment\n• Miete rent 房租\n1. Hose trousers');
-    expect(await rows.locator('.pv-typed').allTextContents()).toEqual(['Wohnung', 'Miete', 'Hose']);
+    // P6.8：Hose trousers 整行都是英文字，接在別筆後面會被當成解釋（有標）→ 放第一行，這支只驗條列符號
+    const rows = await preview(page, '1. Hose trousers\n- Wohnung - apartment\n• Miete rent 房租\n– Lampe - lamp');
+    expect(await rows.locator('.pv-typed').allTextContents()).toEqual(['Hose', 'Wohnung', 'Miete', 'Lampe']);
   });
 
   test('F8 輸入框字型與 App 一致；390 寬首頁三顆按鈕都是一行', async ({ page }) => {
@@ -509,9 +520,54 @@ test.describe('P6.6（SPEC §5.1 F，Tester P6 報告 F1–F8）', () => {
     await expect(rows.nth(0).locator('.flag-check')).toContainText('neither in the dictionary nor in the English word list');
   });
 
-  test('P6.7 N3 Schal scarf ⏎ Mode fashion → 兩筆', async ({ page }) => {
+  // P6.7 的「兩筆」已被 SPEC §5.1 F「P6.8 統一判準」取代：整行英文 → 當上一筆的解釋、一律標，一鍵改成新的一筆
+  test('P6.8 Schal scarf ⏎ Mode fashion → 一筆＋標；一鍵改成兩筆', async ({ page }) => {
     const rows = await preview(page, 'Schal scarf\nMode fashion');
-    expect(await rowTexts(rows)).toEqual(['Schal ‖ scarf', 'Mode ‖ fashion']);
+    expect(await rowTexts(rows)).toEqual(['Schal ‖ scarf\nMode fashion']);
+    await expect(rows.nth(0).locator('.flag-check')).toContainText('Check split');
+    await act(page, rows.nth(0).locator('.flag-make-new'));
+    expect(await rowTexts(page.locator('#wb-preview .pv-row'))).toEqual(['Schal ‖ scarf', 'Mode ‖ fashion']);
+  });
+
+  test('P6.8 F1 Konto ⏎ Bank account → 一筆＋標（理由照規格），一鍵改成新的一筆', async ({ page }) => {
+    const rows = await preview(page, 'Konto\nBank account');
+    expect(await rowTexts(rows)).toEqual(['Konto ‖ Bank account']);
+    await expect(rows.nth(0).locator('.flag-check')).toContainText('This line could be your note or a new German word');
+    await act(page, rows.nth(0).locator('.flag-make-new'));
+    expect(await rowTexts(page.locator('#wb-preview .pv-row'))).toEqual(['Konto', 'Bank ‖ account']);
+  });
+
+  test('P6.8 F2 理由寫「maybe a typo」時畫面上一定有建議', async ({ page }) => {
+    const rows = await preview(page, 'Wohnung\nFlat (BrE)\nKonto\nbank account 帳戶\nTermn appointmnet');
+    const n = await rows.count();
+    for (let k = 0; k < n; k++) {
+      const r = rows.nth(k);
+      if ((await r.locator('.flag-check').count()) && /maybe a typo/.test(await r.locator('.flag-check').textContent())) {
+        await expect(r.locator('.pv-suggest')).toHaveCount(1);
+      }
+    }
+  });
+
+  test('P6.8 閱讀頁存的字：New 組、複習卡背面顯示原句', async ({ page }) => {
+    await page.locator('#tab-read').click();
+    await page.locator('#input').fill('Die Rechnung ist hoch.');
+    await page.locator('#read').click();
+    await page.locator('#text .w', { hasText: /^Rechnung$/ }).click();
+    await expect(page.locator('#card')).toHaveAttribute('data-state', 'found');
+    await page.locator('#save').click();
+    await expect(page.locator('#save')).toHaveText(/Saved/);
+    await openWords(page);
+    await expect(page.locator('.wb-group[data-group="New"] .count')).toHaveText('2');
+    await startReview(page);
+    for (let k = 0; k < 2; k++) {
+      if ((await page.locator('#wb-card').getAttribute('data-dir')) === 'fwd') break;
+      await flipAndAnswer(page, '#wb-unsure');
+    }
+    await page.locator('#wb-card').click();
+    const back = page.locator('#wb-card .back');
+    await expect(back.locator('.section-title')).toHaveText(['Dictionary', 'From your reading']);
+    await expect(back.locator('.wb-example')).toContainText('Die Rechnung ist hoch.');
+    await expect(back.locator('.your-note')).toHaveCount(0);
   });
 
   test('§5.1 F About 標英文詞表（SCOWL）授權', async ({ page }) => {

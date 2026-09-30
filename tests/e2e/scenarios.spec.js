@@ -75,7 +75,27 @@ test('S06 查不到的字不編造', async ({ page }) => {
 
 // S07 在 offline.spec.js（需要先裝好 service worker 再斷網）
 
-test.fixme('S08 存生字以原形去重 — 生字本屬 P4（Charles 指示 P1 存生字按鈕先放著不接）', async () => {});
+// S08（Sherry 9/30 拍板隨 P6 接上，SPEC §5 第一條）：存生字進單字本同一本、New 組，以原形去重、累加原句
+test('S08 存生字以原形去重', async ({ page }) => {
+  await readText(page, 'Wir gingen nach Hause.');
+  await tap(page, 'gingen');
+  await expect(page.locator('#save')).toBeEnabled();
+  await page.locator('#save').click();
+  await expect(page.locator('#save')).toHaveText(/Saved/);
+  await page.locator('#edit').click();
+  await readText(page, 'Er ging schnell.');
+  await tap(page, 'ging');
+  await page.locator('#save').click();
+  await expect(page.locator('#save')).toHaveText(/Saved/);
+  await page.locator('#tab-words').click();
+  await page.locator('#wb-all').click();
+  await expect(page.locator('#wb-items')).toHaveAttribute('data-state', 'ready');
+  const items = page.locator('.wb-item[data-dir="fwd"]');
+  await expect(items).toHaveCount(1);
+  await expect(items.first()).toContainText('gehen');
+  await expect(items.first().locator('select')).toHaveValue('New');
+  await expect(items.first().locator('.wb-ctx li')).toHaveText(['Wir gingen nach Hause.', 'Er ging schnell.']);
+});
 
 test('P1 字卡 ◀ ▶ 逐字移動，跳過表情與數字', async ({ page }) => {
   await readText(page, 'Das Haus 😊 15 ist groß.');
@@ -150,10 +170,11 @@ test('P1 字卡 欄位順序照 SPEC §4.1（原形→形→詞性→名詞→�
   await expect(card.locator('[data-field="verb"]').first()).toContainText('angerufen');
 });
 
-test('P1 字卡 存生字按鈕存在但尚未啟用（P4）', async ({ page }) => {
-  await readText(page, 'Das Haus ist groß.');
-  await tap(page, 'Haus');
-  await expect(page.locator('#save')).toBeDisabled();
+// （原本的「P1 字卡 存生字按鈕存在但尚未啟用（P4）」已刪：Sherry 9/30 拍板存生字隨 P6 接上，規格變更，見 S08）
+test('S08 查不到的字不能存（零編造）', async ({ page }) => {
+  await readText(page, 'Hallo Sebastian');
+  await tap(page, 'Sebastian');
+  await expect(page.locator('#card-foot')).toBeHidden();
 });
 
 test('P1 候選排序 heute 第一個讀法是副詞', async ({ page }) => {

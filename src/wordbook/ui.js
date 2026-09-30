@@ -130,6 +130,7 @@ export function initWordbook({ getDict, onEnter = () => {} }) {
       entries = r.entries;
       skipped = r.skipped;
       hadRows = entries.length > 0;
+      shown = PAGE;
       openFix.clear();
       existing = new Set((await wb.all().catch(() => [])).map((w) => w.key));
       renderPreview();
@@ -177,8 +178,9 @@ export function initWordbook({ getDict, onEnter = () => {} }) {
     boundary: 'a word here is both German and English — tap the word where your note starts:',
     unknown: 'a word is neither in the dictionary nor in the English word list — tap the word where your note starts:',
     typo: 'the German word isn’t in the dictionary — maybe a typo (see the suggestion). Tap the word where your note starts:',
-    maybeNote: 'this line could also be your note for the line above — use Fix if it is.',
-    note: 'a line below was read as your note but contains a German word — use Fix if that’s wrong.',
+    // P6.8（SPEC §5.1 F）規定的理由文字
+    maybeNote: 'This line could be your note for the line above or a new German word — use Fix if it’s a note.',
+    note: 'This line could be your note or a new German word.',
     first: 'this looks like a meaning with no German word above it — use Fix.',
     comma: 'not every part is in the dictionary — tap the word where your note starts:',
   };
@@ -186,6 +188,8 @@ export function initWordbook({ getDict, onEnter = () => {} }) {
     ...e.splitWords.map((w, k) => h('button', { type: 'button', class: 'split-word', 'data-act': 'split', 'data-k': String(k), disabled: k === 0 }, w.text)),
     h('button', { type: 'button', class: 'split-all', 'data-act': 'split', 'data-k': String(e.splitWords.length) }, 'All German'));
 
+  const PAGE = 200;
+  let shown = PAGE; // 預覽目前畫出幾筆（P6.8）
   let hadRows = false; // 這次預覽原本有筆數（被刪光 → 按鈕停用並說明；一開始就沒有 → 不顯示按鈕）
   const openFix = new Set();
 
@@ -217,7 +221,12 @@ export function initWordbook({ getDict, onEnter = () => {} }) {
       if (!hadRows && ui.preview.dataset.state !== 'error') say('Nothing to add. Paste words, one per line.');
       return;
     }
-    ui.preview.replaceChildren(...entries.map((e, i) => {
+    // 很多筆（貼了幾百行）時不做進場動畫：上千個同時跑的動畫在手機上會卡住整頁
+    ui.preview.classList.toggle('many', entries.length > 60);
+    // P6.8：一次最多畫 PAGE 筆（2000 筆全畫約 3 萬個節點，之後整頁會卡十幾秒）；每一筆都照樣匯入、按 Show more 看得到
+    const visible = entries.slice(0, shown);
+    const more = entries.length - visible.length;
+    ui.preview.replaceChildren(...visible.map((e, i) => {
       const f = e.flags;
       const cls = ['pv-row', f.checkSplit ? 'check' : '', f.article ? 'bad-article' : '', e.status === 'notfound' ? 'nf' : ''].filter(Boolean).join(' ');
       const fixing = openFix.has(e.id);
@@ -229,7 +238,10 @@ export function initWordbook({ getDict, onEnter = () => {} }) {
         f.article ? h('p', { class: 'flag-article' }, `Article: ${f.article.dict} (you wrote ${f.article.wrote})`) : null,
         f.checkSplit ? h('div', { class: 'flag-check' },
           h('p', {}, h('b', {}, 'Check split'), ` — ${CHECK_TEXT[f.checkReason] || CHECK_TEXT.boundary}`),
-          ['note', 'first', 'maybeNote'].includes(f.checkReason) || fixing ? null : splitChips(e)) : null,
+          ['note', 'first', 'maybeNote'].includes(f.checkReason) || fixing ? null : splitChips(e),
+          // P6.8：「這行可能是新的德文字」→ 一鍵改成新的一筆（最後一行解釋拆出來）
+          f.checkReason === 'note' && e.attached && e.attached.length && !fixing
+            ? h('button', { type: 'button', class: 'flag-make-new', 'data-act': 'splitnew' }, `Make “${e.attached[e.attached.length - 1]}” a new word`) : null) : null,
         f.noMeaning ? h('p', { class: 'flag-nomeaning' }, 'No meaning yet — only German → meaning will be quizzed') : null,
         h('div', { class: 'pv-actions' },
           // SPEC §5.1 E（P6.5）：已有 Your note 的那筆外面不給 Merge（收在 Fix 裡，§5.1 F）；沒 note 的才給、普通樣式
@@ -244,7 +256,8 @@ export function initWordbook({ getDict, onEnter = () => {} }) {
             e.note !== null ? h('button', { type: 'button', class: 'fix-splitnew', 'data-act': 'splitnew' }, 'Move the last note line out as a new word') : null,
             h('button', { type: 'button', class: 'fix-delete', 'data-act': 'remove' }, 'Delete this entry'))) : null);
       return row;
-    }));
+    }), more > 0 ? h('li', { class: 'pv-more-row' },
+      h('button', { type: 'button', class: 'pv-more', 'data-act': 'more' }, `Show ${Math.min(PAGE, more)} more (${more} not shown yet — all will be added)`)) : '');
     updateCommit();
   }
 
@@ -252,6 +265,7 @@ export function initWordbook({ getDict, onEnter = () => {} }) {
   ui.preview.addEventListener('click', async (ev) => {
     const btn = ev.target.closest('button[data-act]');
     if (!btn) return;
+    if (btn.dataset.act === 'more') { shown += PAGE; renderPreview(); return; }
     const i = Number(btn.closest('.pv-row').dataset.i);
     const dict = getDict();
     const act = btn.dataset.act;
@@ -364,6 +378,11 @@ export function initWordbook({ getDict, onEnter = () => {} }) {
         h('p', { class: 'your-note' }, w.notes.join('\n'))));
     }
     out.push(h('section', { class: 'sec sec-dict' }, h('h3', { class: 'section-title' }, 'Dictionary'), ...dictBlock(w)));
+    // SPEC §5（Sherry 9/30）：閱讀頁存的字，原句當例句（原句只存在這支手機）
+    if (w.contexts && w.contexts.length) {
+      out.push(h('section', { class: 'sec sec-ctx' }, h('h3', { class: 'section-title' }, 'From your reading'),
+        h('ul', { class: 'wb-example' }, ...w.contexts.map((c) => h('li', {}, h('span', { lang: 'de' }, c.sentence), h('span', { class: 'muted small' }, ` · ${c.date}`))))));
+    }
     return out;
   }
 
@@ -482,6 +501,7 @@ export function initWordbook({ getDict, onEnter = () => {} }) {
           rows.push(h('li', { class: 'wb-item', 'data-key': w.key, 'data-dir': dir },
             h('div', { class: 'wb-word' }, h('b', { lang: 'de' }, w.display), w.status !== 'found' ? h('span', { class: 'nf-tag' }, 'Not in dictionary') : null),
             w.notes.length ? h('div', { class: 'wb-note' }, w.notes.join(' / ')) : null,
+            w.contexts && w.contexts.length ? h('ul', { class: 'wb-ctx' }, ...w.contexts.map((c) => h('li', { lang: 'de' }, c.sentence))) : null,
             h('div', { class: 'wb-meta' }, h('span', { class: 'dir' }, DIR_LABEL[dir]), ' · ', h('span', { class: 'due' }, dueText(c))),
             h('div', { class: 'wb-controls' },
               h('select', { 'aria-label': `Group for ${w.display} (${DIR_LABEL[dir]})` }, ...GROUPS.map((g, k) => {

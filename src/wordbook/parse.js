@@ -30,8 +30,19 @@ let nextId = 1;
 
 // P6.6（SPEC §5.1 F）：英文字＝離線英文詞表（SCOWL，data/english-words.json）裡有的字，
 // 取代 P6 的「字典英文解釋裡出現過」（daycare、ID、fridge 都不在字典解釋裡）
+const EN_SUFFIX = new Set(['s', 'm', 're', 've', 'll', 'd', 't']);
 function makeCtx(dict, english) {
-  const isEnglish = (w) => /^[A-Za-z]+$/.test(w) && english.has(w.toLowerCase());
+  // P6.8 N-a：英文縮寫（it's、I'm、where's、don't、can't）也算英文字
+  const isEnglish = (w) => {
+    const m = /^([A-Za-z]+)['’]([A-Za-z]{1,2})$/.exec(w);
+    if (m) {
+      const base = m[1].toLowerCase(), suf = m[2].toLowerCase();
+      if (!EN_SUFFIX.has(suf)) return false;
+      if (suf === 't') return english.has(base) || (base.endsWith('n') && english.has(base.slice(0, -1)));
+      return english.has(base);
+    }
+    return /^[A-Za-z]+$/.test(w) && english.has(w.toLowerCase());
+  };
   // 這個字是不是字典查得到的德文（跟字卡同一套查法：變化形、封閉詞類、口語縮寫、介系詞縮寫、小寫名詞）
   const germanInfo = (w, initial) => {
     const lower = w.toLowerCase();
@@ -43,11 +54,7 @@ function makeCtx(dict, english) {
     const r = dict.lookup(w, { sentenceInitial: initial });
     if (r.found) {
       const rank = Math.min(...r.candidates.map((c) => c.entry.rank || Infinity));
-      // P6.7 N3：首字大寫（不是全大寫縮寫）、字典裡是名詞 → 「這是新的德文行」。
-      // 規格寫詞頻前 5000，但它自己的例子 Mode（6278）、Taste（16495）都在 5000 外 → 不設詞頻門檻，改用
-      // 「Titlecase 名詞」區分 Mode／Taste／Selfie（德文名詞）與 ID（全大寫縮寫＝英文解釋）；回報 PM
-      const titleNoun = /^\p{Lu}\p{Ll}/u.test(w) && r.candidates.some((c) => c.pos === 'noun' && /^\p{Lu}/u.test(c.lemma));
-      return { common: rank <= COMMON_RANK, titleNoun };
+      return { common: rank <= COMMON_RANK };
     }
     if (dict.lowercaseNouns && dict.lowercaseNouns[lower]) return { common: false };
     return null;
@@ -67,37 +74,70 @@ function findSeparator(line) {
 const trimGerman = (s) => s.replace(/[\s\-–—:=|,;/]+$/u, '').trim();
 const wordsOf = (line) => tokenize(line).filter((t) => t.type === 'word').map((t) => ({ text: t.text, start: t.start }));
 
-// 沒有分隔符號的一行（SPEC §5.1 A＋F）。
+// P6.8 F3：括號、引號裡的東西屬於同一側。切點落在沒關上的 ( 或引號裡 → 退到那個符號前面
+function safeCut(line, cut) {
+  const left = line.slice(0, cut);
+  let at = -1;
+  const opens = (left.match(/\(/g) || []).length - (left.match(/\)/g) || []).length;
+  if (opens > 0) at = left.lastIndexOf('(');
+  if ((left.match(/"/g) || []).length % 2 === 1) at = Math.max(at, left.lastIndexOf('"'));
+  if ((left.match(/„/g) || []).length > (left.match(/[“”]/g) || []).length) at = Math.max(at, left.lastIndexOf('„'));
+  return at > 0 && left.slice(0, at).trim() ? at : cut;
+}
+// 括號、引號外面的字（判斷「整行是不是英文」時不看括號裡的補充：GP (BrE) 的 BrE）
+function wordsOutside(line, words) {
+  const inside = new Array(line.length).fill(false);
+  let depth = 0, dq = false;
+  for (let k = 0; k < line.length; k++) {
+    const ch = line[k];
+    if (ch === '(') depth++;
+    if (ch === '"') dq = !dq;
+    inside[k] = depth > 0 || dq;
+    if (ch === ')' && depth > 0) depth--;
+  }
+  return words.filter((w) => !inside[w.start]);
+}
+
+// 沒有分隔符號的一行（SPEC §5.1 A＋F，P6.8 統一判準）。
 // 原則：分界有一點不確定就標 Check split，不存在「切了但沒把握又沒標」的路徑。
-//   - 整行都是英文字、而且沒有一個是常見德文 → 解釋行（bald ⏎ soon、Kita ⏎ daycare、Ausweis ⏎ ID card）
-//   - 第一個字查不到也不是英文 → 打錯的德文：整行沒有英文、沒有中文時試「拆開寫的複合詞」（feiren abend）；
-//     否則只有第一個字是德文段、後面是解釋（Termn ‖ appointmnet），一律標
-//   - 從第一個德文字往後吃查得到的德文；遇到
-//       英文（不是德文）→ 分界清楚；查不到也不是英文 → 在這裡切、標；
-//       德英同形（will、also、bill、mom）→ 在它前面切、標（它後面還有非德文，或它的德文讀法罕見）；
-//       否則（後面全是德文、而且是常見德文）照樣當德文、標
+//   1. 行尾字跟前一個字不分大小寫同拼法（Angst angst、Rucksack rucksack）→ 行尾是英文解釋、不標
+//   2. 上一筆後面：括號外、中文外的每個字都是英文字 → 預設當上一筆的解釋；其中有字也查得到德文（Bank account、
+//      Mode fashion）→ 上一筆標 Check split（note：這行也可能是新的德文字）。
+//      例外：只有一個字、而且是常見德文（bald）→ 照 TESTS Golden K／S20 各自一筆，但標（maybeNote）
+//   3. 沒有上一筆：第一個字不是德文、整行英文 → 沒有主人的解釋（呼叫端標 first）；單獨的德英同形字（Mama）→ 一筆德文、不標
+//   4. 第一個字查不到也不是英文 → 打錯的德文：整行沒有英文、沒有中文時試「拆開寫的複合詞」（feiren abend）；
+//      否則只有第一個字是德文段、後面是解釋（Termn ‖ appointmnet），一律標
+//   5. 從第一個德文字往後吃查得到的德文；遇到英文（不是德文）→ 分界清楚；查不到也不是英文 → 切、標；
+//      德英同形（will、also、bill、mom）→ 在它前面切、標（後面還有非德文、或德文讀法罕見、或它是行尾的非封閉詞類）；
+//      否則照樣當德文、標。上一筆後面、第一個字德英同形（Party machen）→ 也可能是解釋，標
 function greedy(line, words, ctx) {
   const { germanInfo, isEnglish } = ctx;
   const w0 = words[0];
   if (CJK.test(w0.text)) return { kind: 'note', text: line };
   const hasCJK = CJK.test(line);
   const englishOnly = (w) => isEnglish(w.text) && !germanInfo(w.text, false);
-  // 解釋行：每個字都是英文、沒有常見德文
-  // （上面還沒有任何一筆、而且第一個字查得到德文時不當解釋行：Mama mom 是一筆德文＋解釋，不是沒有主人的解釋）
-  // P6.7 N3（SPEC §5.1 F）：第一個字是 Titlecase 字典名詞 → 新的德文行（Schal scarf ⏎ Mode fashion）
   const g0 = germanInfo(w0.text, true);
-  const looksLikeNote = !hasCJK && words.every((w, k) => isEnglish(w.text) && !(germanInfo(w.text, k === 0) || {}).common);
-  if (looksLikeNote && (ctx.hasPrev || !g0) && !(g0 && g0.titleNoun)) {
-    return { kind: 'note', text: line, germanInside: words.some((w, k) => germanInfo(w.text, k === 0)) };
-  }
-  // 反過來：整行也可能是上一行的英文解釋（Bank account）→ 當新的德文行，但一定標（不留「沒把握又沒標」的路徑）
-  const maybeNote = looksLikeNote && ctx.hasPrev;
   const cutAt = (end, checkSplit, reason) => {
     if (end >= words.length) return { kind: 'entry', german: line, note: null, checkSplit, reason };
-    const cut = words[end].start;
+    const cut = safeCut(line, words[end].start);
     return { kind: 'entry', german: trimGerman(line.slice(0, cut)), note: line.slice(cut).trim() || null, checkSplit, reason };
   };
-  if (!germanInfo(w0.text, true)) {
+  // 1. 行尾同拼法
+  const n = words.length;
+  if (n >= 2 && g0 && words[n - 1].text.toLowerCase() === words[n - 2].text.toLowerCase() && words[n - 1].text !== words[n - 2].text) {
+    return cutAt(n - 1, false, null);
+  }
+  // 2／3. 整行（括號外、中文外）都是英文字
+  const outside = wordsOutside(line, words).filter((w) => !CJK.test(w.text));
+  const englishLine = outside.length > 0 && outside.every((w) => isEnglish(w.text));
+  if (englishLine && ctx.hasPrev) {
+    const germanPossible = words.some((w, k) => !CJK.test(w.text) && germanInfo(w.text, k === 0));
+    if (n === 1 && g0 && g0.common && !hasCJK) return cutAt(1, true, 'maybeNote');
+    return { kind: 'note', text: line, germanInside: germanPossible };
+  }
+  if (englishLine && !ctx.hasPrev && !g0) return { kind: 'note', text: line };
+  const prevAmbiguous = ctx.hasPrev && g0 && isEnglish(w0.text);
+  if (!g0) {
     const anyEnglish = words.some(englishOnly);
     if (!anyEnglish && !hasCJK && words.length > 1 && closestLemma(words.map((w) => w.text).join(''), ctx.dict)) {
       // 拆開寫的複合詞（feiren abend → Feierabend）：整段當德文段、照樣標
@@ -126,7 +166,7 @@ function greedy(line, words, ctx) {
     }
     end++;
   }
-  if (!unsure && maybeNote) unsure = 'maybeNote';
+  if (!unsure && prevAmbiguous) unsure = 'maybeNote';
   return cutAt(end, !!unsure, unsure);
 }
 
@@ -278,14 +318,18 @@ function finish(e, dict, ctx) {
     hit = { a: a0, suggestion: sug };
     ctx.memo.set(e.german, hit);
   }
-  const a = { ...hit.a, dict: hit.a.dict ? JSON.parse(JSON.stringify(hit.a.dict)) : null };
+  // 重複的德文段共用同一份字典資料（唯讀；存進本裡時 store 會另外複製）。
+  // P6.8：原本每一筆都深拷貝一份，貼 2000 行時記憶體暴增，之後每載一片字典都卡 2–5 秒（GC）
+  const a = hit.a;
   const note = noteOf(e);
   const suggestion = hit.suggestion;
   const hasMeaning = !!note || !!(a.dict && ((a.dict.readings && a.dict.readings.some((r) => r.glosses.length)) || (a.dict.usage && a.dict.usage.length)));
+  // P6.8 F2：理由只寫畫面上真的有的東西——說 typo 就要有建議，沒有建議就是「查不到」
+  const checkReason = e.flags.checkReason === 'typo' && !suggestion ? 'unknown' : e.flags.checkReason;
   return {
     ...e, ...a, note,
     splitWords: wordsOf(e.line),
-    flags: { ...e.flags, article: a.article, suggestion, noMeaning: !hasMeaning },
+    flags: { ...e.flags, checkReason, article: a.article, suggestion, noMeaning: !hasMeaning },
   };
 }
 
@@ -375,7 +419,8 @@ export async function splitIntoNew(entries, i, dict) {
   } else return entries;
   const ctx = await ctxFor(dict);
   await dict.ensure(wordsOf(text).map((w) => w.text));
-  ctx.hasPrev = true;
+  // 她按了「拆成新的一筆」＝她說這行是德文行：不再套「上一筆後面的整行英文＝解釋」那條（P6.8）
+  ctx.hasPrev = false;
   const p = parseLine(text, ctx);
   // 拆出來的那行看起來是解釋（self photo）→ 照樣成一筆，但標 Check split（像第一行就是解釋）
   const fresh = p.kind === 'entry'
@@ -390,7 +435,11 @@ export async function splitAt(entries, i, k, dict) {
   if (!e) return entries;
   const ws = wordsOf(e.line);
   let german, note;
-  if (k >= ws.length || k <= 0) { german = e.line; note = null; } else { german = trimGerman(e.line.slice(0, ws[k].start)); note = e.line.slice(ws[k].start).trim() || null; }
+  if (k >= ws.length || k <= 0) { german = e.line; note = null; } else {
+    const cut = safeCut(e.line, ws[k].start); // 點到括號裡的字 → 整個括號一起當解釋（P6.8 F3）
+    german = trimGerman(e.line.slice(0, cut));
+    note = e.line.slice(cut).trim() || null;
+  }
   const next = await refresh({ ...e, german, typed: german, sameNote: note, flags: { ...e.flags, checkSplit: false, checkReason: null, firstLineNote: false } }, dict);
   return [...entries.slice(0, i), next, ...entries.slice(i + 1)];
 }

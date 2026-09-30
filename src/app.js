@@ -8,6 +8,7 @@ import { parseFragment, hasFragmentText } from './fragment.js';
 import { mtText } from './mt-normalize.js';
 import { mtReady, downloadMt, translateText, MT_SIZE_LABEL, MT_CACHE } from './translate.js';
 import { initWordbook } from './wordbook/ui.js';
+import { analyzeGerman } from './wordbook/parse.js';
 
 const $ = (id) => document.getElementById(id);
 const ui = {
@@ -494,6 +495,11 @@ function renderCard(m) {
   }
   ui.cardBody.replaceChildren(...body);
   ui.cardFoot.hidden = false;
+  // SPEC §5（Sherry 9/30）：存生字啟用，每張新字卡重新可按
+  const save = $('save');
+  save.disabled = false;
+  save.textContent = 'Save word';
+  save.dataset.i = String(m.index);
 }
 
 // 欄位順序照 SPEC §4.1：原形 → 這個形 → 詞性 → 名詞 → 動詞 → 形容詞 → 介系詞 →（複合詞 P3）→ 解釋
@@ -642,6 +648,37 @@ ui.text.addEventListener('keydown', (e) => {
   const el = e.target.closest('.w');
   if (el && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); openCard(Number(el.dataset.i)); }
 });
+// ---------- 存生字（SPEC §5，Sherry 9/30 拍板隨 P6 接上）----------
+// 存進單字本同一本（以原形去重）、New 組、Your note 空白；這句話當例句（原句＋日期）
+function sentenceOf(i) {
+  const s = tokens[i].sentence;
+  const ws = tokens.filter((t) => t.type === 'word' && t.sentence === s);
+  let end = ws[ws.length - 1].index;
+  while (tokens[end + 1] && tokens[end + 1].type === 'punct') end++;
+  return ui.input.value.slice(ws[0].start, tokens[end].end).replace(/\s+/g, ' ').trim();
+}
+$('save').addEventListener('click', async () => {
+  const save = $('save');
+  const i = Number(save.dataset.i);
+  if (!dict || !wordbookUi || !tokens[i]) return;
+  save.disabled = true;
+  try {
+    const model = buildCard(tokens, i, dict);
+    const main = model.readings.filter((r) => !r.other);
+    // 可分離動詞存重組後的原形（rufe … an → anrufen）；其他存第一個讀法的原形
+    const target = (model.separable && model.separable.verb) || (main[0] || model.readings[0] || {}).lemma;
+    if (!target) throw new Error('not found');
+    await dict.ensure([target]);
+    const entry = analyzeGerman(target, dict);
+    if (entry.status !== 'found') throw new Error('not found');
+    await wordbookUi.wordbook.saveFromReader({ ...entry, german: tokens[i].text, typed: tokens[i].text }, sentenceOf(i));
+    save.textContent = `Saved ✓ ${entry.display}`;
+  } catch (e) {
+    save.disabled = false;
+    save.textContent = e && /^Could not save/.test(e.message) ? 'Could not save — try again' : 'Save word';
+  }
+});
+
 ui.prev.addEventListener('click', () => step(-1));
 ui.next.addEventListener('click', () => step(1));
 ui.close.addEventListener('click', closeCard);
