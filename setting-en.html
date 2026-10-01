@@ -175,7 +175,10 @@
       <li>Back in the editor, a new line <span class="ui">Receive Text from Share Sheet</span> now appears at the top. Tap <span class="ui">If there's no input</span> inside it and change it to <span class="ui">Get Clipboard</span>.
         <div class="note"><strong>This is the most important step</strong>With this change, the same shortcut works for both the Share menu and Back Tap.</div>
       </li>
-      <li>Tap the search bar at the bottom, find <span class="ui">URL Encode</span> and tap it to add it. Check that it says <span class="ui">Shortcut Input</span>.</li>
+      <li>Tap the search bar at the bottom, find <span class="ui">Combine Text</span> and tap it to add it. Check that it says <span class="ui">Shortcut Input</span>, and set the separator to <span class="ui">New Lines</span>.
+        <div class="note"><strong>This step makes forwarding several messages work</strong>When you share several WhatsApp messages at once, the shortcut receives several pieces of text. Without combining them first, they turn into several URLs and the shortcut fails.</div>
+      </li>
+      <li>Then search for <span class="ui">URL Encode</span> and add it. Tap the variable inside it and change it to <span class="ui">Combined Text</span>.</li>
       <li>Then search for <span class="ui">Text</span> and add it. Paste this address into the text box:
         <div class="copy-row"><code id="short-url">https://wortlupe.iamsherry000.workers.dev/#t=</code><button class="copy" type="button" data-copy="short-url">Copy</button></div>
         Leave the cursor at the very end and tap <span class="ui">URL Encoded Text</span> above the keyboard, so it's attached right after the address.
@@ -185,11 +188,13 @@
     </ol>
 
     <figure class="mock">
-      <figcaption>When you're done, your shortcut should look like this (four blocks, top to bottom):</figcaption>
+      <figcaption>When you're done, your shortcut should look like this (five blocks, top to bottom):</figcaption>
       <div class="blocks">
         <div class="block"><b>Receive</b> Text <b>from</b> Share Sheet<br>If there's no input: <b>Get Clipboard</b></div>
         <div class="arrow">↓</div>
-        <div class="block"><b>URL Encode</b> <span class="var">Shortcut Input</span></div>
+        <div class="block"><b>Combine</b> <span class="var">Shortcut Input</span> <b>with</b> New Lines</div>
+        <div class="arrow">↓</div>
+        <div class="block"><b>URL Encode</b> <span class="var">Combined Text</span></div>
         <div class="arrow">↓</div>
         <div class="block"><b>Text</b><br>https://wortlupe.iamsherry000.workers.dev/#t=<span class="var">URL Encoded Text</span></div>
         <div class="arrow">↓</div>
@@ -244,6 +249,10 @@
     <details>
       <summary>Wortlupe opens, but the text isn't there</summary>
       <p>An old version may still be on your phone. Pull down on the Wortlupe page to refresh once. Also check that the address in step 2 ends with “URL Encoded Text”.</p>
+    </details>
+    <details>
+      <summary>Forwarding several WhatsApp messages at once gives an error</summary>
+      <p>The shortcut is missing the Combine Text step. Open the shortcut, add Combine Text (separator: New Lines) right below Receive, then change the variable in URL Encode to Combined Text. It should match the five blocks in the picture above.</p>
     </details>
     <details>
       <summary>Nothing happens when I tap the back</summary>

@@ -176,7 +176,10 @@
       <li>回到編輯畫面，最上方會多出一行 <span class="ui">Receive Text from Share Sheet</span>。點裡面的 <span class="ui">If there's no input</span> <span class="zh">（如果沒有輸入）</span>，改成 <span class="ui">Get Clipboard</span> <span class="zh">（取得剪貼簿）</span>。
         <div class="note"><strong>這一步最重要</strong>改了之後，同一個捷徑就能同時用在「分享選單」和「背面輕點」。</div>
       </li>
-      <li>點下方的搜尋欄，找 <span class="ui">URL Encode</span> <span class="zh">（URL 編碼）</span>，點它加進來。確認它寫的是 <span class="ui">Shortcut Input</span> <span class="zh">（捷徑輸入）</span>。</li>
+      <li>點下方的搜尋欄，找 <span class="ui">Combine Text</span> <span class="zh">（合併文字）</span>，點它加進來。確認它寫的是 <span class="ui">Shortcut Input</span> <span class="zh">（捷徑輸入）</span>，後面的分隔方式選 <span class="ui">New Lines</span> <span class="zh">（換行）</span>。
+        <div class="note"><strong>一次轉傳好幾則訊息要靠這一步</strong>從 WhatsApp 一次選好幾則分享時，捷徑收到的是好幾段文字；沒有先合併，後面會變成好幾個網址，捷徑就會出錯。</div>
+      </li>
+      <li>再搜尋 <span class="ui">URL Encode</span> <span class="zh">（URL 編碼）</span>，點它加進來。點它裡面的變數，改成 <span class="ui">Combined Text</span> <span class="zh">（合併的文字）</span>。</li>
       <li>再搜尋 <span class="ui">Text</span> <span class="zh">（文字）</span> 加進來。在文字框裡貼上下面這串網址：
         <div class="copy-row"><code id="short-url">https://wortlupe.iamsherry000.workers.dev/#t=</code><button class="copy" type="button" data-copy="short-url">拷貝</button></div>
         貼好之後，游標停在最後面，點鍵盤上方出現的 <span class="ui">URL Encoded Text</span> <span class="zh">（URL 編碼的文字）</span>，把它接在網址後面。
@@ -186,11 +189,13 @@
     </ol>
 
     <figure class="mock">
-      <figcaption>完成後，你的捷徑應該長這樣（由上往下四塊）：</figcaption>
+      <figcaption>完成後，你的捷徑應該長這樣（由上往下五塊）：</figcaption>
       <div class="blocks">
         <div class="block"><b>Receive</b> Text <b>from</b> Share Sheet<br>If there's no input: <b>Get Clipboard</b></div>
         <div class="arrow">↓</div>
-        <div class="block"><b>URL Encode</b> <span class="var">Shortcut Input</span></div>
+        <div class="block"><b>Combine</b> <span class="var">Shortcut Input</span> <b>with</b> New Lines</div>
+        <div class="arrow">↓</div>
+        <div class="block"><b>URL Encode</b> <span class="var">Combined Text</span></div>
         <div class="arrow">↓</div>
         <div class="block"><b>Text</b><br>https://wortlupe.iamsherry000.workers.dev/#t=<span class="var">URL Encoded Text</span></div>
         <div class="arrow">↓</div>
@@ -245,6 +250,10 @@
     <details>
       <summary>Wortlupe 打開了，但文字沒有進去</summary>
       <p>可能是舊版還留在手機裡。在 Wortlupe 頁面往下拉重新整理一次。也請檢查第 2 步的網址最後有沒有接上「URL Encoded Text」。</p>
+    </details>
+    <details>
+      <summary>一次轉傳好幾則 WhatsApp 訊息就出錯</summary>
+      <p>捷徑少了「Combine Text」那一步。打開捷徑，在 Receive 下面加上 Combine Text（分隔選 New Lines），再把 URL Encode 裡的變數改成 Combined Text。完成後應該是上面圖裡的五塊。</p>
     </details>
     <details>
       <summary>敲背面沒有反應</summary>
