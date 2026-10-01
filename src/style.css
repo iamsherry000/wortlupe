@@ -263,6 +263,8 @@ body[data-tab="words"] #about { display: none !important; }
 .wb-actions { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin: 12px 0 4px; }
 /* F8：390 寬時 Add words 不折成兩行 */
 #words .wb-actions button { white-space: nowrap; padding: 0 6px; font-size: 16px; }
+/* 連到共用單字本 wortlupe-book（2026-10-01 Sherry 要求） */
+.wb-book-link { display: block; text-align: center; padding: 10px 0; font-size: 16px; }
 /* F4：任何長度的德文、note、網址都不可撐破版面 */
 #words { overflow-wrap: anywhere; min-width: 0; }
 #words .pv-row, #words .wb-item, #words .pv-german > *, #words .wb-word > *, #words .pv-dict > * { min-width: 0; max-width: 100%; }
