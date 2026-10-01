@@ -18,10 +18,20 @@ export function parseFragment(hash) {
   } catch {
     return { kind: 'error', message: FRAGMENT_ERROR };
   }
+  // 2026-10-01 真機：WhatsApp 一次轉傳多則時捷徑把每則內容多編碼一次 → 解一次後還是 %20、%C3%A4…
+  // 看起來還像編碼過的（至少兩個 %XX）就再解，最多兩次；逐段解，解不開的片段原樣留著
+  for (let i = 0; i < 2 && (text.match(ENCODED) || []).length >= 2; i++) text = lenientDecode(text);
   // 分解形的變音字母（u + ¨）轉成組合形，跟貼上的文字一樣查得到字典
   text = text.normalize('NFC');
   if (!text.trim()) return { kind: 'none' };
   return { kind: 'text', text };
 }
 
-export const hasFragmentText = (hash) => PREFIX.test(String(hash ?? ''));
+const ENCODED = /%[0-9A-Fa-f]{2}/g;
+function lenientDecode(s) {
+  return s.replace(/(?:%[0-9A-Fa-f]{2})+/g, (run) => {
+    try { return decodeURIComponent(run); } catch { return run; }
+  });
+}
+
+export const hasFragmentText =(hash) => PREFIX.test(String(hash ?? ''));

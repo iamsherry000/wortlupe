@@ -5,6 +5,7 @@ import { createDictionary, StaleDictionaryError } from './dict.js';
 import { buildCard, PREP_CASE_LABEL } from './card-model.js';
 import { analyzeSentence } from './grammar/engine.js';
 import { parseFragment, hasFragmentText } from './fragment.js';
+import { stripChatPrefixes } from './chat-prefix.js';
 import { mtText } from './mt-normalize.js';
 import { mtReady, downloadMt, translateText, MT_SIZE_LABEL, MT_CACHE } from './translate.js';
 import { initWordbook } from './wordbook/ui.js';
@@ -94,7 +95,9 @@ let wordbookUi = null;
 function readInput() {
   // 從捷徑（#t=…）或還原進來時人可能在 Words 分頁：切回閱讀頁
   if (wordbookUi && document.body.dataset.tab === 'words') wordbookUi.setTab('read');
-  const text = ui.input.value;
+  // WhatsApp 一次拷貝多則訊息的「[日期, 時間] 名字:」自動拿掉（輸入框也一起換成乾淨的，按 New text 看到的是去掉後的）
+  const text = stripChatPrefixes(ui.input.value);
+  if (text !== ui.input.value) ui.input.value = text;
   ui.hint.hidden = true;
   tokens = tokenize(text);
   wordIdx = tokens.filter((t) => t.type === 'word').map((t) => t.index);
