@@ -299,7 +299,9 @@ All das
 - P6.7 收尾（PM 9/30，依 Tester P6.6 報告 N1–N3）：Check split 的理由文字必須對應真正的原因（德英同形／查不到／錯字各自一句）；拼字建議只對「德文查不到且不是英文」的字給，英文字（含被 Fix 移出來的解釋行）不給建議；**上一筆後面的行，第一個字是首字大寫（非全大寫）的字典名詞 → 當新的德文行**，不設詞頻門檻（`Schal scarf ⏎ Mode fashion` → 兩筆；全大寫 `ID card` 仍是解釋；整行都是英文字時當新的一筆但必標 Check split）。行尾小寫同拼法字（`Handy handy`）視為純英文、分界清楚，不標；英文詞表加入 en_GB（colour、favourite、hoover、loo）；en dash `–` 也算條列符號。
 - **P6.8 統一判準（PM 9/30，取代 P6.6／P6.7 關於「上一筆後面那行」的各條特例；依 Tester P6.7 報告 F1）**：
   - 上一筆德文後面、沒有分隔符號的一行，先問「**整行每個字（不分大小寫、含 it's／I'm 這類縮寫）是不是都是英文字**」：
-    - 是 → 這行德英都說得通（`Bank account`、`Date with doctor`、`Mode fashion`、`Art`），**預設當上一筆的解釋，一律標 Check split**（理由：This line could be your note or a new German word），Fix 一鍵改成新的一筆。不看德文詞頻、不看大小寫。
+    - 整行都是英文、沒有任何字查得到德文（`soon`、`daycare`、`notice period`）→ 上一筆的解釋，不標。
+    - 整行都是英文、但有字也查得到德文（`Bank account`、`Date with doctor`、`Mode fashion`、`Arm poor`、`Art`、`bald`）→ **預設當新的一筆（因為 Sherry 的解釋行會打 `=`），一律標 Check split**（理由：This line could be your note or a new German word），Fix 一鍵改成上一筆的解釋。不看德文詞頻、不看大小寫。（PM 9/30 P6.8 後修正：原本預設當解釋，與 TESTS S20／Golden K「lebe seit ⏎ bald 兩筆」衝突，且 `Arm poor`、`Rock skirt` 這類單字表常見行會被誤併。）
+  - 預覽超過 200 筆分批顯示（Show N more），每一筆都照樣匯入：可接受。
     - 否，而且第一個字是德文、不是英文 → 新的一筆德文（`Kündigungsfrist 解約期限`）。
     - 否，其他情況 → 照同行規則切，沒把握就標。
   - 沒有上一筆（第一行、或上一行是空的解釋）的單獨德英同形字行（`Mama`）→ 仍當一筆德文、不標。

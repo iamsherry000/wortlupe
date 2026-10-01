@@ -179,7 +179,7 @@ export function initWordbook({ getDict, onEnter = () => {} }) {
     unknown: 'a word is neither in the dictionary nor in the English word list — tap the word where your note starts:',
     typo: 'the German word isn’t in the dictionary — maybe a typo (see the suggestion). Tap the word where your note starts:',
     // P6.8（SPEC §5.1 F）規定的理由文字
-    maybeNote: 'This line could be your note for the line above or a new German word — use Fix if it’s a note.',
+    maybeNote: 'This line could be your note or a new German word.',
     note: 'This line could be your note or a new German word.',
     first: 'this looks like a meaning with no German word above it — use Fix.',
     comma: 'not every part is in the dictionary — tap the word where your note starts:',
@@ -241,7 +241,10 @@ export function initWordbook({ getDict, onEnter = () => {} }) {
           ['note', 'first', 'maybeNote'].includes(f.checkReason) || fixing ? null : splitChips(e),
           // P6.8：「這行可能是新的德文字」→ 一鍵改成新的一筆（最後一行解釋拆出來）
           f.checkReason === 'note' && e.attached && e.attached.length && !fixing
-            ? h('button', { type: 'button', class: 'flag-make-new', 'data-act': 'splitnew' }, `Make “${e.attached[e.attached.length - 1]}” a new word`) : null) : null,
+            ? h('button', { type: 'button', class: 'flag-make-new', 'data-act': 'splitnew' }, `Make “${e.attached[e.attached.length - 1]}” a new word`) : null,
+          // P6.8b：預設當新的一筆的整行英文 → 一鍵改成上一筆的解釋
+          f.checkReason === 'maybeNote' && i > 0 && !fixing
+            ? h('button', { type: 'button', class: 'flag-merge', 'data-act': 'merge' }, 'Use it as the note of the line above') : null) : null,
         f.noMeaning ? h('p', { class: 'flag-nomeaning' }, 'No meaning yet — only German → meaning will be quizzed') : null,
         h('div', { class: 'pv-actions' },
           // SPEC §5.1 E（P6.5）：已有 Your note 的那筆外面不給 Merge（收在 Fix 裡，§5.1 F）；沒 note 的才給、普通樣式

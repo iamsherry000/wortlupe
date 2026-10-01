@@ -25,10 +25,14 @@ describe('F1 切錯卻沒標（Tester 報告的 5 筆）', () => {
     const { entries } = await pv('Kita\ndaycare');
     expect(entries.map(pair)).toEqual(['Kita ‖ daycare']);
   });
-  it('F1 Ausweis ⏎ ID card ⏎ =身分證 → Ausweis ‖ ID card⏎身分證（ID 不可當成德文 das Id）', async () => {
-    const { entries } = await pv('Ausweis\nID card\n=身分證');
+  // P6.8b（SPEC §5.1 F 修正）：ID 也查得到德文（das Id）→ ID card 預設當新的一筆、必標（Tester 期望也接受「ID card 那筆標 Check split」）
+  it('F1 Ausweis ⏎ ID card ⏎ =身分證 → ID card 那筆標 Check split，一鍵併回 → Ausweis ‖ ID card⏎身分證', async () => {
+    let { entries } = await pv('Ausweis\nID card\n=身分證');
+    expect(entries.map((e) => e.german)).toEqual(['Ausweis', 'ID']);
+    expect(entries[1].flags.checkSplit).toBe(true);
+    expect(entries[1].flags.checkReason).toBe('maybeNote');
+    entries = await mergeIntoPrevious(entries, 1, dict);
     expect(entries).toHaveLength(1);
-    expect(entries[0].german).toBe('Ausweis');
     expect(entries[0].note).toBe('ID card\n身分證');
   });
   it('F1 Termn appointmnet → Termn ‖ appointmnet、Check split、Did you mean Termin', async () => {
@@ -198,23 +202,24 @@ describe('P6.7 N2 英文字不給拼字建議', () => {
   });
 });
 
-// P6.7 的「首字大寫名詞＝新德文行」已被 SPEC §5.1 F「P6.8 統一判準」取代：整行都是英文字 → 預設當上一筆的解釋、一律標
-describe('P6.7→P6.8 N3 德英都說得通的整行英文：當上一筆的解釋、一律標（Fix 一鍵改成新的一筆）', () => {
-  it('N3 Schal scarf ⏎ Mode fashion → 一筆、標', async () => {
-    const { entries } = await pv('Schal scarf\nMode fashion');
+// SPEC §5.1 F「P6.8」（PM 9/30 修正，P6.8b）：整行英文、但有字查得到德文 → 預設當新的一筆、必標，Fix 一鍵改成上一筆的解釋
+describe('P6.8b N3 德英都說得通的整行英文：預設新的一筆、必標（Fix 一鍵併成上一筆的解釋）', () => {
+  it('N3 Schal scarf ⏎ Mode fashion → 兩筆、第二筆標；併回 → 一筆', async () => {
+    let { entries } = await pv('Schal scarf\nMode fashion');
+    expect(entries.map(pair)).toEqual(['Schal ‖ scarf', 'Mode ‖ fashion']);
+    expect(entries[1].flags.checkReason).toBe('maybeNote');
+    entries = await mergeIntoPrevious(entries, 1, dict);
     expect(entries.map(pair)).toEqual(['Schal ‖ scarf\nMode fashion']);
-    expect(entries[0].flags.checkSplit).toBe(true);
   });
-  it('N3 Rente pension ⏎ Taste key (keyboard) → 一筆、標；Fix 拆出來成新的一筆', async () => {
-    let { entries } = await pv('Rente pension\nTaste key (keyboard)');
-    expect(entries.map((e) => e.german)).toEqual(['Rente']);
-    expect(entries[0].flags.checkSplit).toBe(true);
-    entries = await splitIntoNew(entries, 0, dict);
-    expect(entries.map((e) => e.german)).toEqual(['Rente', 'Taste']);
+  it('N3 Rente pension ⏎ Taste key (keyboard) → 兩筆、第二筆標', async () => {
+    const { entries } = await pv('Rente pension\nTaste key (keyboard)');
+    expect(entries.map(pair)).toEqual(['Rente ‖ pension', 'Taste ‖ key (keyboard)']);
+    expect(entries[1].flags.checkSplit).toBe(true);
   });
-  it('N3 Ausweis ⏎ ID card 照舊是解釋（ID 不是常見名詞）', async () => {
+  it('N3 Ausweis ⏎ ID card → 兩筆、ID card 那筆標', async () => {
     const { entries } = await pv('Ausweis\nID card');
-    expect(entries.map(pair)).toEqual(['Ausweis ‖ ID card']);
+    expect(entries.map((e) => e.german)).toEqual(['Ausweis', 'ID']);
+    expect(entries[1].flags.checkSplit).toBe(true);
   });
 });
 
@@ -229,34 +234,46 @@ describe('P6.7 en dash 也算條列符號', () => {
 // ---------- P6.8 統一判準（SPEC §5.1 F「P6.8」，Tester P6.7 報告 F1–F3、N-a、N-b） ----------
 const flaggedSomewhere = (entries) => entries.some((e) => e.flags.checkSplit);
 
-describe('P6.8 F1 上一筆後面、整行都是英文字 → 預設當上一筆的解釋，一律標', () => {
+describe('P6.8b F1 上一筆後面、整行英文但有字查得到德文 → 預設新的一筆、必標；Fix 一鍵併成上一筆的解釋', () => {
   it('F1 Konto ⏎ Bank account ⏎ Termin ⏎ Date with doctor ⏎ Stelle ⏎ Job opening', async () => {
     const { entries } = await pv('Konto\nBank account\nTermin\nDate with doctor\nStelle\nJob opening');
-    expect(entries.map(pair)).toEqual(['Konto ‖ Bank account', 'Termin ‖ Date with doctor', 'Stelle ‖ Job opening']);
-    expect(entries.every((e) => e.flags.checkSplit && e.flags.checkReason === 'note')).toBe(true);
+    expect(entries.map((e) => e.german)).toEqual(['Konto', 'Bank', 'Termin', 'Date', 'Stelle', 'Job']);
+    for (const k of [1, 3, 5]) expect(entries[k].flags.checkReason).toBe('maybeNote');
   });
   for (const [a, b] of [['Spielplatz', 'Park for kids'], ['Mannschaft', 'Team of players'], ['Schuh', 'Boot for winter'],
-    ['Handschuh', 'Hand glove'], ['Sportverein', 'Sport club'], ['Schal scarf', 'Mode fashion']]) {
-    it(`F1 ${a} ⏎ ${b} → 一筆、解釋含 ${b}、標`, async () => {
-      const { entries } = await pv(`${a}\n${b}`);
+    ['Handschuh', 'Hand glove'], ['Sportverein', 'Sport club'], ['Schal scarf', 'Mode fashion'],
+    ['Termin', 'Arm poor'], ['Kleid', 'Rock skirt'], ['lebe seit', 'bald']]) {
+    it(`F1 ${a} ⏎ ${b} → 兩筆、第二筆必標；併回 → 解釋含 ${b}`, async () => {
+      let { entries } = await pv(`${a}\n${b}`);
+      expect(entries).toHaveLength(2);
+      expect(entries[1].flags.checkSplit).toBe(true);
+      expect(entries[1].flags.checkReason).toBe('maybeNote');
+      entries = await mergeIntoPrevious(entries, 1, dict);
       expect(entries).toHaveLength(1);
       expect(entries[0].note.split('\n')).toContain(b);
-      expect(entries[0].flags.checkSplit).toBe(true);
     });
   }
-  it('F1 Sparkonto ⏎ Bank account 帳戶（中英混寫）→ 一筆、標', async () => {
+  it('F1 Sparkonto ⏎ Bank account 帳戶（中英混寫）→ 兩筆、第二筆必標', async () => {
     const { entries } = await pv('Sparkonto\nBank account 帳戶');
-    expect(entries.map(pair)).toEqual(['Sparkonto ‖ Bank account 帳戶']);
-    expect(entries[0].flags.checkSplit).toBe(true);
+    expect(entries.map((e) => e.german)).toEqual(['Sparkonto', 'Bank']);
+    expect(entries[1].flags.checkSplit).toBe(true);
+  });
+  it('F1 純英文（查不到德文）照舊當解釋、不標：Kita ⏎ daycare、bald ⏎ soon', async () => {
+    for (const [text, want] of [['Kita\ndaycare', 'Kita ‖ daycare'], ['bald\nsoon', 'bald ‖ soon']]) {
+      const { entries } = await pv(text);
+      expect(entries.map(pair)).toEqual([want]);
+      expect(entries[0].flags.checkSplit).toBe(false);
+    }
   });
   it('F1 Kündigung ⏎ Notice period → 解釋（Notice 不是德文，不必標）', async () => {
     const { entries } = await pv('Kündigung\nNotice period');
     expect(entries.map(pair)).toEqual(['Kündigung ‖ Notice period']);
   });
-  it('F1 Kunst ⏎ Art：沒有靜默（要嘛併成解釋有標，要嘛兩筆而 Art 那筆有標）', async () => {
+  it('F1 Kunst ⏎ Art → 兩筆、Art 那筆必標', async () => {
     const { entries } = await pv('Kunst\nArt');
     expect(flaggedSomewhere(entries)).toBe(true);
-    if (entries.length === 2) expect(entries[1].flags.checkSplit).toBe(true);
+    expect(entries.map((e) => e.german)).toEqual(['Kunst', 'Art']);
+    expect(entries[1].flags.checkReason).toBe('maybeNote');
   });
   it('F1 第一個字是德文、不是英文 → 新的一筆（Kündigungsfrist 解約期限）', async () => {
     const { entries } = await pv('Termin\nKündigungsfrist 解約期限');

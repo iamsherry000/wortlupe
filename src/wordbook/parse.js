@@ -130,13 +130,17 @@ function greedy(line, words, ctx) {
   // 2／3. 整行（括號外、中文外）都是英文字
   const outside = wordsOutside(line, words).filter((w) => !CJK.test(w.text));
   const englishLine = outside.length > 0 && outside.every((w) => isEnglish(w.text));
+  // P6.8b（PM 9/30 修正）：整行英文、但有字查得到德文（Bank account、Arm poor、bald、Art）→ 預設當新的一筆、必標，
+  // Fix 一鍵改成上一筆的解釋（Sherry 的解釋行會打 =）；純英文（soon、daycare）→ 上一筆的解釋、不標
+  let maybeNote = false;
   if (englishLine && ctx.hasPrev) {
     const germanPossible = words.some((w, k) => !CJK.test(w.text) && germanInfo(w.text, k === 0));
-    if (n === 1 && g0 && g0.common && !hasCJK) return cutAt(1, true, 'maybeNote');
-    return { kind: 'note', text: line, germanInside: germanPossible };
+    if (!germanPossible) return { kind: 'note', text: line };
+    maybeNote = true;
   }
   if (englishLine && !ctx.hasPrev && !g0) return { kind: 'note', text: line };
   const prevAmbiguous = ctx.hasPrev && g0 && isEnglish(w0.text);
+  if (maybeNote && !g0) return cutAt(1, true, 'maybeNote');
   if (!g0) {
     const anyEnglish = words.some(englishOnly);
     if (!anyEnglish && !hasCJK && words.length > 1 && closestLemma(words.map((w) => w.text).join(''), ctx.dict)) {
@@ -166,7 +170,8 @@ function greedy(line, words, ctx) {
     }
     end++;
   }
-  if (!unsure && prevAmbiguous) unsure = 'maybeNote';
+  // 整行英文的新一筆：理由一律是「可能是上一行的解釋」（Fix 一鍵併回去）
+  if (maybeNote || (!unsure && prevAmbiguous)) unsure = 'maybeNote';
   return cutAt(end, !!unsure, unsure);
 }
 

@@ -33,7 +33,8 @@ const E = [
   ['Vermieter 房東!!', 'Vermieter', '房東!!'],
   ['kündigen – to cancel (contract)', 'kündigen', 'to cancel (contract)'],
   ['abholen pick up 接', 'abholen', 'pick up 接'],
-  ['Ausweis', 'Ausweis', 'ID card\n身分證'],
+  // Tester 期望：「Ausweis ‖ ID card ⏎ 身分證（或 ID card 那筆標 Check split）」→ nextFlagged
+  ['Ausweis', 'Ausweis', 'ID card\n身分證', { nextFlagged: 'ID card' }],
   ['die Kaution deposit 押金', 'die Kaution', 'deposit 押金'],
   ['übrigens by the way', 'übrigens', 'by the way'],
   ['Feierabend machen', 'Feierabend machen', 'call it a day'],
@@ -122,7 +123,9 @@ describe('TH 集外迴歸：P6 第一輪集外組（Tester 2026-09-30，80 行�
       if (opt.mustFlag) { expect(e.flags.checkSplit).toBe(true); return; }
       const right = e.german === german && (e.note ?? null) === note;
       // 切錯卻沒標＝不通過（標了算沒切錯）
-      if (!right) expect(e.flags.checkSplit, `切錯沒標：${pair(e)}（期望 ${german} ‖ ${note ?? ''}）`).toBe(true);
+      const next = opt.nextFlagged && result.entries.find((x) => x.line === opt.nextFlagged);
+      if (!right && next) expect(next.flags.checkSplit, `「${opt.nextFlagged}」自成一筆卻沒標`).toBe(true);
+      else if (!right) expect(e.flags.checkSplit, `切錯沒標：${pair(e)}（期望 ${german} ‖ ${note ?? ''}）`).toBe(true);
       if (right && opt.sug) expect(e.flags.suggestion).toBe(opt.sug);
       if (opt.key) expect(e.key).toBe(opt.key);
       if (opt.nf) {
